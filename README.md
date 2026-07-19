@@ -2,7 +2,7 @@
 
 ORION is the model-independent reasoning and orchestration repository above the frozen NEXAH Kernel.
 
-This repository contains the development workshop, the Phase 1A deterministic execution slice, and the Phase 1B local Ollama reference backend. `FakeBackend` remains the offline baseline; `OllamaBackend` is the first real implementation of the same provider-neutral port.
+This repository contains the development workshop, the Phase 1A deterministic execution slice, the Phase 1B local Ollama reference backend, the Phase 2 context pipeline, and the Phase 4A transformation-planning baseline. `FakeBackend` remains the offline reasoning baseline; `OllamaBackend` is the first real implementation of the frozen provider-neutral port.
 
 The governing rule is:
 
@@ -13,6 +13,9 @@ The governing rule is:
 | I want to… | Read |
 |---|---|
 | understand the architecture | [`docs/architecture/ORION_ARCHITECTURE.md`](docs/architecture/ORION_ARCHITECTURE.md) |
+| understand representation and rendering | [`docs/architecture/REPRESENTATION_ARCHITECTURE.md`](docs/architecture/REPRESENTATION_ARCHITECTURE.md) |
+| navigate the Orientation Transform Stack | [`docs/architecture/transformations/ORIENTATION_TRANSFORM_STACK.md`](docs/architecture/transformations/ORIENTATION_TRANSFORM_STACK.md) |
+| inspect the versioned transformation contracts | [`docs/architecture/transformations/contracts/TRANSITION_CONTRACT_SPECIFICATION.md`](docs/architecture/transformations/contracts/TRANSITION_CONTRACT_SPECIFICATION.md) |
 | inspect the recovered Core baseline | [`docs/architecture/baselines/PHASE_0_BASELINE_RECOVERY.md`](docs/architecture/baselines/PHASE_0_BASELINE_RECOVERY.md) |
 | prepare my local workspace | [`docs/development/WORKSPACE.md`](docs/development/WORKSPACE.md) |
 | understand where work belongs | [`docs/governance/OWNERSHIP.md`](docs/governance/OWNERSHIP.md) |
@@ -22,6 +25,10 @@ The governing rule is:
 | inspect the first execution slice | [`docs/development/PHASE_1A_EXECUTION.md`](docs/development/PHASE_1A_EXECUTION.md) |
 | run the local Ollama backend | [`docs/development/PHASE_1B_OLLAMA.md`](docs/development/PHASE_1B_OLLAMA.md) |
 | verify the executable baseline | [`docs/development/PHASE_1B_CLOSEOUT.md`](docs/development/PHASE_1B_CLOSEOUT.md) |
+| build deterministic repository context | [`docs/development/PHASE_2A_CONTEXT.md`](docs/development/PHASE_2A_CONTEXT.md) |
+| derive repository documents from request scope | [`docs/development/PHASE_2B_SELECTION.md`](docs/development/PHASE_2B_SELECTION.md) |
+| derive a deterministic content-free context brief | [`docs/development/PHASE_2C_CONTEXT_BRIEF.md`](docs/development/PHASE_2C_CONTEXT_BRIEF.md) |
+| plan deterministic representation transitions | [`docs/development/PHASE_4A_TRANSFORMATION_ENGINE.md`](docs/development/PHASE_4A_TRANSFORMATION_ENGINE.md) |
 
 ## Repository boundary
 
@@ -78,10 +85,18 @@ Library and Builder Hub are deliberately not cloned until their authoritative re
 
 ## Current phase
 
-Phase 1B adds one provider adapter only: local Ollama. Ollama remains an externally
-managed runtime; ORION never starts or stops it. Run the offline baseline with
-`make demo`, all isolated tests with `make test`, and the opt-in `llama3.1:8b`
-integration with `make integration`. Other providers, retrieval, persistence,
-Kernel calls, and application integration remain postponed.
+Phase 4A adds deterministic Transformation Graph orchestration. It computes
+registered paths, verifies Transition Contracts, preserves invariant and
+provenance chains, and reports missing contracts, operators, renderers, evidence,
+and compatibility without executing transformations. No mathematics, geometry,
+rendering, LLM call, persistence, or Kernel mutation is performed. Ollama remains
+an externally managed runtime; ORION never starts or stops it. Run all isolated
+tests with `make test`; the `llama3.1:8b` integration remains opt-in through
+`make integration`.
+
+No registered transition is currently executable. ORION can navigate documented
+representation routes and produce `TransformationPlan` and blocker reports, but
+it never generates a Target Representation in Phase 4A;
+`produced_representation` remains `None`.
 
 The repository development version is recorded in [`VERSION`](VERSION). No version number implies production readiness.

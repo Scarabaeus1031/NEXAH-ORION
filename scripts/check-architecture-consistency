@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""Verify Phase 3/4 graph and contract terminology without changing files."""
+
+from __future__ import annotations
+
+from pathlib import Path
+import re
+import sys
+
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+
+from orion.transformation_contracts import (  # noqa: E402
+    DEFAULT_REPRESENTATION_GRAPH,
+    DEFAULT_TRANSITION_CONTRACTS,
+)
+
+
+def fail(message: str) -> None:
+    failures.append(message)
+
+
+def table_value(text: str, field: str, path: Path) -> str:
+    match = re.search(rf"^\| {re.escape(field)} \| (.+) \|$", text, re.MULTILINE)
+    if match is None:
+        fail(f"{path.relative_to(ROOT)}: missing table field {field}")
+        return ""
+    return match.group(1)
+
+
+failures: list[str] = []
+base = ROOT / "docs" / "architecture" / "transformations"
+graph_text = (base / "REPRESENTATION_GRAPH.md").read_text(encoding="utf-8")
+cards_text = (base / "TRANSITION_CARDS.md").read_text(encoding="utf-8")
+spec_text = (
+    base / "contracts" / "TRANSITION_CONTRACT_SPECIFICATION.md"
+).read_text(encoding="utf-8")
+
+edges = DEFAULT_REPRESENTATION_GRAPH.edges
+contracts = DEFAULT_TRANSITION_CONTRACTS.contracts
+if tuple(edge.transition_id for edge in edges) != tuple(
+    contract.transition_id for contract in contracts
+):
+    fail("runtime graph and contract registry transition IDs differ")
+
+card_blocks: dict[str, str] = {}
+for block in re.split(r"(?=^## T\d{2} — )", cards_text, flags=re.MULTILINE):
+    heading = re.match(r"## (T\d{2}) — ([^\n]+)", block)
+    if heading is not None:
+        card_blocks[heading.group(1)] = block
+
+for edge in edges:
+    transition_id = edge.transition_id
+    expected_name = (
+        f"{edge.source_representation} → {edge.target_representation}"
+    )
+    contract = DEFAULT_TRANSITION_CONTRACTS.get(transition_id)
+    if contract is None:
+        fail(f"runtime contract missing: {transition_id}")
+        continue
+    if (
+        contract.source_representation != edge.source_representation
+        or contract.target_representation != edge.target_representation
+    ):
+        fail(f"runtime endpoints differ for {transition_id}")
+    if contract.operator_status not in ("unknown", "candidate"):
+        fail(f"runtime operator status is overstated for {transition_id}")
+    if contract.has_executable_operator or contract.has_renderer:
+        fail(f"runtime capability unexpectedly executable for {transition_id}")
+
+    graph_pattern = re.compile(
+        rf"^\| \[`{transition_id}`\]\(contracts/{transition_id}\.md\) "
+        rf"\| ([^|]+) \| ([^|]+) \| [^|]+ \| [^|]+ \| `([^`]+)` \|$",
+        re.MULTILINE,
+    )
+    graph_match = graph_pattern.search(graph_text)
+    if graph_match is None:
+        fail(f"Representation Graph registry row missing: {transition_id}")
+    else:
+        graph_source, graph_target, graph_evidence = (
+            value.strip() for value in graph_match.groups()
+        )
+        if (graph_source, graph_target) != (
+            edge.source_representation,
+            edge.target_representation,
+        ):
+            fail(f"Representation Graph endpoints differ for {transition_id}")
+        if graph_evidence != contract.evidence_level:
+            fail(f"Representation Graph evidence differs for {transition_id}")
+
+    block = card_blocks.get(transition_id)
+    if block is None:
+        fail(f"Transition Card missing: {transition_id}")
+    else:
+        heading = re.match(rf"## {transition_id} — ([^\n]+)", block)
+        if heading is None or heading.group(1) != expected_name:
+            fail(f"Transition Card heading differs for {transition_id}")
+        card_source = table_value(block, "Source", base / "TRANSITION_CARDS.md")
+        card_target = table_value(block, "Target", base / "TRANSITION_CARDS.md")
+        evidence = re.search(
+            r"^\| Evidence Status \| `([^`]+)`",
+            block,
+            re.MULTILINE,
+        )
+        if (card_source, card_target) != (
+            edge.source_representation,
+            edge.target_representation,
+        ):
+            fail(f"Transition Card endpoints differ for {transition_id}")
+        if evidence is None or evidence.group(1) != contract.evidence_level:
+            fail(f"Transition Card evidence differs for {transition_id}")
+
+    contract_path = base / "contracts" / f"{transition_id}.md"
+    contract_text = contract_path.read_text(encoding="utf-8")
+    documented_source = table_value(
+        contract_text,
+        "Source Representation",
+        contract_path,
+    )
+    documented_target = table_value(
+        contract_text,
+        "Target Representation",
+        contract_path,
+    )
+    documented_evidence = table_value(contract_text, "Evidence Level", contract_path)
+    documented_operator = table_value(contract_text, "Operator Status", contract_path)
+    if (documented_source, documented_target) != (
+        edge.source_representation,
+        edge.target_representation,
+    ):
+        fail(f"normalized contract endpoints differ for {transition_id}")
+    if documented_evidence != f"`{contract.evidence_level}`":
+        fail(f"normalized contract evidence differs for {transition_id}")
+    if not documented_operator.startswith(f"`{contract.operator_status}`"):
+        fail(f"normalized contract operator status differs for {transition_id}")
+    if contract.documentation_ref != str(contract_path.relative_to(ROOT)):
+        fail(f"runtime documentation reference differs for {transition_id}")
+
+    spec_pattern = re.compile(
+        rf"^\| \[`{transition_id}`\]\({transition_id}\.md\) \| "
+        rf"([^|]+) \| `([^`]+)` \| ([^|]+) \|$",
+        re.MULTILINE,
+    )
+    spec_match = spec_pattern.search(spec_text)
+    if spec_match is None:
+        fail(f"TransitionContract catalog row missing: {transition_id}")
+    else:
+        spec_transition, spec_evidence, spec_operator = (
+            value.strip() for value in spec_match.groups()
+        )
+        if spec_transition != expected_name:
+            fail(f"TransitionContract catalog endpoints differ for {transition_id}")
+        if spec_evidence != contract.evidence_level:
+            fail(f"TransitionContract catalog evidence differs for {transition_id}")
+        if spec_operator != contract.operator_status:
+            fail(f"TransitionContract catalog operator differs for {transition_id}")
+
+if failures:
+    print("Architecture consistency checks failed:", file=sys.stderr)
+    for failure in failures:
+        print(f"- {failure}", file=sys.stderr)
+    raise SystemExit(1)
+
+print(
+    "Architecture consistency checks passed for 15 graph edges, cards, "
+    "contracts, and runtime registries."
+)

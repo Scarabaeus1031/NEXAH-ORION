@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$repo_root"
+
+failures=0
+
+fail() {
+  echo "ERROR: $*" >&2
+  failures=$((failures + 1))
+}
+
+frozen_files='82e4dbc3c915cf6545bc410ce7aa00749ef86a52241e92ecf8f24de900c9ab13 src/orion/contracts.py
+6e8057112a116172136b02311a314dff76bd90818f1c9992d481ee68977ed6f1 src/orion/backend.py
+12ed38214c12ba637d63f1f6fb81619f43e886ac5c6ff91cdfc8a1f2e4fb9fd4 src/orion/executor.py
+47bfcce22f804c109f8b4a7428aa551c962ea6a2f78bf792daf30ff320860c66 src/orion/validation.py
+114fff63a1a8345c73028503b8086f149e8f2494c18aae604448e610fc46f736 src/orion/fake_backend.py
+6a242195e5ea50ffdb3149277aae939fd15560591b6c397ffd7aecb88e1b474d src/orion/ollama_backend.py'
+
+while read -r expected path; do
+  [ -f "$path" ] || {
+    fail "Frozen file is missing: $path"
+    continue
+  }
+  actual=$(shasum -a 256 "$path" | awk '{print $1}')
+  [ "$actual" = "$expected" ] || \
+    fail "Frozen file checksum changed: $path"
+done <<EOF
+$frozen_files
+EOF
+
+phase2_manifest_creators=$(grep -l 'ContextManifest\.create' \
+  src/orion/context_builder.py \
+  src/orion/context_execution.py \
+  src/orion/selection_execution.py \
+  src/orion/context_brief.py \
+  src/orion/brief_execution.py || true)
+[ "$phase2_manifest_creators" = 'src/orion/context_builder.py' ] || \
+  fail "ContextBuilder is not the sole ContextManifest creator in the Phase 2 flow"
+
+if grep -Eq '(^|[^A-Za-z])(open\(|read_text\(|read_bytes\(|write_text\(|write_bytes\()' \
+  src/orion/document_selector.py; then
+  fail "DocumentSelector contains file I/O"
+fi
+
+python_command=${ORION_PYTHON:-python3}
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$repo_root/src" "$python_command" -c '
+from dataclasses import fields
+from orion.context_brief import ContextBrief, ContextBriefEntry
+from orion.transformation_contracts import DEFAULT_TRANSITION_CONTRACTS
+from orion.transformation_engine import TransformationReport
+
+brief_fields = {field.name for field in fields(ContextBrief)}
+entry_fields = {field.name for field in fields(ContextBriefEntry)}
+assert "content" not in brief_fields | entry_fields
+assert "prompt" not in brief_fields | entry_fields
+produced = next(field for field in fields(TransformationReport) if field.name == "produced_representation")
+assert produced.default is None
+assert all(contract.operator_status in {"unknown", "candidate"} for contract in DEFAULT_TRANSITION_CONTRACTS.contracts)
+assert all(not contract.has_executable_operator for contract in DEFAULT_TRANSITION_CONTRACTS.contracts)
+assert all(not contract.has_renderer for contract in DEFAULT_TRANSITION_CONTRACTS.contracts)
+' || fail "Immutable brief or transformation capability boundary failed"
+
+PYTHONDONTWRITEBYTECODE=1 "$python_command" -c '
+import ast
+from pathlib import Path
+
+for path in (
+    Path("src/orion/transformation_contracts.py"),
+    Path("src/orion/transformation_engine.py"),
+):
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            names = [alias.name for alias in node.names]
+        elif isinstance(node, ast.ImportFrom):
+            names = [node.module or ""]
+        else:
+            continue
+        for name in names:
+            assert not name.startswith((
+                "urllib", "http", "socket", "requests", "httpx", "ollama",
+                "openai", "anthropic", "sqlite3",
+            )), f"forbidden import in {path}: {name}"
+' || fail "Transformation Engine crosses backend, network, or persistence boundary"
+
+grep -Fq 'context: ContextManifest' src/orion/validation.py || \
+  fail "Validation no longer validates against ContextManifest"
+
+./scripts/check-architecture-consistency || failures=$((failures + 1))
+
+if [ "$failures" -ne 0 ]; then
+  echo "$failures boundary check(s) failed." >&2
+  exit 1
+fi
+
+echo "Frozen and responsibility boundary checks passed."

@@ -18,6 +18,13 @@ CHANGELOG.md
 VERSION
 workspace.yaml
 docs/architecture/ORION_ARCHITECTURE.md
+docs/architecture/REPRESENTATION_ARCHITECTURE.md
+docs/architecture/transformations/ORIENTATION_TRANSFORM_STACK.md
+docs/architecture/transformations/REPRESENTATION_GRAPH.md
+docs/architecture/transformations/REPRESENTATION_MATRIX.md
+docs/architecture/transformations/TRANSITION_CARDS.md
+docs/architecture/transformations/INVARIANTS.md
+docs/architecture/transformations/OPEN_ARCHITECTURE_QUESTIONS.md
 docs/architecture/baselines/PHASE_0_BASELINE_RECOVERY.md
 docs/adr/README.md
 docs/adr/0000-template.md
@@ -31,7 +38,22 @@ docs/development/DEVELOPMENT_WORKFLOW.md
 docs/development/PHASE_1A_EXECUTION.md
 docs/development/PHASE_1B_OLLAMA.md
 docs/development/PHASE_1B_CLOSEOUT.md
+docs/development/PHASE_2A_CONTEXT.md
+docs/development/PHASE_2B_SELECTION.md
+docs/development/PHASE_2C_CONTEXT_BRIEF.md
+docs/development/PHASE_4A_TRANSFORMATION_ENGINE.md
+docs/development/PHASE_4A_CLOSEOUT.md
+docs/development/PHASE_4A_CLOSEOUT.sha256
 pyproject.toml
+src/orion/brief_backend.py
+src/orion/brief_execution.py
+src/orion/context_brief.py
+src/orion/context_builder.py
+src/orion/context_execution.py
+src/orion/document_selector.py
+src/orion/selection_execution.py
+src/orion/transformation_contracts.py
+src/orion/transformation_engine.py
 src/orion/contracts.py
 src/orion/backend.py
 src/orion/fake_backend.py
@@ -40,15 +62,23 @@ src/orion/validation.py
 src/orion/executor.py
 tests/test_execution.py
 tests/test_ollama_backend.py
+tests/test_context_builder.py
+tests/test_document_selector.py
+tests/test_context_brief.py
+tests/test_transformation_engine.py
 tests/integration/test_ollama_integration.py
 scripts/test
-scripts/test-ollama-integration'
+scripts/test-ollama-integration
+scripts/check-architecture-consistency
+scripts/check-boundaries'
 
 while IFS= read -r path; do
   [ -f "$path" ] || fail "Missing required file: $path"
 done <<EOF
 $required_files
 EOF
+
+./scripts/check-boundaries || failures=$((failures + 1))
 
 version=$(tr -d '\r\n' < VERSION)
 echo "$version" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$' || \
