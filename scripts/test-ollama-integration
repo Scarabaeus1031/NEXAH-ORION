@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$repo_root"
+
+python_command=${ORION_PYTHON:-python3}
+if ! command -v "$python_command" >/dev/null 2>&1; then
+  echo "Python command not found: $python_command" >&2
+  exit 1
+fi
+
+if ! "$python_command" -c 'import sys; raise SystemExit(sys.version_info < (3, 10))'; then
+  echo "ORION requires Python 3.10 or newer; set ORION_PYTHON if needed." >&2
+  exit 1
+fi
+
+ORION_OLLAMA_INTEGRATION=1 \
+PYTHONPATH="$repo_root/src" \
+  "$python_command" -m unittest discover \
+    -s tests/integration \
+    -p 'test_ollama_integration.py' \
+    -v

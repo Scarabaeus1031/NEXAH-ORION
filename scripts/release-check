@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$repo_root"
+
+mode=release
+if [ "$#" -gt 1 ]; then
+  echo "Usage: ./scripts/release-check [--development]" >&2
+  exit 2
+fi
+if [ "$#" -eq 1 ]; then
+  [ "$1" = --development ] || {
+    echo "Usage: ./scripts/release-check [--development]" >&2
+    exit 2
+  }
+  mode=development
+fi
+
+./scripts/check-workspace
+./scripts/test
+
+version=$(tr -d '\r\n' < VERSION)
+grep -Fq "## [$version]" CHANGELOG.md || {
+  echo "CHANGELOG.md has no section for $version." >&2
+  exit 1
+}
+
+if [ ! -d docs/releases/compatibility ] || \
+   ! find docs/releases/compatibility -type f -name '*.yaml' -print | grep -q .; then
+  echo "No release compatibility record found." >&2
+  exit 1
+fi
+
+if [ "$mode" = release ]; then
+  if grep -El '^- Status: (Draft|Proposed)$' docs/adr/[0-9][0-9][0-9][0-9]-*.md >/dev/null 2>&1; then
+    echo "A release cannot include Draft or Proposed ADRs." >&2
+    exit 1
+  fi
+  if [ -n "$(git status --porcelain)" ]; then
+    echo "Release check requires a clean working tree." >&2
+    exit 1
+  fi
+fi
+
+echo "Release check passed in $mode mode for $version."

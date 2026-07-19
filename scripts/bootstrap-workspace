@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+set -eu
+
+usage() {
+  cat <<'EOF'
+Usage: ./scripts/bootstrap-workspace [--clone-core | --core-path ABSOLUTE_PATH]
+
+Without options, creates the ignored local workspace zones.
+--clone-core clones and checks out the Core revision pinned in workspace.yaml.
+--core-path links an existing clean Core checkout after verifying its revision.
+EOF
+}
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+manifest="$repo_root/workspace.yaml"
+workspace_root="$repo_root/.workspace"
+
+core_field() {
+  field=$1
+  awk -v wanted="$field" '
+    /^  - id: nexah-core$/ { in_core = 1; next }
+    in_core && /^  - id:/ { exit }
+    in_core && $1 == wanted ":" { print $2; exit }
+  ' "$manifest"
+}
+
+core_path=$(core_field local_path)
+core_remote=$(core_field remote)
+core_revision=$(core_field revision)
+core_target="$repo_root/${core_path#./}"
+
+mode=zones
+provided_core_path=
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --clone-core)
+      [ "$mode" = zones ] || { echo "Choose only one Core setup option." >&2; exit 2; }
+      mode=clone
+      shift
+      ;;
+    --core-path)
+      [ "$mode" = zones ] || { echo "Choose only one Core setup option." >&2; exit 2; }
+      [ "$#" -ge 2 ] || { echo "--core-path requires a path." >&2; exit 2; }
+      mode=link
+      provided_core_path=$2
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+mkdir -p \
+  "$workspace_root/architecture" \
+  "$workspace_root/repositories" \
+  "$workspace_root/research" \
+  "$workspace_root/experiments" \
+  "$workspace_root/runs" \
+  "$workspace_root/reviews" \
+  "$workspace_root/releases" \
+  "$workspace_root/archive"
+
+verify_core() {
+  candidate=$1
+  git -C "$candidate" rev-parse --is-inside-work-tree >/dev/null 2>&1 || {
+    echo "Core path is not a Git working tree: $candidate" >&2
+    exit 1
+  }
+  actual_revision=$(git -C "$candidate" rev-parse HEAD)
+  [ "$actual_revision" = "$core_revision" ] || {
+    echo "Core revision mismatch." >&2
+    echo "Expected: $core_revision" >&2
+    echo "Actual:   $actual_revision" >&2
+    exit 1
+  }
+  if [ -n "$(git -C "$candidate" status --porcelain)" ]; then
+    echo "Core working tree is not clean: $candidate" >&2
+    exit 1
+  fi
+}
+
+case "$mode" in
+  clone)
+    if [ -e "$core_target" ] || [ -L "$core_target" ]; then
+      verify_core "$core_target"
+    else
+      git clone "$core_remote" "$core_target"
+      git -C "$core_target" checkout --detach "$core_revision"
+      verify_core "$core_target"
+    fi
+    ;;
+  link)
+    case "$provided_core_path" in
+      /*) ;;
+      *) echo "--core-path must be absolute." >&2; exit 2 ;;
+    esac
+    resolved_core_path=$(CDPATH= cd -- "$provided_core_path" && pwd -P)
+    verify_core "$resolved_core_path"
+    if [ -e "$core_target" ] || [ -L "$core_target" ]; then
+      connected_core_path=$(CDPATH= cd -- "$core_target" && pwd -P)
+      [ "$connected_core_path" = "$resolved_core_path" ] || {
+        echo "Core target already points somewhere else: $core_target" >&2
+        exit 1
+      }
+      verify_core "$core_target"
+    else
+      ln -s "$resolved_core_path" "$core_target"
+    fi
+    ;;
+  zones)
+    if [ -e "$core_target" ] || [ -L "$core_target" ]; then
+      verify_core "$core_target"
+    fi
+    ;;
+esac
+
+echo "Workspace ready: $workspace_root"
+if [ -e "$core_target" ] || [ -L "$core_target" ]; then
+  echo "Pinned Core ready: $core_target"
+else
+  echo "Core not connected. Use --clone-core or --core-path when needed."
+fi
+echo "Library and Builder Hub remain pending in workspace.yaml."

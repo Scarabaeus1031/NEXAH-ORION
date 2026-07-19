@@ -1,0 +1,5 @@
+# Preserve byte-identical Phase 1A baselines with their intentional terminal blank line.
+src/orion/backend.py whitespace=-blank-at-eof
+src/orion/executor.py whitespace=-blank-at-eof
+src/orion/fake_backend.py whitespace=-blank-at-eof
+src/orion/validation.py whitespace=-blank-at-eof

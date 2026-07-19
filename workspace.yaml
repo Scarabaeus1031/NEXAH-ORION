@@ -1,0 +1,59 @@
+schema_version: 1
+
+workspace:
+  name: nexah-orion
+  local_root: .workspace
+  policy: repositories_are_independent
+
+repositories:
+  - id: nexah-core
+    role: frozen_deterministic_authority
+    local_path: .workspace/repositories/NEXAH
+    remote: https://github.com/Scarabaeus1031/NEXAH.git
+    branch: main
+    revision: 9f79bb06210402c40c9ef7d9937ca00d86c092b1
+    mode: read_only
+    status: pinned
+
+  - id: nexah-orion
+    role: reasoning_orchestration
+    local_path: .
+    remote: pending
+    branch: main
+    revision: working_tree
+    mode: development
+    status: active
+
+  - id: nexah-library
+    role: independent_knowledge_and_editorial_authority
+    local_path: .workspace/repositories/nexah-library
+    remote: pending
+    branch: pending
+    revision: pending
+    mode: unavailable
+    status: ownership_confirmed_remote_pending
+
+  - id: nexah-builder-hub
+    role: independent_operator_application
+    local_path: .workspace/repositories/nexah-builder-hub
+    remote: pending
+    branch: pending
+    revision: pending
+    mode: unavailable
+    status: repository_identity_pending
+
+local_zones:
+  architecture: .workspace/architecture
+  research: .workspace/research
+  experiments: .workspace/experiments
+  runs: .workspace/runs
+  reviews: .workspace/reviews
+  releases: .workspace/releases
+  archive: .workspace/archive
+
+governance:
+  ownership: docs/governance/OWNERSHIP.md
+  cross_repository: docs/governance/CROSS_REPOSITORY_GOVERNANCE.md
+  compatibility: docs/governance/COMPATIBILITY_POLICY.md
+  adr_index: docs/adr/README.md
+  versioning: docs/releases/VERSIONING.md

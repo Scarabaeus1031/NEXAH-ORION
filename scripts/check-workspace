@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$repo_root"
+
+failures=0
+
+fail() {
+  echo "ERROR: $*" >&2
+  failures=$((failures + 1))
+}
+
+required_files='README.md
+CONTRIBUTING.md
+GOVERNANCE.md
+CHANGELOG.md
+VERSION
+workspace.yaml
+docs/architecture/ORION_ARCHITECTURE.md
+docs/architecture/baselines/PHASE_0_BASELINE_RECOVERY.md
+docs/adr/README.md
+docs/adr/0000-template.md
+docs/governance/OWNERSHIP.md
+docs/governance/CROSS_REPOSITORY_GOVERNANCE.md
+docs/governance/COMPATIBILITY_POLICY.md
+docs/releases/RELEASE_STRATEGY.md
+docs/releases/VERSIONING.md
+docs/development/WORKSPACE.md
+docs/development/DEVELOPMENT_WORKFLOW.md
+docs/development/PHASE_1A_EXECUTION.md
+docs/development/PHASE_1B_OLLAMA.md
+docs/development/PHASE_1B_CLOSEOUT.md
+pyproject.toml
+src/orion/contracts.py
+src/orion/backend.py
+src/orion/fake_backend.py
+src/orion/ollama_backend.py
+src/orion/validation.py
+src/orion/executor.py
+tests/test_execution.py
+tests/test_ollama_backend.py
+tests/integration/test_ollama_integration.py
+scripts/test
+scripts/test-ollama-integration'
+
+while IFS= read -r path; do
+  [ -f "$path" ] || fail "Missing required file: $path"
+done <<EOF
+$required_files
+EOF
+
+version=$(tr -d '\r\n' < VERSION)
+echo "$version" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$' || \
+  fail "VERSION is not valid Semantic Versioning: $version"
+
+adr_numbers=
+for adr in docs/adr/[0-9][0-9][0-9][0-9]-*.md; do
+  [ -e "$adr" ] || continue
+  number=$(basename "$adr" | cut -d- -f1)
+  [ "$number" = 0000 ] && continue
+  grep -Eq '^- Status: (Draft|Proposed|Accepted|Rejected|Superseded)$' "$adr" || \
+    fail "ADR has invalid or missing status: $adr"
+  grep -Eq '^- Date: [0-9]{4}-[0-9]{2}-[0-9]{2}$' "$adr" || \
+    fail "ADR has invalid or missing date: $adr"
+  grep -Eq '^- Decision owner: .+' "$adr" || \
+    fail "ADR has no decision owner: $adr"
+  grep -Fq "($(basename "$adr"))" docs/adr/README.md || \
+    fail "ADR is missing from docs/adr/README.md: $adr"
+  case " $adr_numbers " in
+    *" $number "*) fail "Duplicate ADR number: $number" ;;
+  esac
+  adr_numbers="$adr_numbers $number"
+done
+
+core_revision=$(awk '
+  /^  - id: nexah-core$/ { in_core = 1; next }
+  in_core && /^  - id:/ { exit }
+  in_core && $1 == "revision:" { print $2; exit }
+' workspace.yaml)
+
+echo "$core_revision" | grep -Eq '^[0-9a-f]{40}$' || \
+  fail "Core revision in workspace.yaml is not a full commit hash."
+
+for forbidden in .workspace source_material models outputs runs; do
+  if git ls-files "$forbidden" | grep -q .; then
+    fail "Forbidden local path is tracked: $forbidden"
+  fi
+done
+
+if grep -ERn \
+  '^[[:space:]]*(from|import)[[:space:]]+(openai|anthropic|ollama|requests|httpx|aiohttp|grpc|boto3)([.[:space:]]|$)' \
+  src tests >/dev/null 2>&1; then
+  fail "A provider SDK or third-party network client is imported."
+fi
+
+if grep -ERn --exclude='ollama_backend.py' \
+  '^[[:space:]]*(from|import)[[:space:]]+(urllib|http|socket)([.[:space:]]|$)' \
+  src/orion >/dev/null 2>&1; then
+  fail "Network imports must remain inside the Ollama adapter."
+fi
+
+grep -Fq 'dependencies = []' pyproject.toml || \
+  fail "ORION must declare no provider SDK or third-party runtime dependency."
+
+if ! git diff --check; then
+  fail "Git whitespace check failed."
+fi
+
+core_target="$repo_root/.workspace/repositories/NEXAH"
+if [ -e "$core_target" ] || [ -L "$core_target" ]; then
+  if ! git -C "$core_target" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    fail "Connected Core path is not a Git repository."
+  else
+    actual_revision=$(git -C "$core_target" rev-parse HEAD)
+    [ "$actual_revision" = "$core_revision" ] || \
+      fail "Connected Core is at $actual_revision, expected $core_revision."
+    [ -z "$(git -C "$core_target" status --porcelain)" ] || \
+      fail "Connected Core working tree is not clean."
+  fi
+fi
+
+if [ "$failures" -ne 0 ]; then
+  echo "$failures workshop check(s) failed." >&2
+  exit 1
+fi
+
+echo "Workshop checks passed for ORION $version."

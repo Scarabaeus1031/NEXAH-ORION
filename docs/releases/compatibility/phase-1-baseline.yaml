@@ -1,0 +1,53 @@
+schema_version: 1
+bundle_id: 2026-07-19-phase-1b-ollama
+status: documented_baseline
+
+repositories:
+  nexah_core:
+    remote: https://github.com/Scarabaeus1031/NEXAH.git
+    revision: 9f79bb06210402c40c9ef7d9937ca00d86c092b1
+    compatibility: documentation_baseline_only
+  nexah_orion:
+    revision: working_tree
+    compatibility: internal_local_ollama_reference
+  nexah_library:
+    revision: pending
+    compatibility: unknown
+  nexah_builder_hub:
+    revision: pending
+    compatibility: unknown
+
+contracts:
+  - id: phase-1a-python-contracts
+    version: 0.1
+    visibility: internal_unstable
+    external_consumers: []
+  - id: ollama-reasoning-backend
+    version: 0.1
+    visibility: internal_unstable
+    runtime: ollama-0.32.1
+    model: llama3.1:8b
+    model_digest: 46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e
+    external_consumers: []
+
+verification:
+  executed_at: 2026-07-19
+  environment: python_standard_library_with_local_ollama
+  results:
+    - check: frozen_core_identity
+      result: pass
+    - check: runtime_contract_compatibility
+      result: pass_internal_only
+    - check: fake_backend_execution
+      result: pass
+    - check: ollama_backend_unit_tests
+      result: pass
+    - check: ollama_llama3_1_8b_integration
+      result: pass_local
+
+unknowns:
+  - Library authoritative repository and revision are pending.
+  - Builder Hub authoritative repository and revision are pending.
+  - Phase 1A contracts are not approved as public serialization schemas.
+  - Only the recorded local Ollama runtime and model were exercised.
+  - Cross-provider conformance is not yet demonstrated.

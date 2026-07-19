@@ -1,0 +1,82 @@
+# Local multi-repository workspace
+.workspace/
+
+# Unreviewed visual and source evidence
+source_material/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+.secrets/
+secrets/
+credentials*.json
+service-account*.json
+*.token
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+*.egg-info/
+.venv/
+.venv*/
+venv/
+env/
+.direnv/
+.python-version
+build/
+dist/
+htmlcov/
+
+# Model/runtime artifacts
+models/
+.ollama/
+.cache/huggingface/
+*.gguf
+*.ggml
+*.safetensors
+*.onnx
+*.bin
+*.ckpt
+*.pt
+*.pth
+*.tflite
+*.mlmodel
+*.mlpackage/
+*.h5
+
+# Run and generated artifacts
+outputs/
+runs/
+logs/
+*.log
+coverage/
+.coverage
+.coverage.*
+integration-output/
+.integration/
+.tmp/
+tmp/
+temp/
+
+# Editors and operating systems
+.DS_Store
+.AppleDouble/
+._*
+Thumbs.db
+.idea/
+.vscode/
+.fleet/
+*.code-workspace
+*~
+*.swp
+*.swo

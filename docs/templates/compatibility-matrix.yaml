@@ -1,0 +1,24 @@
+schema_version: 1
+bundle_id: YYYY-MM-DD-short-name
+status: draft
+
+repositories:
+  nexah_core:
+    remote: https://github.com/Scarabaeus1031/NEXAH.git
+    revision: 9f79bb06210402c40c9ef7d9937ca00d86c092b1
+  nexah_orion:
+    revision: pending
+  nexah_library:
+    revision: pending
+  nexah_builder_hub:
+    revision: pending
+
+contracts: []
+
+verification:
+  executed_at: pending
+  environment: pending
+  results: []
+
+unknowns:
+  - Library and Builder Hub authoritative baselines are not yet recorded.

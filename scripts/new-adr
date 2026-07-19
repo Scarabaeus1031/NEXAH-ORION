@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+adr_dir="$repo_root/docs/adr"
+template="$adr_dir/0000-template.md"
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: ./scripts/new-adr \"Decision title\"" >&2
+  exit 2
+fi
+
+title=$1
+echo "$title" | grep -Eq '^[0-9A-Za-z][0-9A-Za-z .,_-]*$' || {
+  echo "Title may contain letters, numbers, spaces, periods, commas, underscores and hyphens." >&2
+  exit 2
+}
+
+max=0
+for path in "$adr_dir"/[0-9][0-9][0-9][0-9]-*.md; do
+  [ -e "$path" ] || continue
+  number=$(basename "$path" | cut -d- -f1)
+  [ "$number" = 0000 ] && continue
+  numeric=$(printf '%s' "$number" | sed 's/^0*//')
+  [ -n "$numeric" ] || numeric=0
+  [ "$numeric" -gt "$max" ] && max=$numeric
+done
+
+next=$((max + 1))
+number=$(printf '%04d' "$next")
+slug=$(printf '%s' "$title" | tr '[:upper:]' '[:lower:]' | tr ' _' '--' | sed 's/[^a-z0-9-]//g; s/--*/-/g; s/^-//; s/-$//')
+target="$adr_dir/$number-$slug.md"
+today=$(date +%Y-%m-%d)
+
+awk -v number="$number" -v title="$title" -v today="$today" '
+  NR == 1 { print "# ADR-" number ": " title; next }
+  $0 == "- Date: YYYY-MM-DD" { print "- Date: " today; next }
+  { print }
+' "$template" > "$target"
+
+echo "Created: $target"
+echo "Complete the record, set Status to Proposed, and add it to docs/adr/README.md."

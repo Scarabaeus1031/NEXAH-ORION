@@ -1,0 +1,11 @@
+# Replace this repository-wide fallback with confirmed team handles through a governance PR.
+* @Scarabaeus1031
+
+# Decision and governance records require architecture review.
+/docs/adr/ @Scarabaeus1031
+/docs/architecture/ @Scarabaeus1031
+/docs/governance/ @Scarabaeus1031
+/docs/releases/ @Scarabaeus1031
+
+# Future public contracts require explicit contract ownership before files are added.
+/schemas/ @Scarabaeus1031
