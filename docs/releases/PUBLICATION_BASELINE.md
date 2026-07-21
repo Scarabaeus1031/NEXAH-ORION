@@ -12,7 +12,7 @@ production runtime.
 
 | Input | Required state | Current state |
 |---|---|---|
-| ORION source | clean, immutable commit | local working tree contains the completed post-Phase-4A development work but is not consolidated |
+| ORION source | clean, immutable commit | local baseline is committed through `f16adc9…`; no public remote exists |
 | NEXAH Core | exact revision in `workspace.yaml` | configured `9f79bb06210402c40c9ef7d9937ca00d86c092b1`; connected clean checkout is on a newer local Operations series |
 | Library | explicit canonical Registry reference | remains external to ORION and currently canonical in `NEXAH/LIBRARY` |
 | Builder Hub | only when consumed | not part of this publication candidate |
@@ -25,9 +25,10 @@ The Release Gate is correct to stop. ORION was frozen against NEXAH Core commit
 advanced beyond that revision and contains publication/governance work. A newer
 Framework commit is not automatically a compatible Core baseline.
 
-Resolving the mismatch requires one of two explicit actions:
+The first valid path has now been verified; the owner still chooses which
+baseline to publish:
 
-1. verify ORION against a clean detached checkout of the existing pinned Core;
+1. adopt the successful clean verification against the existing pinned Core;
    or
 2. approve a new cross-repository compatibility record and update the pin.
 
@@ -39,9 +40,14 @@ different checkout.
 
 - repository-wide license requires owner approval;
 - public repository identity and remote require owner/GitHub action;
-- working tree must be consolidated into an immutable reviewed baseline;
-- Core compatibility must be verified using one of the two explicit paths;
-- the full release gate must pass from a clean working tree.
+- owner must adopt the verified existing Core pin or request qualification of a
+  newer revision; and
+- public CI must pass on the published immutable commit.
+
+The local consolidation blocker is closed. ORION `0a9c031…` passed the full
+development Release Gate in an isolated clean workspace against the unchanged
+Core pin `9f79bb…`; follow-up `f16adc9…` records that evidence and changes no
+runtime source.
 
 ## Verification commands
 

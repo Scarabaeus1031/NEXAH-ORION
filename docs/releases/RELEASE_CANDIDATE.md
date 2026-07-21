@@ -39,7 +39,7 @@ stops at the exact revision comparison described in
 
 - owner-approved repository license;
 - public repository identity and remote;
-- clean immutable ORION commit;
+- publication of the existing clean immutable local ORION commits;
 - owner decision on the existing Core pin;
 - successful development Release Gate against that exact Core revision; and
 - green public CI on the published commit.
