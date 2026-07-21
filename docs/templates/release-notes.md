@@ -1,4 +1,4 @@
-# NEXAH ORION VERSION
+# NEXAH-ORION VERSION
 
 - Release date:
 - Git revision:

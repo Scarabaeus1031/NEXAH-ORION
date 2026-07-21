@@ -1,4 +1,4 @@
-# Contributing to NEXAH ORION
+# Contributing to NEXAH-ORION
 
 Every contribution begins with ownership. A technically correct change in the wrong repository is still an invalid change.
 
@@ -85,6 +85,14 @@ Never commit:
 Participation follows [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Report
 security-sensitive issues through [`SECURITY.md`](SECURITY.md), never through a
 public issue containing credentials or exploit details.
+
+## Contribution licensing
+
+Software contributions are submitted under the
+[Apache License 2.0](LICENSE). Original documentation, specifications,
+research, books and visual material are submitted under
+[CC BY 4.0](LICENSE-DOCS.md) where applicable. Contributors must preserve
+third-party licenses and provenance. See [Licensing Scope](LICENSES.md).
 
 ## Definition of done
 

@@ -111,7 +111,7 @@ executor = SelectingOrientationExecutor(
     context_provider=RepositoryContextProvider(
         repository_root=Path("."),
         source_id="orion",
-        owner="NEXAH ORION",
+        owner="NEXAH-ORION",
         revision="0.3.0-dev.0",
     ),
 )

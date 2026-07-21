@@ -1,4 +1,4 @@
-# NEXAH ORION
+# NEXAH-ORION
 
 ORION is the model-independent reasoning and orchestration repository above the frozen NEXAH Kernel.
 
@@ -56,7 +56,7 @@ The governing rule is:
 
 ```text
 NEXAH Framework / OLS / Kernel   definitions, semantics and deterministic contracts
-NEXAH ORION                      deterministic navigation, reports, validation and LYRA
+NEXAH-ORION                      deterministic navigation, reports, validation and LYRA
 Library House                    Works, Editions and editorial identity
 Builder Hub                      independent operator-facing application
 ```
@@ -154,9 +154,15 @@ not a public release, stable semantic-version tag or production-readiness claim.
 Its current publication blockers and exact Core-pin mismatch are recorded in
 [`docs/releases/PUBLICATION_BASELINE.md`](docs/releases/PUBLICATION_BASELINE.md).
 
-No repository-wide public license or public ORION remote has yet been approved.
-Publication remains blocked until both are explicitly established; ORION does
-not inherit a license merely by consuming the NEXAH Framework.
+The approved public repository identity is `NEXAH-ORION`. Repository creation,
+remote configuration and publication remain GitHub owner actions; this local
+repository has not been renamed and the verified Core pin is unchanged.
+
+Original software is licensed under the [Apache License 2.0](LICENSE).
+Original documentation, specifications, research, books and visual material
+are licensed under [CC BY 4.0](LICENSE-DOCS.md) where applicable. Third-party
+and source-derived material retains its stated terms. See the complete
+[Licensing Scope](LICENSES.md).
 
 Community participation follows the canonical
 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md); security reports follow

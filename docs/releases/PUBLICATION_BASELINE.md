@@ -2,7 +2,7 @@
 
 ## Status
 
-**Development publication candidate — not yet releasable.**
+**Development publication candidate — locally publication-ready.**
 
 ORION remains `0.3.0-dev.0`. The F1 freeze stabilizes the ORION v1 architecture
 but does not declare a stable public API, executable Transformation Stack or
@@ -12,7 +12,7 @@ production runtime.
 
 | Input | Required state | Current state |
 |---|---|---|
-| ORION source | clean, immutable commit | local baseline is committed through `f16adc9…`; no public remote exists |
+| ORION source | clean, immutable commit | current clean commit contains the approved license and repository identity; pre-license baseline was `18d8a454842c8f25301ca4d3118f7ad903de55a2`; no public remote exists |
 | NEXAH Core | exact revision in `workspace.yaml` | configured `9f79bb06210402c40c9ef7d9937ca00d86c092b1`; connected clean checkout is on a newer local Operations series |
 | Library | explicit canonical Registry reference | remains external to ORION and currently canonical in `NEXAH/LIBRARY` |
 | Builder Hub | only when consumed | not part of this publication candidate |
@@ -36,18 +36,20 @@ Operations must not choose the second action without the Framework and ORION
 owners. The Release Gate must not be weakened or taught to ignore a dirty or
 different checkout.
 
-## Publication blockers
+## Publication gates
 
-- repository-wide license requires owner approval;
-- public repository identity and remote require owner/GitHub action;
+- Apache 2.0 for software and CC BY 4.0 for original documentation and visual
+  material are recorded in `LICENSE`, `LICENSE-DOCS.md` and `LICENSES.md`;
+- approved repository identity is `NEXAH-ORION`; repository creation and remote
+  configuration require GitHub owner action;
 - owner must adopt the verified existing Core pin or request qualification of a
   newer revision; and
 - public CI must pass on the published immutable commit.
 
-The local consolidation blocker is closed. ORION `0a9c031…` passed the full
-development Release Gate in an isolated clean workspace against the unchanged
-Core pin `9f79bb…`; follow-up `f16adc9…` records that evidence and changes no
-runtime source.
+The local consolidation and licensing blockers are closed. The current clean
+publication candidate passed the full development Release Gate in an isolated
+workspace against the unchanged Core pin `9f79bb…`. Its executable baseline
+entered at `0a9c031…`; subsequent publication commits change no runtime source.
 
 ## Verification commands
 

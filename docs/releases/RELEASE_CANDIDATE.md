@@ -28,20 +28,24 @@ candidate, not a release or stable API declaration.
 ## Verification
 
 The local suite passes with 75 tests and one opt-in Ollama integration test
-skipped. Architecture, responsibility-boundary and Plate checks pass. An
-isolated clean verification of ORION commit `0a9c031…` against the unchanged
-configured Core pin `9f79bb…` passes the complete development Release Gate.
+skipped. Architecture, responsibility-boundary and Plate checks pass. The
+current clean publication candidate, including the approved licensing and
+repository metadata, passes the complete development Release Gate in an
+isolated workspace against the unchanged configured Core pin `9f79bb…`.
 The ordinary connected workspace remains intentionally newer and therefore
 stops at the exact revision comparison described in
 `CORE_COMPATIBILITY_REPORT.md`.
 
 ## Publication gates
 
-- owner-approved repository license;
-- public repository identity and remote;
+- approved `NEXAH-ORION` public repository creation and remote configuration;
 - publication of the existing clean immutable local ORION commits;
 - owner decision on the existing Core pin;
 - successful development Release Gate against that exact Core revision; and
 - green public CI on the published commit.
 
 No additional architecture or feature work is required for this candidate.
+
+Software is licensed under Apache 2.0. Original documentation,
+specifications, research, books and visual material are licensed under
+CC BY 4.0 where applicable; `LICENSES.md` defines the boundary.

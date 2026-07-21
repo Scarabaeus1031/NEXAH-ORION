@@ -1,6 +1,6 @@
 # Repository Governance
 
-NEXAH ORION is governed through explicit ownership, recorded decisions, compatibility review, and human approval.
+NEXAH-ORION is governed through explicit ownership, recorded decisions, compatibility review, and human approval.
 
 ## Authority
 

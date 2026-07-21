@@ -1,4 +1,4 @@
-# NEXAH ORION — Phase 0 Baseline Recovery
+# NEXAH-ORION — Phase 0 Baseline Recovery
 
 Status: Baseline Recovery Map
 Datum: 19. Juli 2026
@@ -352,7 +352,7 @@ NEXAH WORKSPACE
 │   ├── existing evidence and validation
 │   └── historical Library/EOS snapshot retained intact
 │
-├── NEXAH ORION REPOSITORY
+├── NEXAH-ORION REPOSITORY
 │   ├── architecture and ADRs
 │   ├── OrientationRequest / Run ownership
 │   ├── Context planning / manifest ownership

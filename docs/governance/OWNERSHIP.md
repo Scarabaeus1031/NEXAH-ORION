@@ -13,7 +13,7 @@ Ownership is defined by responsibility and authority, not by convenience or impo
 | Repository | Owns | Does not own |
 |---|---|---|
 | NEXAH Framework / OLS / Kernel | framework definitions, OLS authority, deterministic contracts, Kernel behavior, existing evidence and validation | model reasoning, ORION runs, Library editorial authority, Builder UI |
-| NEXAH ORION | request lifecycle, context selection and assembly, model invocation boundary, result validation, representation-route planning, contract verification, run audit and replay | Kernel truth, OLS semantics, mathematical transformation operators not yet approved, renderer authority not yet implemented, Library identity, human approval, application UI |
+| NEXAH-ORION | request lifecycle, context selection and assembly, model invocation boundary, result validation, representation-route planning, contract verification, run audit and replay | Kernel truth, OLS semantics, mathematical transformation operators not yet approved, renderer authority not yet implemented, Library identity, human approval, application UI |
 | Library House (currently canonical in `NEXAH/LIBRARY`) | Registry identity, Works, Editions, reader journeys, knowledge contracts and guarded editorial execution | ORION routing, Kernel invariants, Builder UI |
 | Builder Hub | operator-facing request, inspection, diff and approval interaction | model or Kernel authority, Library identity |
 
