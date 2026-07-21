@@ -28,9 +28,12 @@ candidate, not a release or stable API declaration.
 ## Verification
 
 The local suite passes with 75 tests and one opt-in Ollama integration test
-skipped. Architecture, responsibility-boundary and Plate checks pass. The
-development Release Gate remains blocked only by the exact NEXAH Core revision
-comparison described in `CORE_COMPATIBILITY_REPORT.md`.
+skipped. Architecture, responsibility-boundary and Plate checks pass. An
+isolated clean verification of ORION commit `0a9c031…` against the unchanged
+configured Core pin `9f79bb…` passes the complete development Release Gate.
+The ordinary connected workspace remains intentionally newer and therefore
+stops at the exact revision comparison described in
+`CORE_COMPATIBILITY_REPORT.md`.
 
 ## Publication gates
 
