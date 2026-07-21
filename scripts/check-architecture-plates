@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$repo_root"
+
+failures=0
+
+fail() {
+  echo "ERROR: $*" >&2
+  failures=$((failures + 1))
+}
+
+plates='01_system_perspective.png
+02_orientation_workflow.png
+03_representation_architecture.png
+04_representation_graph.png
+05_transition_contract_anatomy.png
+06_transformation_engine.png
+07_operator_registry.png
+08_lyra_language_layer.png
+09_documentation_projections.png
+10_evidence_inference_boundary.png'
+
+generated='01_system_perspective
+02_orientation_workflow
+03_representation_architecture
+04_representation_graph
+05_transition_contract_anatomy
+06_transformation_engine
+07_operator_registry
+08_lyra_language_layer
+09_documentation_projections
+10_evidence_inference_boundary'
+
+while IFS= read -r plate; do
+  path="docs/architecture/plates/$plate"
+  [ -f "$path" ] || {
+    fail "Missing canonical Architecture Plate: $path"
+    continue
+  }
+  signature=$(od -An -tx1 -N8 "$path" | tr -d ' \n')
+  [ "$signature" = 89504e470d0a1a0a ] || fail "Invalid PNG signature: $path"
+  reference_count=$(grep -RFl "plates/$plate" docs --include='*.md' | \
+    grep -v '^docs/architecture/plates/README.md$' | wc -l | tr -d ' ')
+  [ "$reference_count" -ge 1 ] || \
+    fail "Architecture Plate has no authoritative-document reference: $plate"
+done <<EOF
+$plates
+EOF
+
+while IFS= read -r name; do
+  source="docs/architecture/plates/src/$name.svg"
+  [ -f "$source" ] || fail "Missing deterministic SVG source: $source"
+done <<EOF
+$generated
+EOF
+
+if command -v rsvg-convert >/dev/null 2>&1; then
+  plate_check_tmp=$(mktemp -d)
+  trap 'rm -rf "$plate_check_tmp"' EXIT
+  while IFS= read -r name; do
+    rsvg-convert --width 1536 --height 1024 \
+      "docs/architecture/plates/src/$name.svg" > "$plate_check_tmp/$name.png"
+    cmp -s "$plate_check_tmp/$name.png" "docs/architecture/plates/$name.png" || \
+      fail "Generated PNG differs from canonical SVG source: $name"
+  done <<EOF
+$generated
+EOF
+else
+  fail "rsvg-convert is required to verify generated Plate PNGs"
+fi
+
+if grep -Fq '/Users/' scripts/generate-architecture-plates; then
+  fail "Architecture Plate generator contains a machine-specific path"
+fi
+
+python_command=${ORION_PYTHON:-python3}
+PYTHONDONTWRITEBYTECODE=1 "$python_command" -c '
+from pathlib import Path
+from struct import unpack
+from xml.etree import ElementTree
+
+plate_dir = Path("docs/architecture/plates")
+for path in sorted(plate_dir.glob("*.png")):
+    header = path.read_bytes()[:24]
+    assert len(header) == 24
+    assert unpack(">II", header[16:24]) == (1536, 1024), path
+for path in sorted((plate_dir / "src").glob("*.svg")):
+    root = ElementTree.parse(path).getroot()
+    assert root.tag.endswith("svg"), path
+' || fail "Architecture Plate dimensions or SVG sources are invalid"
+
+if [ "$failures" -ne 0 ]; then
+  echo "$failures Architecture Plate check(s) failed." >&2
+  exit 1
+fi
+
+echo "Architecture Plate checks passed for 10 generated plates and 10 canonical SVG sources."

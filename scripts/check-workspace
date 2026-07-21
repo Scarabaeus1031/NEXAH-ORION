@@ -14,11 +14,38 @@ fail() {
 required_files='README.md
 CONTRIBUTING.md
 GOVERNANCE.md
+SECURITY.md
+CODE_OF_CONDUCT.md
 CHANGELOG.md
 VERSION
 workspace.yaml
 docs/architecture/ORION_ARCHITECTURE.md
+docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md
+docs/architecture/ORION_V1_ARCHITECTURE_REVIEW.md
 docs/architecture/REPRESENTATION_ARCHITECTURE.md
+docs/architecture/operators/OPERATOR_ARCHITECTURE.md
+docs/architecture/lyra/LYRA_ARCHITECTURE.md
+docs/architecture/plates/README.md
+docs/architecture/plates/01_system_perspective.png
+docs/architecture/plates/02_orientation_workflow.png
+docs/architecture/plates/03_representation_architecture.png
+docs/architecture/plates/04_representation_graph.png
+docs/architecture/plates/05_transition_contract_anatomy.png
+docs/architecture/plates/06_transformation_engine.png
+docs/architecture/plates/07_operator_registry.png
+docs/architecture/plates/08_lyra_language_layer.png
+docs/architecture/plates/09_documentation_projections.png
+docs/architecture/plates/10_evidence_inference_boundary.png
+docs/architecture/plates/src/01_system_perspective.svg
+docs/architecture/plates/src/02_orientation_workflow.svg
+docs/architecture/plates/src/03_representation_architecture.svg
+docs/architecture/plates/src/04_representation_graph.svg
+docs/architecture/plates/src/05_transition_contract_anatomy.svg
+docs/architecture/plates/src/06_transformation_engine.svg
+docs/architecture/plates/src/07_operator_registry.svg
+docs/architecture/plates/src/08_lyra_language_layer.svg
+docs/architecture/plates/src/09_documentation_projections.svg
+docs/architecture/plates/src/10_evidence_inference_boundary.svg
 docs/architecture/transformations/ORIENTATION_TRANSFORM_STACK.md
 docs/architecture/transformations/REPRESENTATION_GRAPH.md
 docs/architecture/transformations/REPRESENTATION_MATRIX.md
@@ -28,12 +55,18 @@ docs/architecture/transformations/OPEN_ARCHITECTURE_QUESTIONS.md
 docs/architecture/baselines/PHASE_0_BASELINE_RECOVERY.md
 docs/adr/README.md
 docs/adr/0000-template.md
+docs/adr/0008-orion-v1-architecture-freeze.md
 docs/governance/OWNERSHIP.md
 docs/governance/CROSS_REPOSITORY_GOVERNANCE.md
 docs/governance/COMPATIBILITY_POLICY.md
 docs/releases/RELEASE_STRATEGY.md
 docs/releases/VERSIONING.md
+docs/releases/PUBLICATION_BASELINE.md
+docs/releases/RELEASE_CANDIDATE.md
+docs/releases/CORE_COMPATIBILITY_REPORT.md
+.github/REPOSITORY_METADATA.md
 docs/development/WORKSPACE.md
+docs/development/README.md
 docs/development/DEVELOPMENT_WORKFLOW.md
 docs/development/PHASE_1A_EXECUTION.md
 docs/development/PHASE_1B_OLLAMA.md
@@ -44,6 +77,24 @@ docs/development/PHASE_2C_CONTEXT_BRIEF.md
 docs/development/PHASE_4A_TRANSFORMATION_ENGINE.md
 docs/development/PHASE_4A_CLOSEOUT.md
 docs/development/PHASE_4A_CLOSEOUT.sha256
+docs/development/PHASE_5A_OPERATOR_REGISTRY.md
+docs/development/PHASE_6A_LYRA_LANGUAGE.md
+docs/development/PHASE_6B_LYRA_INTEGRATION.md
+docs/development/PHASE_6C_ORIENTATION_SESSIONS.md
+docs/orientation_sessions/README.md
+docs/orientation_sessions/canonical/full_round_trip.md
+docs/orientation_sessions/canonical/clarification_required.md
+docs/orientation_sessions/canonical/unsupported_vocabulary.md
+docs/orientation_sessions/navigation/existing_route.md
+docs/orientation_sessions/explanation/planned_identity.md
+docs/orientation_sessions/comparison/report_comparison.md
+docs/orientation_sessions/validation/validation_outcome.md
+docs/orientation_sessions/blockers/blocked_route.md
+docs/orientation_sessions/blockers/missing_operator.md
+docs/orientation_sessions/blockers/missing_renderer.md
+docs/orientation_sessions/blockers/unknown_representation.md
+docs/orientation_sessions/alternatives/registered_alternatives.md
+docs/orientation_sessions/inspection/report_metadata.md
 pyproject.toml
 src/orion/brief_backend.py
 src/orion/brief_execution.py
@@ -54,6 +105,14 @@ src/orion/document_selector.py
 src/orion/selection_execution.py
 src/orion/transformation_contracts.py
 src/orion/transformation_engine.py
+src/orion/operator_registry.py
+src/orion/lyra/__init__.py
+src/orion/lyra/exceptions.py
+src/orion/lyra/explanation.py
+src/orion/lyra/models.py
+src/orion/lyra/translator.py
+src/orion/lyra/vocabulary.py
+src/orion/lyra_execution.py
 src/orion/contracts.py
 src/orion/backend.py
 src/orion/fake_backend.py
@@ -66,11 +125,16 @@ tests/test_context_builder.py
 tests/test_document_selector.py
 tests/test_context_brief.py
 tests/test_transformation_engine.py
+tests/test_operator_registry.py
+tests/test_lyra.py
+tests/test_orientation_sessions.py
 tests/integration/test_ollama_integration.py
 scripts/test
 scripts/test-ollama-integration
 scripts/check-architecture-consistency
-scripts/check-boundaries'
+scripts/check-boundaries
+scripts/check-architecture-plates
+scripts/generate-architecture-plates'
 
 while IFS= read -r path; do
   [ -f "$path" ] || fail "Missing required file: $path"
@@ -79,6 +143,7 @@ $required_files
 EOF
 
 ./scripts/check-boundaries || failures=$((failures + 1))
+./scripts/check-architecture-plates || failures=$((failures + 1))
 
 version=$(tr -d '\r\n' < VERSION)
 echo "$version" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$' || \

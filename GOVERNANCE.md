@@ -28,3 +28,12 @@ NEXAH ORION is governed through explicit ownership, recorded decisions, compatib
 - Local research and experiments: `.workspace/`, never authority by placement
 
 Detailed governance is defined in [`docs/governance/CROSS_REPOSITORY_GOVERNANCE.md`](docs/governance/CROSS_REPOSITORY_GOVERNANCE.md).
+
+## Frozen architecture baseline
+
+[`ADR-0008`](docs/adr/0008-orion-v1-architecture-freeze.md) freezes the ORION v1
+Architecture Baseline. Additive implementation work may proceed within its
+extension points. A change to frozen terminology, authority, responsibility,
+contracts, ownership, dependency direction, repository structure,
+Architecture Plates or Orientation Sessions requires explicit Architecture
+Review and an accepted ADR.

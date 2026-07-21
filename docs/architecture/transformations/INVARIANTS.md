@@ -1,5 +1,8 @@
 # Orientation Invariants
 
+- F1-Status: Invariant-Vokabular eingefroren; wissenschaftliche Verifikation offen
+- Repository-Version: `0.3.0-dev.0`
+
 ## 1. Statuscodes
 
 | Code | Status | Bedeutung |

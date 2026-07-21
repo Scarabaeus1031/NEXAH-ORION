@@ -10,6 +10,11 @@
 
 ## Purpose
 
+![Architecture Plate 06 — Transformation Engine](../architecture/plates/06_transformation_engine.png)
+
+*The Transformation Engine plans registered routes and reports blockers without
+executing transformations.*
+
 The Transformation Engine proves that ORION can navigate the registered
 Representation Graph, bind every selected edge to its Transition Contract, and
 produce an inspectable plan and report without performing a transformation.

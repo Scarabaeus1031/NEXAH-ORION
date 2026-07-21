@@ -1,14 +1,20 @@
 # Ownership Map
 
+This map derives from the adopted
+[NEXAH Ecosystem Constitution v1.0](https://github.com/Scarabaeus1031/NEXAH/blob/main/GOVERNANCE/ECOSYSTEM_CONSTITUTION.md).
+The Constitution defines the Houses and their authority. This document assigns
+concrete ORION repository and component responsibilities within those
+boundaries; it does not repeat or amend constitutional principles.
+
 Ownership is defined by responsibility and authority, not by convenience or import direction.
 
 ## Repository ownership
 
 | Repository | Owns | Does not own |
 |---|---|---|
-| NEXAH Core | OLS authority, deterministic contracts, Kernel behavior, existing evidence and validation | model reasoning, ORION runs, Library editorial authority, Builder UI |
+| NEXAH Framework / OLS / Kernel | framework definitions, OLS authority, deterministic contracts, Kernel behavior, existing evidence and validation | model reasoning, ORION runs, Library editorial authority, Builder UI |
 | NEXAH ORION | request lifecycle, context selection and assembly, model invocation boundary, result validation, representation-route planning, contract verification, run audit and replay | Kernel truth, OLS semantics, mathematical transformation operators not yet approved, renderer authority not yet implemented, Library identity, human approval, application UI |
-| NEXAH Library | Registry identity, Works, Editions, reader journeys, knowledge contracts and guarded editorial execution | ORION routing, Kernel invariants, Builder UI |
+| Library House (currently canonical in `NEXAH/LIBRARY`) | Registry identity, Works, Editions, reader journeys, knowledge contracts and guarded editorial execution | ORION routing, Kernel invariants, Builder UI |
 | Builder Hub | operator-facing request, inspection, diff and approval interaction | model or Kernel authority, Library identity |
 
 ## ORION directory ownership
@@ -16,12 +22,13 @@ Ownership is defined by responsibility and authority, not by convenience or impo
 | Path | Responsibility | Current status |
 |---|---|---|
 | `docs/architecture/` | current architecture and recovered baselines | active |
+| `docs/architecture/plates/` | canonical SVG sources and generated PNG companions to authoritative Markdown and ADRs | active; PNG is never edited directly and plates cannot change architecture independently |
 | `docs/adr/` | immutable decision history | active |
 | `docs/governance/` | ownership and cross-repository rules | active |
 | `docs/releases/` | release, version and compatibility policy | active |
 | `docs/development/` | contributor and workspace process | active |
 | `schemas/` | future ORION-owned public cross-repository contracts | reserved; no public contracts approved |
-| `src/orion/` | internal contracts, context pipeline, backend ports/adapters, validation, explicit representation graph, transformation planning and blocker reports | active; transformation operators and renderers absent |
+| `src/orion/` | internal contracts, context pipeline, backend ports/adapters, validation, explicit representation graph, declarative operator inventory, transformation planning, blocker reports and LYRA language boundary | active; transformation operator implementations and renderers absent |
 | `tests/` | ORION-owned contract and execution verification | active |
 | `tools/` | maintained ORION repository tools | reserved |
 | `scripts/` | repository workshop automation | active |
@@ -39,9 +46,20 @@ Ownership is defined by responsibility and authority, not by convenience or impo
 | Validation | ORION validation boundary | validate backend results against the original `ContextManifest` | canonical Kernel decisions |
 | Representation Graph registry | ORION representation-planning boundary | enumerate only registered `T01–T15` edges | infer transitions or execute operators |
 | Transition Contract registry | ORION representation-planning boundary | expose the normalized planning metadata of `T01–T15` | upgrade evidence or provide algorithms |
+| Operator Registry | ORION capability-inventory boundary | expose immutable operator identity, lifecycle, compatibility, evidence and ownership metadata | select, rank, load or execute operators; provide mathematics |
 | `TransformationEngine` | ORION navigation layer | plan deterministic routes and report provenance, evidence, compatibility and blockers | mathematics, operators, rendering, target production, persistence, LLM calls, Kernel mutation |
-| Transition operators | unassigned until separately approved | none in the current baseline | not executable in Phase 4A |
-| Renderers | future Lyra/Representation boundary | none in the current baseline | not executable in Phase 4A |
+| LYRA language boundary | ORION human-language layer | deterministically map canonical requests to existing planning inputs and faithfully explain the exact structured report | reasoning, planning, routing, validation, contracts, operators, renderers, providers, Kernel truth |
+| `LyraOrientationExecutor` | ORION composition layer | sequence translation, unchanged Engine planning and explanation through dependency injection | language inference, planning policy, validation changes, operator or renderer execution |
+| Transition operator implementations | unassigned until separately approved | none in the current baseline | all Phase 5A registry entries are non-executable |
+| Renderers | future ORION Representation boundary | none in the current baseline | not executable in the frozen baseline; never LYRA authority |
+
+## Architecture maintenance mode
+
+The frozen scope is defined in
+[`ORION_V1_ARCHITECTURE_FREEZE.md`](../architecture/ORION_V1_ARCHITECTURE_FREEZE.md).
+Additive work must preserve this ownership map. Changing an owner, sole
+responsibility, explicit non-responsibility or repository boundary is an
+architecture change and requires an accepted ADR before implementation.
 
 ## Ownership test
 

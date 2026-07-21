@@ -14,16 +14,26 @@ Core, ORION, Library, and Builder Hub release independently. An ORION tag never 
 | stable repository release | supported ORION contract/runtime scope | `v0.2.0` |
 | ecosystem compatibility bundle | known compatible independent releases | dated manifest, not a shared code version |
 
-## Phase 1B release boundary
+## Current development release boundary
 
-Phase 1B may release documentation, workshop tooling, the bounded offline
-execution slice, and the local Ollama reference adapter. It must not claim:
+The F1 Architecture Freeze may be reviewed and committed as development
+documentation together with the completed Phase 0–6C code and verification. It
+does not create a release or tag. A later release must not claim:
 
 - a stable or production ORION runtime;
 - model independence demonstrated across multiple real providers;
 - a public cross-repository contract;
 - Core, Library, or Builder compatibility beyond pinned documentation;
 - production readiness.
+
+The frozen architecture baseline is stable as an architectural reference while
+the repository remains `0.3.0-dev.0`. Architecture stability and public API or
+runtime stability are separate claims.
+
+The prepared development publication scope is recorded in
+[`RELEASE_CANDIDATE.md`](RELEASE_CANDIDATE.md). The exact unchanged Core-pin
+decision is recorded separately in
+[`CORE_COMPATIBILITY_REPORT.md`](CORE_COMPATIBILITY_REPORT.md).
 
 ## Release inputs
 

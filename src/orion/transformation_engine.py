@@ -7,6 +7,7 @@ from hashlib import sha256
 import json
 from typing import Any
 
+from .operator_registry import DEFAULT_OPERATOR_REGISTRY, OperatorRegistry
 from .transformation_contracts import (
     DEFAULT_REPRESENTATION_GRAPH,
     DEFAULT_TRANSITION_CONTRACTS,
@@ -128,7 +129,10 @@ class PlannedTransition:
     target_representation: str
     contract_version: str | None
     evidence_level: str
+    operator_id: str | None
+    operator_version: str | None
     operator_status: str
+    operator_owner: str | None
     renderer_family: str | None
     required_parameters: tuple[str, ...]
     documentation_ref: str | None
@@ -186,6 +190,7 @@ class TransformationPlan:
     target_representation_version: str | None
     graph_version: str
     contract_registry_version: str
+    operator_registry_version: str
     path: tuple[PlannedTransition, ...]
     alternative_paths: tuple[tuple[str, ...], ...]
     required_invariants: tuple[str, ...]
@@ -230,12 +235,15 @@ class TransformationEngine:
 
     graph: RepresentationGraph = DEFAULT_REPRESENTATION_GRAPH
     contracts: TransitionContractRegistry = DEFAULT_TRANSITION_CONTRACTS
+    operators: OperatorRegistry = DEFAULT_OPERATOR_REGISTRY
 
     def __post_init__(self) -> None:
         if not isinstance(self.graph, RepresentationGraph):
             raise TypeError("graph must be a RepresentationGraph")
         if not isinstance(self.contracts, TransitionContractRegistry):
             raise TypeError("contracts must be a TransitionContractRegistry")
+        if not isinstance(self.operators, OperatorRegistry):
+            raise TypeError("operators must be an OperatorRegistry")
 
     def execute(
         self,
@@ -308,7 +316,10 @@ class TransformationEngine:
                         target_representation=edge.target_representation,
                         contract_version=None,
                         evidence_level="unknown",
+                        operator_id=None,
+                        operator_version=None,
                         operator_status="unknown",
+                        operator_owner=None,
                         renderer_family=None,
                         required_parameters=(),
                         documentation_ref=None,
@@ -329,6 +340,12 @@ class TransformationEngine:
                 continue
 
             evidence_chain.append(contract.evidence_level)
+            registered_operators = self.operators.for_transition(edge.transition_id)
+            registered_operator = (
+                registered_operators[0]
+                if len(registered_operators) == 1
+                else None
+            )
             planned_steps.append(
                 PlannedTransition(
                     sequence=sequence,
@@ -337,7 +354,26 @@ class TransformationEngine:
                     target_representation=edge.target_representation,
                     contract_version=contract.contract_version,
                     evidence_level=contract.evidence_level,
-                    operator_status=contract.operator_status,
+                    operator_id=(
+                        registered_operator.operator_id
+                        if registered_operator is not None
+                        else None
+                    ),
+                    operator_version=(
+                        registered_operator.operator_version
+                        if registered_operator is not None
+                        else None
+                    ),
+                    operator_status=(
+                        registered_operator.status.value
+                        if registered_operator is not None
+                        else contract.operator_status
+                    ),
+                    operator_owner=(
+                        registered_operator.owner
+                        if registered_operator is not None
+                        else None
+                    ),
                     renderer_family=contract.renderer_family,
                     required_parameters=contract.required_parameters,
                     documentation_ref=contract.documentation_ref,
@@ -408,16 +444,43 @@ class TransformationEngine:
             else:
                 checks.append(f"contract:{edge.transition_id}:invariants-preserved")
 
-            if not contract.has_executable_operator:
+            if not registered_operators:
+                operator_reason = (
+                    f"{edge.transition_id} has no Operator Registry entry"
+                )
+            elif len(registered_operators) > 1:
+                operator_reason = (
+                    f"{edge.transition_id} has multiple Operator Registry entries; "
+                    "the registry and engine do not select between operators"
+                )
+            elif not registered_operator.supports_contract(
+                edge.transition_id,
+                contract.contract_version,
+            ):
+                operator_reason = (
+                    f"{registered_operator.operator_id} does not declare support for "
+                    f"{edge.transition_id}@{contract.contract_version}"
+                )
+            elif not registered_operator.executable:
+                operator_reason = (
+                    f"{registered_operator.operator_id} is "
+                    f"{registered_operator.status.value} and executable=false; "
+                    "no executable operator is registered"
+                )
+            else:  # Phase 5A records reject executable=true during construction.
+                operator_reason = ""
+
+            if operator_reason:
                 issues.append(
                     TransformationIssue(
                         kind="MissingOperator",
                         transition_id=edge.transition_id,
-                        evidence_level=contract.evidence_level,
-                        reason=(
-                            f"{edge.transition_id} operator status is "
-                            f"{contract.operator_status}; no verified operator is registered"
+                        evidence_level=(
+                            registered_operator.evidence_level
+                            if registered_operator is not None
+                            else contract.evidence_level
                         ),
+                        reason=operator_reason,
                     )
                 )
             if not contract.has_renderer:
@@ -479,6 +542,7 @@ class TransformationEngine:
             "target_representation_version": target.representation_version,
             "graph_version": self.graph.graph_version,
             "contract_registry_version": self.contracts.registry_version,
+            "operator_registry_version": self.operators.registry_version,
             "path": [step.transition_id for step in planned_steps],
             "alternative_paths": alternatives,
             "required_invariants": orientation_object.active_invariants,
@@ -501,6 +565,7 @@ class TransformationEngine:
             target_representation_version=target.representation_version,
             graph_version=self.graph.graph_version,
             contract_registry_version=self.contracts.registry_version,
+            operator_registry_version=self.operators.registry_version,
             path=tuple(planned_steps),
             alternative_paths=alternatives,
             required_invariants=orientation_object.active_invariants,

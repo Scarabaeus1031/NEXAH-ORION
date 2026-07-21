@@ -1,11 +1,17 @@
 # ORION Architecture
 
-Status: Proposed Architecture Baseline
+Status: Frozen ORION v1 Architecture Baseline
 Datum: 19. Juli 2026
-Scope: Architektur-Extraktion und Vorbereitung der Implementierungsphase
+Freeze bestätigt: 19. Juli 2026, Phase F1
+Scope: Architektur, Verantwortlichkeiten, Autorität und Erweiterungsgrenzen
 Entscheidungsgrundlage: `NEXAH_REASONING_ARCHITECTURE_REVIEW.md`, sechs Visual-Iterationen zur Architecture of Orientation sowie die vorangegangenen Construction Documents
 
 ---
+
+![Architecture Plate 01 — System Perspective](plates/01_system_perspective.png)
+
+*NEXAH defines the Orientation Space, ORION navigates it, and LYRA makes it
+accessible to human language.*
 
 ## 1. Zweck dieses Dokuments
 
@@ -13,7 +19,20 @@ Dieses Dokument stabilisiert die Architektur, die im Engineering Review und in m
 
 Die Visuals sind keine UI-Spezifikation und ihre Namen sind keine automatische Repository-Struktur. Sie liefern konzeptionelle Evidenz. Das Engineering Review liefert technische Randbedingungen. Dieses Dokument übersetzt beides in eine implementierbare Architektur, ohne Metapher, Repräsentation, Software und Dateisystem miteinander zu vermischen.
 
-Die Exploration gilt als abgeschlossen. Änderungen an dieser Baseline erfolgen künftig über Architecture Decision Records (ADRs), nicht über neue Posterinterpretationen.
+Die Exploration und die erste Human-facing Integration gelten als abgeschlossen.
+Diese Baseline ist durch
+[`ORION_V1_ARCHITECTURE_FREEZE.md`](ORION_V1_ARCHITECTURE_FREEZE.md) und
+[`ADR-0008`](../adr/0008-orion-v1-architecture-freeze.md) eingefroren. Änderungen
+an ihr erfolgen künftig über explizite Architecture Review und ein akzeptiertes
+Architecture Decision Record (ADR), nicht über neue Posterinterpretationen.
+
+### Aktueller Interaktionsnachweis
+
+Phase 6B implementiert LYRA als deterministische, nicht-autoritative Translation-
+und Explanation-Grenze. Phase 6C validiert diese Grenze mit versionierten
+[`Orientation Sessions`](../orientation_sessions/README.md). Die Sessions
+verwenden ausschließlich vorhandene Planning Inputs und Reports, ändern keine
+Engine-Entscheidung und halten LUCY ausdrücklich außerhalb des Ausführungspfads.
 
 ## 2. Verbindliche Architekturentscheidung
 
@@ -55,7 +74,7 @@ Beispiele:
 
 - Poster, Map, Blueprint, Specification und Atlas
 - Graph-, Poset-, Lattice-, Neighborhood- und Reader-Path-Sichten
-- Lyra als Sprache und Übersetzungsschicht
+- LYRA als Sprache und Übersetzungsschicht
 - Sirius als Darstellung eines lokalen Zugangspunkts oder Begleiters
 - Operator als Darstellung der navigierenden menschlichen Rolle
 
@@ -71,7 +90,7 @@ Stabile Architekturelemente sind:
 - Anwendungen und Operator-Flows als Eingangs- und Freigabegrenze
 - ORION als Orchestration-, Context- und Validation-Schicht
 - Kernel als kanonische, deterministische Foundation
-- Lyra als Representation-/Translation-Boundary
+- LYRA als menschliche Language-/Translation-Boundary
 - Library als kuratierte Wissens-, Evidenz- und Kontextquelle
 - Reasoning Backends als austauschbare, nicht-autoritative Inferenzdienste
 - Adapter als Anti-Corruption Layer zu lokalen und Cloud-Runtimes
@@ -99,7 +118,7 @@ Implementierungsentscheidungen dürfen ausgetauscht werden, solange Architekturv
 |---|---|---|---|---|
 | Kernel | Architektur | kanonische Foundation; Objekte, Relationen, Invarianten, Grenzen | versionierter NEXAH Core und seine Ports | ein LLM, Prompt oder Workflow-Manager |
 | ORION | Architektur | modellunabhängige Reasoning- und Orchestration-Schicht | Orchestrator, Context Pipeline, Routing, Validation, Evaluation | „das Llama-Modul“ oder bloßer Modellwrapper |
-| Lyra | Repräsentationsarchitektur | Sprachen der Orientierung; Übersetzung zwischen Darstellungen | versionierte Projektionen, Serializer, Renderer, Semantikprofile | ein UI-Theme oder ungeprüfte freie Übersetzung |
+| LYRA | Spracharchitektur | kanonische Sprache zwischen Human und ORION | deterministische Translation vorhandener Inputs und faithful Explanation vorhandener Reports | Renderer, Reasoning Engine oder zweite Wahrheitsschicht |
 | Library | Architektur/Daten | kuratierte gemeinsame Evidenz, Werke, Maps, Records und Corpora | getrennt versionierte Wissensbestände mit Provenance und Retrieval-Ports | beliebiger Dokumentenordner oder ORION-Quellcode |
 | Sirius | Repräsentation/Systemgrenze | lokaler Knoten, Begleiter, Interface oder Gate | optionale Client-/Edge-Runtime oder Builder-Anwendung | Core-Service oder kanonische Autorität |
 | Operator | Rolle/Trust Boundary | navigiert, prüft, baut und genehmigt | Rollen, Berechtigungen, Review- und Approval-Flows | autonomer Super-Agent mit impliziten Rechten |
@@ -108,7 +127,7 @@ Implementierungsentscheidungen dürfen ausgetauscht werden, solange Architekturv
 | Fission | Prozessmetapher | zerlegen, differenzieren, Grenzen sichtbar machen | Analyse-/Decomposition-Schritte | eigener Microservice |
 | Fusion | Prozessmetapher | geprüfte Synthese zu einer neuen Repräsentation | Synthesevorschlag plus Kernel-validierte Übernahme | ungeprüftes Mergen oder Verlust der Quellen |
 | Cosmos | Metapher/Domänenlinse | Feld, Maßstab und Orientierung | möglicherweise spätere Domänenprofile | Infrastruktur-Layer |
-| Geometry | Repräsentationslinse | Form, Ordnung, Lattices und Proportion | formale Modelle im Core oder Lyra-Projektionen | eigenständiger Produktbereich ohne Use Case |
+| Geometry | Repräsentationslinse | Form, Ordnung, Lattices und Proportion | formale Modelle im Core oder ORION-Representation-Projektionen | eigenständiger Produktbereich ohne Use Case |
 | Atlas | Repräsentation/Dokumentation | navigierbare Bedeutungs- und Beziehungssicht | Atlas Objects und publizierte Dokumentationssicht | Ersatz für Spezifikation oder kanonischen Zustand |
 
 Die Namen bleiben wertvoll, aber die technische Architektur verwendet zusätzlich klare Funktionsnamen. Ein Entwickler muss die Systemgrenze verstehen können, ohne die Metaphern zu kennen.
@@ -135,6 +154,11 @@ Poster, Map, Blueprint, Specification und Atlas sowie die wiederkehrenden Domän
 
 ### 5.5 Zerlegen, verbinden, neu bilden
 
+![Architecture Plate 02 — Orientation Workflow](plates/02_orientation_workflow.png)
+
+*Orientation moves from observation through differentiation and connection
+toward a preserved, shareable result.*
+
 Die Iterationen variieren sprachlich, erhalten aber denselben Arbeitsrhythmus:
 
 ```text
@@ -145,7 +169,7 @@ Dies ist ein fachliches Prozessmuster, keine zwingende feste Pipeline für jeden
 
 ### 5.6 Wissen ist eine eigene Quelle
 
-Library erscheint wiederholt neben Kernel, ORION und Lyra. Wissen hat eine andere Lebensdauer und Autorität als Code. Es wird referenziert und versioniert, nicht in Prompts oder Quellcode eingebettet.
+Library erscheint wiederholt neben Kernel, ORION und LYRA. Wissen hat eine andere Lebensdauer und Autorität als Code. Es wird referenziert und versioniert, nicht in Prompts oder Quellcode eingebettet.
 
 ### 5.7 Lokaler Zugang ohne lokale Wahrheitshoheit
 
@@ -170,7 +194,7 @@ Zur Stabilitätsprüfung wurden die Visuals als sechs Iterationen betrachtet:
 |---|:---:|:---:|:---:|:---:|:---:|:---:|---|
 | Kernel als Foundation | ✓ | ✓ | ✓ | ✓ | ✓ | – | Architektur |
 | ORION als Reasoning | ✓ | ✓ | ✓ | ✓ | ✓ | – | Architektur |
-| Lyra als Language/Meaning | ✓ | ✓ | ✓ | ✓ | ✓ | – | Repräsentationsarchitektur |
+| LYRA als Language/Meaning | ✓ | ✓ | ✓ | ✓ | ✓ | – | Repräsentationsarchitektur |
 | Sirius als lokaler Companion/Node | ✓ | ✓ | ✓ | ✓ | ✓ | – | Systemgrenzen-Repräsentation |
 | Human als Quelle/Zweck | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Trust Boundary |
 | Operator/Navigator | ✓ | – | ✓ | ✓ | ✓ | implizit | Rolle |
@@ -207,13 +231,19 @@ Die Metapher „Bridge“ bedeutet deshalb nicht Fusion um jeden Preis, sondern 
 
 ## 7. Softwarearchitektur
 
+Dieser Abschnitt beschreibt das eingefrorene Responsibility Envelope von ORION,
+nicht die Behauptung, dass jede mögliche Capability bereits implementiert ist.
+Der konkrete F1-Funktionsumfang und seine Grenzen stehen im Freeze-Bericht.
+Nicht implementierte Routing-, Evaluation-, Effect- oder Publication-Funktionen
+bleiben Erweiterungspunkte innerhalb derselben Autoritätsgrenzen.
+
 ### 7.1 Systemkontext
 
 ```text
 Human / Operator
-       │ intent, scope, approval
+       │ canonical language, intent, scope, approval
        ▼
-Applications / Builder Hub / Editorial OS / Review Toolbox / Sirius clients
+LYRA / Applications / Builder Hub / Editorial OS / Review Toolbox / Sirius clients
        │ OrientationRequest
        ▼
 ┌──────────────────────── ORION ─────────────────────────┐
@@ -236,7 +266,7 @@ Applications / Builder Hub / Editorial OS / Review Toolbox / Sirius clients
                │ curated evidence and typed projections
       ┌────────┴─────────┐
       │ Library          │
-      │ Lyra projections │
+      │ typed references │
       └──────────────────┘
 ```
 
@@ -286,20 +316,14 @@ Fehler, Abbruch und Ablehnung sind reguläre Endzustände und werden ebenfalls p
 
 Legende: A = accountable, R = responsible, C = consulted, V = validates, – = keine Autorität.
 
-### 7.5 Lyra Boundary
+### 7.5 LYRA Boundary
 
-Lyra ist keine zweite Wahrheitsschicht. Lyra stellt kanonische Objekte zweckgebunden dar und übersetzt zwischen Repräsentationsformen.
-
-Jede Lyra-Projektion benötigt:
-
-- eine eindeutige Projektionsart und Schemaversion
-- Referenzen auf kanonische Objekt- und Relations-IDs
-- Quellversionen und Provenance
-- dokumentierten Informationsverlust
-- Round-trip- oder Equivalence-Regeln, wo möglich
-- einen klaren Zweck, z. B. Modellkontext, Atlas, Review oder menschliche Navigation
-
-Freie Modellprosa ist eine abgeleitete Darstellung, niemals die kanonische Lyra-Repräsentation.
+LYRA ist die menschliche Language Boundary und keine zweite Wahrheitsschicht.
+Sie übersetzt kanonische Vokabeln auf vorhandene ORION-Inputs und erklärt
+vorhandene strukturierte Ergebnisse. Sie ist kein Renderer und transformiert
+keine Representation. Jede Erklärung behält Status, Evidenz, Provenance,
+Validation, Blocker und Alternativen des autoritativen Reports. Freie Modellprosa
+ist keine kanonische LYRA-Ausgabe.
 
 ### 7.6 Library Boundary
 
@@ -332,22 +356,24 @@ Eine Anwendung kann beide Konzepte verkörpern. Weder benötigt zum Start ein ei
 Vier gleichrangige Ordner würden semantische Ebenen vermischen:
 
 - Core und ORION enthalten Laufzeitcode.
-- Lyra ist zunächst eine fachliche Boundary mit Schemas und Projektionen.
+- LYRA ist eine interne fachliche Language Boundary ohne eigene Planungs- oder Renderer-Autorität.
 - Library enthält primär versioniertes Wissen und andere Governance-Regeln.
 
 Die empfohlene Zielstruktur ist ein Multi-Repository-Workspace mit klaren Release-Grenzen.
 
-### 8.2 Empfohlene Repositories
+### 8.2 Eingefrorene Repository-Grenzen
 
 ```text
 nexah-core/              bestehender stabiler Kernel
-nexah-orion/             neue Reasoning- und Orchestration-Architektur
+nexah-orion/             Reasoning-, Context-, Navigation- und LYRA-Architektur
 nexah-library/           kuratierte, veröffentlichbare Wissensbestände
-nexah-docs/              Architektur, Spezifikation, Atlas und öffentliche Dokumentation
-nexah-builder-hub/       Anwendung; nur falls bereits eigenständig vorhanden
+nexah-builder-hub/       unabhängige operator-facing Anwendung
 ```
 
-Die Zahl der Repositories sollte nicht künstlich erhöht werden. `nexah-lyra` und `nexah-sirius` werden erst extrahiert, wenn sie einen unabhängigen Releasezyklus, mehrere echte Konsumenten oder ein eigenes Deployment besitzen.
+Architektur- und Entwicklungsdokumentation für ORION liegt im ORION-Repository.
+Die Zahl der Repositories wird nicht künstlich erhöht. LYRA ist eine interne
+ORION-Boundary und kein eigenes Repository. Eine spätere Extraktion benötigt eine
+neue Architekturentscheidung.
 
 ### 8.3 Abhängigkeitsrichtung
 
@@ -356,7 +382,6 @@ nexah-builder-hub ──► nexah-orion contracts
 nexah-orion       ──► published nexah-core ports/contracts
 nexah-orion       ──► nexah-library ports/content references
 nexah-orion       ──► external backend APIs through adapters
-nexah-docs        ──► released schemas and architecture records
 
 nexah-core        ──X─► nexah-orion
 nexah-core        ──X─► provider SDKs
@@ -365,53 +390,31 @@ nexah-library     ──X─► model runtimes
 
 Der Core kennt ORION nicht. Eine Abhängigkeit von ORION auf interne Core-Dateien ist ebenfalls verboten; verwendet werden nur publizierte Ports, Schemas oder versionierte SDK-Artefakte.
 
-### 8.4 Empfohlene Struktur von `nexah-orion`
+### 8.4 Eingefrorene Struktur von `nexah-orion`
 
 ```text
 nexah-orion/
 ├── README.md
 ├── CHANGELOG.md
+├── VERSION
 ├── docs/
-│   ├── architecture/
-│   │   ├── ORION_ARCHITECTURE.md
-│   │   ├── context-pipeline.md
-│   │   ├── authority-model.md
-│   │   └── runtime-model.md
-│   ├── adr/
-│   ├── specification/
-│   └── atlas/
-├── schemas/
-│   ├── requests/
-│   ├── context/
-│   ├── results/
-│   ├── commands/
-│   └── capabilities/
+│   ├── architecture/          # frozen baseline and specializations
+│   ├── adr/                   # accepted decision history
+│   ├── development/           # phase and contributor records
+│   ├── governance/            # ownership and compatibility
+│   ├── orientation_sessions/  # executable documentation
+│   └── releases/              # release policy and compatibility
 ├── src/
-│   ├── contracts/
-│   ├── orchestration/
-│   ├── context/
-│   ├── reasoning/
-│   ├── validation/
-│   ├── evaluation/
-│   ├── representations/        # Lyra Boundary
-│   └── adapters/
-│       ├── kernel/
-│       ├── library/
-│       └── backends/
-├── prompts/                    # versionierte Renderer-Ressourcen, kein Vertrag
-├── corpora/
-│   ├── acceptance/
-│   └── adversarial/
-├── tests/
-│   ├── contract/
-│   ├── conformance/
-│   ├── integration/
-│   └── acceptance/
-├── examples/
-└── tools/
+│   └── orion/                 # internal runtime and LYRA package
+├── tests/                     # unit, conformance and opt-in integration
+├── scripts/                   # repository governance and verification
+├── schemas/                   # reserved; no public contracts approved
+├── tools/                     # reserved maintained tools
+└── .workspace/                # ignored local-only material
 ```
 
-Die konkrete Programmiersprache darf diese logischen Grenzen abbilden, aber nicht umkehren. `src/representations` ist der Startpunkt für Lyra. Eine spätere Extraktion ist eine eigene ADR-Entscheidung.
+Die konkrete Programmiersprache darf diese logischen Grenzen abbilden, aber nicht
+umkehren. `src/orion/lyra` ist die aktuelle LYRA Language Boundary.
 
 ### 8.5 Was wohin gehört
 
@@ -421,9 +424,9 @@ Die konkrete Programmiersprache darf diese logischen Grenzen abbilden, aber nich
 | Provenance-, Boundary- und Statusregeln des kanonischen Zustands | `nexah-core` |
 | Request Lifecycle, Context Planning, Routing und Validation | `nexah-orion` |
 | Backend-, Kernel- und Library-Adapter | `nexah-orion` |
-| Lyra-Projektionen und Representation Contracts | zunächst `nexah-orion/src/representations` und `schemas/` |
+| LYRA Language Boundary | `nexah-orion/src/orion/lyra` |
 | Review Corpora, Werke, Maps und veröffentlichte Records | `nexah-library` |
-| Poster, Map, Blueprint, Specification und Atlas als publizierte Dokumente | `nexah-docs` |
+| ORION Architecture Plates und normative ORION-Dokumentation | `nexah-orion/docs` |
 | Builder UI, Review/Diff/Approve und Run Inspector | `nexah-builder-hub` |
 | persönliche Notizen, vertrauliche Rohdaten, Modellgewichte und temporäre Runs | ausschließlich lokaler Workspace |
 
@@ -438,53 +441,41 @@ Die konkrete Programmiersprache darf diese logischen Grenzen abbilden, aber nich
 
 ## 9. Lokale Workspace-Architektur
 
-Der lokale Workspace ist ein Arbeitskontext über mehrere Repositories. Er ist nicht selbst das Produkt und nicht vollständig veröffentlichbar.
+Der lokale Workspace ist ein Arbeitskontext über mehrere unabhängige
+Repositories. Er ist nicht selbst das Produkt und nicht vollständig
+veröffentlichbar. `workspace.yaml` ist das Manifest; `.workspace/` ist der
+ignorierte lokale Bereich.
 
 ```text
-NEXAH_WORKSPACE/
-├── 00_Inbox/                   ungeprüfte Eingänge
-├── 10_Architecture/
-│   ├── Decisions_Drafts/
-│   ├── Reviews/
-│   └── Visual_Evidence/
-├── 20_Repositories/
-│   ├── nexah-core/
-│   ├── nexah-orion/
-│   ├── nexah-library/
-│   ├── nexah-docs/
-│   └── nexah-builder-hub/
-├── 30_Library_Workbench/
-│   ├── Incoming/
-│   ├── Curated/
-│   └── Publication_Queue/
-├── 40_Research_Local/
-│   ├── Notes/
-│   ├── Sources/
-│   └── Sensitive/
-├── 50_Experiments/
-│   ├── Backends/
-│   ├── Retrieval/
-│   └── Prompt_Renderers/
-├── 60_Runs_Local/
-│   ├── Manifests/
-│   ├── Outputs/
-│   └── Evaluations/
-├── 70_Reviews/
-│   ├── Architecture/
-│   ├── Releases/
-│   └── Corpora/
-├── 80_Releases/
-└── 90_Archive/
+nexah-orion/
+├── workspace.yaml
+└── .workspace/
+    ├── architecture/
+    ├── repositories/
+    │   ├── NEXAH/               pinned read-only Core
+    │   ├── nexah-library/       only after remote confirmation
+    │   └── nexah-builder-hub/   only after identity confirmation
+    ├── research/
+    ├── experiments/
+    ├── runs/
+    ├── reviews/
+    ├── releases/
+    └── archive/
 ```
 
 ### Workspace-Regeln
 
-- Nur `20_Repositories` enthält veröffentlichbaren Quellstand.
-- `00_Inbox` ist nie eine autoritative Quelle.
-- `40_Research_Local`, `50_Experiments` und `60_Runs_Local` sind standardmäßig nicht synchronisiert und nicht versioniert.
-- Ein Artefakt wandert nicht durch bloßes Verschieben in einen höheren Status. Aufnahme in Library oder Repository benötigt Review, Provenance und explizite Freigabe.
-- Archiv bedeutet unverändert aufbewahrt, nicht kanonisch oder aktuell.
-- Symlinks oder Workspace-Manifeste dürfen Repositories verbinden; Quellcode wird nicht zwischen Repositories dupliziert.
+- `.workspace/` ist vollständig untracked und verleiht keinem Artefakt Autorität.
+- Core, Library und Builder Hub werden weder kopiert noch vendort.
+- Der Core-Checkout muss dem in `workspace.yaml` gepinnten Commit entsprechen
+  und bleibt read-only.
+- Library und Builder Hub werden erst verbunden, wenn ihre Repository-Identität
+  und Remote-Quelle bestätigt sind.
+- Forschung, Experimente, Runs, Reviews, lokale Release Candidates und Archive
+  werden nicht durch bloße Platzierung zu Repository-Inhalten.
+- Promotion benötigt Ownership, Provenance, Lizenzprüfung, Redaction und Review.
+- Die ausführliche Arbeitsanleitung steht in
+  [`WORKSPACE.md`](../development/WORKSPACE.md).
 
 ## 10. Offizielle Dokumentationsstrategie
 
@@ -552,6 +543,11 @@ Quellen, Zustand und Kontext werden zuerst erfasst. Interpretation und Benennung
 
 ### P3 — Evidence Before Interpretation
 
+![Architecture Plate 10 — Evidence/Inference Boundary](plates/10_evidence_inference_boundary.png)
+
+*NEXAH supports expressive representations while keeping inference bounded by
+evidence.*
+
 Claims und Synthesen müssen auf identifizierbare Evidenz verweisen oder ausdrücklich als Hypothese markiert sein.
 
 ### P4 — One Kernel, Many Representations
@@ -592,7 +588,13 @@ Verbesserung erzeugt neue Versionen, Evaluationen und Entscheidungen. Frühere E
 
 Nicht als Architekturprinzip übernommen werden kosmologische Zuordnungen, konkrete Sternnamen, Phasenorte oder numerologische Strukturen. Sie können im Atlas als kulturelle Repräsentation erhalten bleiben.
 
-## 12. Implementierungsroadmap
+## 12. Historische Implementierungsroadmap
+
+Dieser Abschnitt dokumentiert den ursprünglichen Plan vor der Implementierung.
+Die Phasen 0–6C sind abgeschlossen; seine Nummerierung ist keine aktuelle
+Roadmap und begründet keine offenen Aufgaben. Der verifizierte Ist-Stand steht im
+ORION-v1-Freeze-Bericht. Neue Arbeit erweitert die eingefrorene Baseline und darf
+die nachfolgenden historischen Schritte nicht als aktuelle Autorisierung lesen.
 
 ### Phase 0 — Baseline Recovery
 
@@ -652,7 +654,7 @@ Ziel: echte Modellunabhängigkeit nachweisen.
 
 **Gate 4:** Derselbe fachliche Acceptance Corpus besteht auf mindestens zwei Runtimes innerhalb definierter Qualitätsgrenzen.
 
-### Phase 5 — Structured NEXAH Objects und Lyra
+### Phase 5 — Structured NEXAH Objects und LYRA
 
 Ziel: Freitextzentrierung überwinden.
 
@@ -696,9 +698,14 @@ Ziel: Betrieb, Routing und Skalierung.
 
 **Gate 8:** Ein Backendwechsel ist eine kontrollierte Konfigurations- und Releaseentscheidung mit messbarer Qualitätsfreigabe.
 
-## 13. Empfohlene ADRs
+## 13. ADR-Historie und Erweiterungskandidaten
 
-### Sofort erforderlich
+ADR-0001 bis ADR-0007 sind akzeptiert; ADR-0008 bestätigt den Architecture
+Freeze. Die nachfolgende ursprüngliche Kandidatenliste ist historisch. Nicht
+angelegte Einträge sind weder akzeptierte Architektur noch Voraussetzung der
+Freeze-Baseline.
+
+### Historische Kandidaten
 
 1. **ADR-001: ORION above Kernel**
    Beschließt die Autoritätsgrenze und verbietet direkte Modellmutationen.
@@ -721,20 +728,26 @@ Ziel: Betrieb, Routing und Skalierung.
 7. **ADR-007: Five Documentation Projections**
    Formalisiert Poster, Map, Blueprint, Specification und Atlas samt Release-Verknüpfung.
 
-### Vor dem zweiten Backend
+### Vor einem zweiten produktiven Backend
 
-8. **ADR-008: Reproducibility Levels** – replayable, repeatable und semantically equivalent.
-9. **ADR-009: Error, Retry and Cancellation Semantics** – reguläre Run-Endzustände.
-10. **ADR-010: Secrets, Local Data and Run Retention** – lokale und veröffentlichbare Artefakte.
-11. **ADR-011: Acceptance and Conformance Evaluation** – fachliche statt textidentische Backend-Gleichheit.
+- **Reproducibility Levels** – replayable, repeatable und semantically equivalent.
+- **Error, Retry and Cancellation Semantics** – reguläre Run-Endzustände.
+- **Secrets, Local Data and Run Retention** – lokale und veröffentlichbare Artefakte.
+- **Acceptance and Conformance Evaluation** – fachliche statt textidentische Backend-Gleichheit.
 
 ### Vor Library Write-back
 
-12. **ADR-012: Library Governance and Publication** – Status, Rechte, Provenance und Freigabe.
-13. **ADR-013: Lyra Projection Contract** – Identität, Lossiness und Versionierung.
-14. **ADR-014: Kernel Command Boundary** – Validierung, Idempotenz und Konfliktverhalten.
+- **Library Governance and Publication** – Status, Rechte, Provenance und Freigabe.
+- **LYRA Projection Contract** – Identität, Lossiness und Versionierung.
+- **Kernel Command Boundary** – Validierung, Idempotenz und Konfliktverhalten.
 
-## 14. Offene Fragen
+## 14. Historisches Frageninventar
+
+Diese Fragen stammen aus der Architektur-Extraktion. Antworten, die in späteren
+Phasen implementiert oder dokumentiert wurden, gelten gemäß den jeweiligen
+Phase Guides und dem Freeze-Bericht als geklärt. Verbleibende Fragen sind
+Erweiterungspunkte; sie öffnen die eingefrorenen Verantwortlichkeiten und
+Autoritätsgrenzen nicht erneut.
 
 Diese Fragen müssen beantwortet werden, ohne die bereits beschlossene Autoritätsarchitektur wieder zu öffnen.
 
@@ -752,10 +765,10 @@ Diese Fragen müssen beantwortet werden, ohne die bereits beschlossene Autoritä
 - Welche Latenz-, Kosten- und Datenschutzbudgets müssen Requests ausdrücken können?
 - Wie wird partielle Backend-Ausgabe behandelt, wenn Cancellation oder Timeout eintritt?
 
-### Lyra
+### LYRA
 
 - Welche Repräsentationen sind normativ, verlustfrei oder bewusst verlustbehaftet?
-- Wird Lyra nur als Schema-/Renderer-Boundary benötigt oder später als eigenständiger Dienst?
+- Benötigt LYRA später mehrere kontrollierte Sprachprofile, ohne ihre Authority Boundary zu erweitern?
 - Welche Round-trip-Eigenschaften sind für Graphen, Atlas Objects und Reader Paths realistisch?
 
 ### Library
@@ -787,7 +800,7 @@ Diese Fragen müssen beantwortet werden, ohne die bereits beschlossene Autoritä
 | `generate(prompt)` als Scheinabstraktion | Anbietersemantik verteilt sich im Produkt | strukturierte Requests/Results und Capability Negotiation |
 | OpenAI-kompatibel wird mit gleichwertig verwechselt | unterschiedliche Tools, Schemas und Fehler bleiben unsichtbar | Conformance Suite mit mindestens zwei heterogenen Backends |
 | Library und Context Cache werden vermischt | temporäre Modellinputs erhalten falschen Wahrheitsstatus | getrennte Stores, IDs, Status und Retention Policies |
-| Lyra erzeugt neue Wahrheit | freie Übersetzung verliert Identität und Provenance | kanonische Referenzen, Lossiness-Metadaten, Equivalence Tests |
+| LYRA erzeugt neue Wahrheit | freie Übersetzung verliert Identität und Provenance | kanonische Referenzen, Lossiness-Metadaten, Equivalence Tests |
 | Sirius erhält implizite Autorität | lokaler Client kann ungeprüft kanonisch schreiben | Kernel Commands, Effect Classes und Approval |
 | Poster treiben Architekturänderungen | visuelle Kohärenz ersetzt Engineering Review | ADR-first Change Flow und Release-Verknüpfung |
 | Multi-Repository Drift | Schemas und Dokumentation laufen auseinander | versionierte Artefakte, Compatibility Matrix und Release Automation |
@@ -797,11 +810,16 @@ Diese Fragen müssen beantwortet werden, ohne die bereits beschlossene Autoritä
 | ungeprüfter Write-back | Kontamination von Core oder Library | Vorschlag → Diff → Validation → Approval → Command |
 | lokale Forschung gelangt in Git | Datenschutz-, Lizenz- und Geheimnisrisiko | Workspace-Zonen, Ignore-Regeln, Pre-commit- und Release-Checks |
 
-## 16. Was als Nächstes geschehen sollte
+## 16. Archivierter initialer Arbeitsplan
+
+Die folgenden Punkte erklären die Entstehung des Repositories und sind keine
+aktuellen Handlungsanweisungen. Der aktuelle Übergang nach F1 ist eine getrennte
+zukünftige Reflection Boundary; sie darf ORIONs eingefrorene Autorität nicht
+verändern.
 
 ### Unmittelbar
 
-1. Dieses Dokument als `Proposed Architecture Baseline` reviewen und die Begriffe Kernel, ORION, Lyra, Library, Sirius, Operator und Human formal bestätigen.
+1. Dieses Dokument als initiale Architektur-Baseline reviewen und die Begriffe Kernel, ORION, LYRA, Library, Sirius, Operator und Human formal bestätigen.
 2. Den tatsächlichen NEXAH-Core samt Repository Map in `20_Repositories/nexah-core` verfügbar machen.
 3. Eine Architecture Inventory Session durchführen und die sechs Subsysteme auf die hier beschriebenen Ports und Autoritäten mappen.
 4. ADR-001 bis ADR-007 schreiben und entscheiden.
@@ -821,15 +839,15 @@ Diese Fragen müssen beantwortet werden, ohne die bereits beschlossene Autoritä
 - keinen allgemeinen autonomen Agenten entwerfen
 - keine eigene Vector Database zum Architekturzentrum erklären
 - Library nicht aus Modellantworten befüllen
-- Lyra und Sirius nicht vorschnell als eigene Services oder Repositories auskoppeln
+- LYRA und Sirius nicht vorschnell als eigene Services oder Repositories auskoppeln
 - den Core nicht zur Bequemlichkeit der ersten Runtime ändern
 
-## 17. Acceptance Criteria für die Architekturphase
+## 17. Erfüllte Acceptance Criteria der initialen Architekturphase
 
 Die Architekturphase ist abgeschlossen, wenn:
 
 - jede wiederkehrende visuelle Rolle einer klaren Kategorie und Softwaregrenze zugeordnet ist;
-- Kernel, ORION, Library, Lyra, Anwendungen, Human und Backends getrennte Autoritäten besitzen;
+- Kernel, ORION, Library, LYRA, Anwendungen, Human und Backends getrennte Autoritäten besitzen;
 - Abhängigkeitsrichtungen beschlossen und testbar formuliert sind;
 - die fünf Dokumentationsprojektionen denselben Architecture Release referenzieren;
 - der reale Core gegen die Zielarchitektur gemappt wurde;
@@ -837,7 +855,8 @@ Die Architekturphase ist abgeschlossen, wenn:
 - offene Fragen einen Owner und eine Entscheidungsfrist besitzen;
 - ein kleiner, lizenzierter und redigierter Review Corpus für den ersten Vertical Slice benannt ist.
 
-Erst dann beginnt Interface- und Implementierungsarbeit.
+Diese Kriterien wurden durch Phase 0 bis Phase 6C erfüllt. Der maßgebliche
+Verifikationsstand ist im ORION-v1-Freeze-Bericht festgehalten.
 
 ---
 
@@ -857,6 +876,6 @@ ORION ist dabei nicht der Stern, das Poster und auch nicht das Modell. ORION ist
 
 Der Kernel bleibt, was gilt.
 Die Library bewahrt, worauf wir uns beziehen.
-Lyra macht es in verschiedenen Formen verständlich.
+LYRA macht es in verschiedenen Formen verständlich.
 ORION organisiert das Reasoning.
 Der Operator trägt die Verantwortung für Wirkung.

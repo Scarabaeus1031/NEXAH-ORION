@@ -4,8 +4,14 @@
 - Scope: Repräsentation, Projektion und Rendering
 - Implementierungsstatus: nicht implementiert
 - Repository-Version: `0.3.0-dev.0`
+- F1-Status: Architektur eingefroren; Renderer und Rendering-Ausführung bewusst offen
 
 ## 1. Zweck
+
+![Architecture Plate 03 — Representation Architecture](plates/03_representation_architecture.png)
+
+*One Orientation Object may have many immutable representations without changing
+its identity.*
 
 Dieses Dokument formalisiert Rendering als eigenständige architektonische
 Fähigkeit von ORION. Ein identitätsbewahrendes Orientation Object kann in
@@ -30,8 +36,10 @@ Diese Spezifikation präzisiert bereits akzeptierte NEXAH-Entscheidungen:
   und machen Unterschiede sichtbar.
 - **P9 — Multiple Representations, Explicit Translation**: Übersetzung zwischen
   Repräsentationsräumen ist explizit und versioniert.
-- **Lyra Boundary**: Lyra bezeichnet die fachliche Grenze für Sprache,
-  Projektion und Translation, nicht eine zweite Wahrheitsschicht.
+- **LYRA Boundary**: Die spätere Phase-6-Spezifikation präzisiert LYRA als
+  menschliche Language Boundary. Rendering bleibt eine eigenständige
+  ORION-Representation-Verantwortung; LYRA konsumiert Representations und Reports,
+  führt aber keine Projektion aus.
 - **ADR-0007**: Poster, Map, Blueprint, Specification und Atlas sind gekoppelte
   Dokumentationsprojektionen derselben Architekturversion.
 
@@ -197,6 +205,11 @@ Ownership- und Release-Entscheidung.
 
 ## 7. Dokumentationsprojektionen
 
+![Architecture Plate 09 — Documentation Projections](plates/09_documentation_projections.png)
+
+*Poster, Map, Blueprint, Specification and Atlas are coordinated views of one
+architecture release.*
+
 Die fünf Ebenen sind offizielle, gekoppelte Dokumentationsprojektionen:
 
 ```text
@@ -223,20 +236,19 @@ Orientierungs- und Detailperspektiven, nicht fünf wechselnde Quellidentitäten.
 Alle fünf Projektionen müssen dieselbe Architekturrelease-ID referenzieren. Ein
 Atlas ersetzt keine Specification; ein Poster kann keinen ADR superseden.
 
-## 8. Lyra und Repository-Eigentum
+## 8. Repository-Eigentum und Verhältnis zu LYRA
 
-Die Representation Architecture liegt fachlich an der bestehenden Lyra Boundary.
-Lyra ist zunächst keine eigene Runtime und kein eigenes Repository. Gemäß der
-stabilen Architektur verbleiben freigegebene Projektionen und Renderer zunächst
-innerhalb des ORION-Eigentums, bis mehrere Konsumenten oder ein unabhängiger
-Releasezyklus eine Extraktion rechtfertigen.
+Die Representation Architecture und zukünftige Renderer verbleiben im
+ORION-Eigentum. LYRA ist keine eigene Runtime und kein eigenes Repository; sie
+ist die Language Boundary, die vorhandene Representation-Namen und strukturierte
+Reports sprachlich zugänglich macht. Sie rendert und transformiert nicht.
 
 Wichtige Abgrenzung:
 
 - Die vorhandenen `nexah/backends/` im frozen NEXAH Core sind deterministische
   **Core Representation Backends**.
 - ORION-`ReasoningBackend` bezeichnet den austauschbaren Reasoning-Port.
-- Zukünftige ORION-Renderer gehören zur Lyra-/Representation-Boundary.
+- Zukünftige ORION-Renderer gehören zur ORION Representation Boundary.
 
 Diese drei Begriffe dürfen weder zusammengelegt noch durch Umbenennung
 umgedeutet werden. Phase 3A verschiebt und vendort keinen Core-Code.
@@ -404,7 +416,7 @@ Vor dem ersten Renderer müssen mindestens entschieden werden:
 3. welche Identität, Version und Provenienz eine Representation serialisiert;
 4. welche Verlustigkeit erlaubt ist;
 5. welche externe Conformance-Prüfung gilt;
-6. wo die Lyra Boundary im aktuellen Repository physisch abgebildet wird;
+6. wo die ORION Representation Boundary physisch abgebildet wird;
 7. ob ein neuer öffentlicher Contract eine ADR und Schema-Version benötigt.
 
 Erst danach beginnt Implementierung. Phase 3A beendet die Architekturdefinition,
@@ -422,7 +434,7 @@ Die Representation Architecture ist erfüllt, wenn:
 - die fünf Dokumentationsebenen als gekoppelte Projektionen derselben
   Architekturversion behandelt werden;
 - Providerdetails die allgemeine Rendering Architecture nicht verändern;
-- Core Representation Backends, ORION Reasoning Backends und Lyra Renderer
+- Core Representation Backends, ORION Reasoning Backends und ORION Renderer
   getrennte Verantwortlichkeiten behalten;
 - keinerlei Renderer-Implementierung aus Phase 3A abgeleitet oder vorweggenommen
   wird.

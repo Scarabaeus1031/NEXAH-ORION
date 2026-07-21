@@ -1,5 +1,8 @@
 # Representation Matrix
 
+- F1-Status: Repräsentationsrollen eingefroren; unbekannte Evidenz bleibt unbekannt
+- Repository-Version: `0.3.0-dev.0`
+
 ## 1. Leseregel
 
 Die Matrix vergleicht die zehn benannten Repräsentationen. „Dimension“ bezeichnet

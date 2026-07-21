@@ -13,6 +13,11 @@ The visual evolution repeatedly produced five useful levels of understanding. Th
 
 ## Decision
 
+![Architecture Plate 09 — Documentation Projections](../architecture/plates/09_documentation_projections.png)
+
+*Poster, Map, Blueprint, Specification and Atlas are coordinated views of one
+architecture release.*
+
 Architecture releases may provide five linked projections: Poster, Map, Blueprint, Specification, and Atlas. All reference the same architecture release. Specification is normative for implementation; no poster changes architecture by itself.
 
 ## Ownership and authority

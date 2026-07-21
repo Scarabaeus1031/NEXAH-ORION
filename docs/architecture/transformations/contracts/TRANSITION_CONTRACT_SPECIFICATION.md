@@ -1,4 +1,4 @@
-# TransitionContract Specification
+# Transition Contract Specification
 
 - Status: Phase-3C-Architekturspezifikation
 - Schema name: `orion.transition-contract`
@@ -6,8 +6,15 @@
 - Runtime status: nicht ausführbar; Phase 4A besitzt nur eine planning-only
   Metadatenprojektion dieses Katalogs
 - Repository-Version: `0.3.0-dev.0`
+- F1-Status: Contract-Verantwortung und T01–T15-Katalog eingefroren;
+  Operator-/Renderer-Implementierung offen
 
 ## 1. Zweck
+
+![Architecture Plate 05 — Transition Contract Anatomy](../../plates/05_transition_contract_anatomy.png)
+
+*Every registered graph edge has an inspectable contract declaring inputs,
+invariants, evidence and loss.*
 
 Ein `TransitionContract` macht eine Kante des Representation Graph zu einem
 inspizierbaren, testbaren und unabhängig versionierten Architekturgegenstand. Er
@@ -15,7 +22,7 @@ beschreibt, wie eine Source Representation in eine Target Representation
 überführt werden darf und welche Identität, Provenienz und Invarianten dabei
 erhalten, abgeleitet, aggregiert, verborgen oder verloren werden.
 
-Ein TransitionContract:
+Ein Transition Contract (`TransitionContract`):
 
 - implementiert keinen Operator;
 - enthält keinen Renderer-Code;
@@ -258,7 +265,7 @@ unknown
 
 ## 11. Renderer-Anforderungen
 
-Ein zukünftiger Renderer, der einen TransitionContract ausführt, muss:
+Ein zukünftiger Renderer, der einen Transition Contract ausführt, muss:
 
 1. exakt eine unterstützte Contract-ID und -Version deklarieren;
 2. Source-Typ und Source-Version vor Ausführung prüfen lassen;

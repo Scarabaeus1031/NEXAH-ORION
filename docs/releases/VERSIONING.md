@@ -30,11 +30,13 @@ Repository version and schema versions are separate:
 
 ## Current version
 
-`0.3.0-dev.0` means the Phase 1B local Ollama reference adapter exists alongside
-the Phase 1A offline execution slice. Its Python contracts remain internal and
-unstable; no public cross-repository contract or stable ORION runtime is released.
-Python package metadata represents the same version as `0.3.0.dev0`, the PEP 440
-spelling of the repository prerelease.
+`0.3.0-dev.0` contains the frozen ORION v1 Architecture Baseline and the
+completed Phase 0–6C development work, including the local Ollama reference
+adapter and deterministic Human → ORION → Human interaction. The Architecture
+Freeze stabilizes responsibility and authority; it does not declare the Python
+contracts a public stable API, create a stable ORION runtime release, or prove
+production readiness. Python package metadata represents the same version as
+`0.3.0.dev0`, the PEP 440 spelling of the repository prerelease.
 
 ## Version source
 

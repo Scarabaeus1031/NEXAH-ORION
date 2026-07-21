@@ -81,8 +81,9 @@ Promotion is a reviewed change, not a file move. A local artifact enters the rep
 ./scripts/test
 ```
 
-The default checks verify repository structure, ADR metadata, version syntax,
-forbidden tracked paths, the Core revision when a local Core checkout is connected,
-the complete offline Phase 1A execution, and isolated Phase 1B adapter behavior.
-`make integration` additionally requires the explicitly configured local Ollama
-runtime and model.
+The default checks verify repository structure, ADR metadata, the F1 Architecture
+Freeze, version syntax, forbidden tracked paths, the Core revision when a local
+Core checkout is connected, all offline unit and documentation-conformance tests,
+architecture consistency, frozen boundaries, and Architecture Plate
+reproducibility. `make integration` additionally requires the explicitly
+configured local Ollama runtime and model.

@@ -2,7 +2,8 @@
 
 Reserved for versioned ORION-owned public contracts.
 
-No schemas are approved in Phase 1. A schema may be added only after:
+No public cross-repository schemas are approved in the F1 Architecture
+Baseline. A schema may be added only after:
 
 1. its repository and contract owner are confirmed;
 2. an ADR defines its authority and compatibility surface;

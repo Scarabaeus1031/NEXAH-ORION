@@ -4,6 +4,7 @@
 - Scope: bestehende Repräsentationen und ihre Übergänge
 - Implementierungsstatus: keine Implementierung
 - Repository-Version: `0.3.0-dev.0`
+- F1-Status: Graphidentität und Layer eingefroren; Mathematik bewusst offen
 
 ## 1. Zweck
 

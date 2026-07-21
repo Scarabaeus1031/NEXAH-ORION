@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$repo_root"
+
+command -v rsvg-convert >/dev/null 2>&1 || {
+  echo "rsvg-convert is required to generate Architecture Plate PNGs." >&2
+  exit 1
+}
+
+source_dir=docs/architecture/plates/src
+output_dir=docs/architecture/plates
+
+count=0
+for source in "$source_dir"/*.svg; do
+  [ -f "$source" ] || {
+    echo "No canonical SVG sources found in $source_dir." >&2
+    exit 1
+  }
+  name=$(basename "$source" .svg)
+  rsvg-convert --width 1536 --height 1024 "$source" > "$output_dir/$name.png"
+  count=$((count + 1))
+done
+
+[ "$count" -eq 10 ] || {
+  echo "Expected 10 SVG sources, generated $count PNGs." >&2
+  exit 1
+}
+
+echo "Generated 10 Architecture Plate PNGs from canonical SVG sources."

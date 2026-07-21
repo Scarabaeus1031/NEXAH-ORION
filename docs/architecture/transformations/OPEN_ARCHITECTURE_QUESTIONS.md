@@ -1,5 +1,8 @@
 # Open Architecture Questions
 
+- F1-Status: Erweiterungsregister; öffnet die eingefrorene Architektur nicht erneut
+- Repository-Version: `0.3.0-dev.0`
+
 ## 1. Zweck
 
 Dieses Register hält fehlende Transformationsbelege fest. Es ist keine

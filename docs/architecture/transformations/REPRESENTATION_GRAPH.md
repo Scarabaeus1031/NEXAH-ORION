@@ -1,6 +1,14 @@
 # Representation Graph
 
+- F1-Status: T01–T15 Graph eingefroren; keine inferierten Kanten
+- Repository-Version: `0.3.0-dev.0`
+
 ## 1. Zweck
+
+![Architecture Plate 04 — Representation Graph](../plates/04_representation_graph.png)
+
+*The Representation Graph contains only the fifteen explicitly registered
+T01–T15 transitions.*
 
 Dieser Graph ersetzt die Annahme einer einzigen linearen Pipeline durch eine
 Karte aus primären Übergängen, analytischen Projektionen, Visualisierungszweigen,

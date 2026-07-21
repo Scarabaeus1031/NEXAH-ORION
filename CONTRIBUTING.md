@@ -63,6 +63,11 @@ The default checks must remain usable without downloading model runtimes. Runtim
 
 Accepted architecture is changed by a superseding ADR, not by silently editing historical decisions. Rejected and superseded ADRs remain in the repository.
 
+The frozen scope and canonical terminology are listed in
+[`ORION_V1_ARCHITECTURE_FREEZE.md`](docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md).
+An extension must name the frozen boundary it preserves. A redefinition must
+stop for Architecture Review before implementation.
+
 ## Generated and local material
 
 Never commit:
@@ -74,6 +79,12 @@ Never commit:
 - unredacted model runs;
 - generated contact sheets and source-material dumps;
 - independent repository working trees.
+
+## Conduct and security
+
+Participation follows [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Report
+security-sensitive issues through [`SECURITY.md`](SECURITY.md), never through a
+public issue containing credentials or exploit details.
 
 ## Definition of done
 

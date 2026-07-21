@@ -48,6 +48,8 @@ python_command=${ORION_PYTHON:-python3}
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$repo_root/src" "$python_command" -c '
 from dataclasses import fields
 from orion.context_brief import ContextBrief, ContextBriefEntry
+from orion.operator_registry import DEFAULT_OPERATOR_REGISTRY, OperatorStatus
+from orion.lyra import CANONICAL_ORIENTATION_VOCABULARY, OrientationIntent
 from orion.transformation_contracts import DEFAULT_TRANSITION_CONTRACTS
 from orion.transformation_engine import TransformationReport
 
@@ -60,6 +62,13 @@ assert produced.default is None
 assert all(contract.operator_status in {"unknown", "candidate"} for contract in DEFAULT_TRANSITION_CONTRACTS.contracts)
 assert all(not contract.has_executable_operator for contract in DEFAULT_TRANSITION_CONTRACTS.contracts)
 assert all(not contract.has_renderer for contract in DEFAULT_TRANSITION_CONTRACTS.contracts)
+assert len(DEFAULT_OPERATOR_REGISTRY.operators) == 15
+assert all(not operator.executable for operator in DEFAULT_OPERATOR_REGISTRY.operators)
+assert all(
+    operator.status in {OperatorStatus.UNKNOWN, OperatorStatus.CANDIDATE}
+    for operator in DEFAULT_OPERATOR_REGISTRY.operators
+)
+assert tuple(entry.intent for entry in CANONICAL_ORIENTATION_VOCABULARY) == tuple(OrientationIntent)
 ' || fail "Immutable brief or transformation capability boundary failed"
 
 PYTHONDONTWRITEBYTECODE=1 "$python_command" -c '
@@ -69,9 +78,22 @@ from pathlib import Path
 for path in (
     Path("src/orion/transformation_contracts.py"),
     Path("src/orion/transformation_engine.py"),
+    Path("src/orion/operator_registry.py"),
+    Path("src/orion/lyra_execution.py"),
+    *Path("src/orion/lyra").glob("*.py"),
 ):
     tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
     for node in ast.walk(tree):
+        if path.parent.name == "lyra":
+            assert not (
+                isinstance(node, ast.Name)
+                and node.id in {"TransformationEngine", "ReasoningBackend", "validate_execution"}
+            ), f"forbidden authority in {path}: {node.id}"
+            assert not (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Attribute)
+                and node.func.attr in {"execute", "plan", "validate"}
+            ), f"forbidden authority call in {path}: {node.func.attr}"
         if isinstance(node, ast.Import):
             names = [alias.name for alias in node.names]
         elif isinstance(node, ast.ImportFrom):
@@ -82,8 +104,9 @@ for path in (
             assert not name.startswith((
                 "urllib", "http", "socket", "requests", "httpx", "ollama",
                 "openai", "anthropic", "sqlite3",
+                "importlib",
             )), f"forbidden import in {path}: {name}"
-' || fail "Transformation Engine crosses backend, network, or persistence boundary"
+' || fail "Transformation or LYRA boundary crosses an authority boundary"
 
 grep -Fq 'context: ContextManifest' src/orion/validation.py || \
   fail "Validation no longer validates against ContextManifest"

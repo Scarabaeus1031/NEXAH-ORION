@@ -27,6 +27,7 @@ Accepted → Superseded
 | [0005](0005-capability-based-reasoning-backends.md) | Capability-based Reasoning Backends | Accepted |
 | [0006](0006-human-approval-and-effect-classes.md) | Human approval and effect classes | Accepted |
 | [0007](0007-five-documentation-projections.md) | Five documentation projections | Accepted |
+| [0008](0008-orion-v1-architecture-freeze.md) | Freeze the ORION v1 architecture baseline | Accepted |
 
 ## Creating an ADR
 

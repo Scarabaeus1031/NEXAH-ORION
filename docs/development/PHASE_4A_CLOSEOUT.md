@@ -106,7 +106,7 @@ Documentation never upgrades an operator beyond the evidence available in Phase
 | Transition Contract registry | ORION planning boundary | expose normalized planning metadata | implement operators or upgrade evidence |
 | `TransformationEngine` | ORION navigation layer | plan routes and report compatibility, invariants, evidence, provenance, and blockers | calculate, approximate, render, persist, reason, call a provider, or mutate Kernel |
 | transformation operators | unassigned | none in this baseline | not executable |
-| renderers | future Lyra/Representation boundary | none in this baseline | not executable |
+| renderers | future ORION Representation boundary | none in this baseline | not executable |
 
 The normative repository ownership map is
 [`docs/governance/OWNERSHIP.md`](../governance/OWNERSHIP.md).

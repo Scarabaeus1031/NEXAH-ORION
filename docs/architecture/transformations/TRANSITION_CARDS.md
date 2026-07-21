@@ -1,5 +1,8 @@
 # Transition Cards
 
+- F1-Status: T01–T15 Cards eingefroren; Candidate Mathematics bleibt unfrozen
+- Repository-Version: `0.3.0-dev.0`
+
 ## 1. Verwendung
 
 Jede Card beschreibt genau eine Kante aus dem
@@ -11,7 +14,7 @@ Invertibility verwendet ausschließlich die erlaubten Werte `yes`, `locally`,
 `partially`, `unknown` und `no`.
 
 Phase 3C formalisiert diese Cards als einzeln versionierte Contracts im
-[`TransitionContract-Katalog`](contracts/TRANSITION_CONTRACT_SPECIFICATION.md).
+[`Transition-Contract-Katalog`](contracts/TRANSITION_CONTRACT_SPECIFICATION.md).
 
 ## T01 — Reality → Observation
 
