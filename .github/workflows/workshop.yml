@@ -16,6 +16,10 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - name: Install Architecture Plate renderer
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes librsvg2-bin
       - name: Connect the pinned NEXAH Core
         run: ./scripts/bootstrap-workspace --clone-core
       - name: Verify the development publication baseline
