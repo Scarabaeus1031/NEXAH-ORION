@@ -12,7 +12,7 @@ production runtime.
 
 | Input | Required state | Current state |
 |---|---|---|
-| ORION source | clean, immutable commit | current clean commit contains the approved license and repository identity; pre-license baseline was `18d8a454842c8f25301ca4d3118f7ad903de55a2`; no public remote exists |
+| ORION source | clean, immutable commit | current clean commit contains the approved license and public repository identity; pre-license baseline was `18d8a454842c8f25301ca4d3118f7ad903de55a2` |
 | NEXAH Core | exact revision in `workspace.yaml` | configured `9f79bb06210402c40c9ef7d9937ca00d86c092b1`; connected clean checkout is on a newer local Operations series |
 | Library | explicit canonical Registry reference | remains external to ORION and currently canonical in `NEXAH/LIBRARY` |
 | Builder Hub | only when consumed | not part of this publication candidate |
@@ -40,8 +40,8 @@ different checkout.
 
 - Apache 2.0 for software and CC BY 4.0 for original documentation and visual
   material are recorded in `LICENSE`, `LICENSE-DOCS.md` and `LICENSES.md`;
-- approved repository identity is `NEXAH-ORION`; repository creation and remote
-  configuration require GitHub owner action;
+- public repository identity is
+  `https://github.com/Scarabaeus1031/NEXAH-ORION`;
 - owner must adopt the verified existing Core pin or request qualification of a
   newer revision; and
 - public CI must pass on the published immutable commit.

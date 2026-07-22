@@ -9,8 +9,8 @@ Approved values for the public repository settings:
 - **Topics:** `orientation`, `deterministic-systems`, `knowledge-representation`,
   `provenance`, `python`
 - **Visibility:** public
-- **Primary pin:** yes, after repository creation
+- **Primary pin:** yes, after production publication
 - **Community files:** `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`,
   issue templates, pull-request template and `CODEOWNERS` are prepared.
 
-These values do not create the repository, configure a remote or modify GitHub.
+These values describe the public repository and do not modify GitHub settings.

@@ -38,7 +38,7 @@ stops at the exact revision comparison described in
 
 ## Publication gates
 
-- approved `NEXAH-ORION` public repository creation and remote configuration;
+- publication of the prepared `NEXAH-ORION` repository and immutable baseline;
 - publication of the existing clean immutable local ORION commits;
 - owner decision on the existing Core pin;
 - successful development Release Gate against that exact Core revision; and

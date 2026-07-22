@@ -154,9 +154,11 @@ not a public release, stable semantic-version tag or production-readiness claim.
 Its current publication blockers and exact Core-pin mismatch are recorded in
 [`docs/releases/PUBLICATION_BASELINE.md`](docs/releases/PUBLICATION_BASELINE.md).
 
-The approved public repository identity is `NEXAH-ORION`. Repository creation,
-remote configuration and publication remain GitHub owner actions; this local
-repository has not been renamed and the verified Core pin is unchanged.
+The public repository identity is
+[`Scarabaeus1031/NEXAH-ORION`](https://github.com/Scarabaeus1031/NEXAH-ORION).
+It publishes the independent ORION development baseline; public release tags
+and stable API claims remain governed separately. The verified Core pin is
+unchanged.
 
 Original software is licensed under the [Apache License 2.0](LICENSE).
 Original documentation, specifications, research, books and visual material

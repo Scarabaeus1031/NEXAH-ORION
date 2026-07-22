@@ -4,15 +4,19 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   structure:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Check repository workshop
-        run: ./scripts/check-workspace
-      - name: Check development release state
+      - name: Connect the pinned NEXAH Core
+        run: ./scripts/bootstrap-workspace --clone-core
+      - name: Verify the development publication baseline
         run: ./scripts/release-check --development

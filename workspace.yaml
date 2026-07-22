@@ -18,7 +18,7 @@ repositories:
   - id: nexah-orion
     role: reasoning_orchestration
     local_path: .
-    remote: pending
+    remote: https://github.com/Scarabaeus1031/NEXAH-ORION.git
     branch: main
     revision: working_tree
     mode: development
