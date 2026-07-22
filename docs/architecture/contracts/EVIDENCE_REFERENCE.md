@@ -19,6 +19,15 @@ Evidence behavior is governed by
 [`ORION_ORIENTATION_POLICIES.md`](../operators/ORION_ORIENTATION_POLICIES.md).
 This specification defines only the stable public reference.
 
+### Suite position
+
+This is chapter 3 of the public contract suite. Evidence References are
+versioned traceability records used by Orientation Reports; they are not a
+separate orientation outcome. It inherits the canonical vocabulary in
+[`ORIENTATION_REQUEST.md`](ORIENTATION_REQUEST.md#65-canonical-suite-vocabulary).
+Read next:
+[`ORIENTATION_REPORT.md`](ORIENTATION_REPORT.md).
+
 ## 2. Scope
 
 This specification defines:
@@ -48,6 +57,8 @@ normative. Examples use illustrative field notation only.
 - A derivation owner owns the declared derivation rule and version.
 - LYRA MAY explain evidence fields but MUST NOT promote or reinterpret them.
 - A consumer MUST NOT infer authority from inclusion in a report.
+- Providers, prompts, orchestration, transport, internal plans and reasoning
+  strategies MUST NOT appear in an Evidence Reference.
 
 ## 5. Common envelope
 
@@ -201,6 +212,9 @@ A major change alters evidence classes, relationship meaning, identity,
 authority, provenance or validation semantics. A minor change may add optional
 metadata that cannot promote authority or evidence status.
 
+`schema_version` versions this contract language. `evidence_version` versions
+an immutable Evidence Reference. They are never interchangeable.
+
 ## 14. Canonical invariants
 
 1. Evidence identity and source identity remain distinct.
@@ -213,6 +227,8 @@ metadata that cannot promote authority or evidence status.
 8. Validation status is never inferred from inclusion in a report.
 9. Traceability reaches exact report fields.
 10. No Evidence Reference grants access or mutation authority.
+11. `evidence_id + evidence_version` identifies one immutable Evidence
+    Reference, including its provenance and authority declarations.
 
 ## 15. Examples
 
@@ -309,3 +325,5 @@ access_status: available
   by adaptation.
 - Evidence references from future runtimes remain conformant only when every
   canonical invariant is preserved.
+- Compatibility is suite-wide; adaptation MUST preserve every referenced
+  contract identity, version and invariant.

@@ -23,6 +23,15 @@ Continuation behavior is governed by
 and the cross-mode rules in
 [`ORION_ORIENTATION_OPERATORS.md`](../operators/ORION_ORIENTATION_OPERATORS.md).
 
+### Suite position
+
+This is chapter 5 of the public contract suite. Every Continuation Option is
+derived from exactly one Orientation Report in chapter 4. The canonical name
+for that origin is **source report**. It inherits the canonical vocabulary in
+[`ORIENTATION_REQUEST.md`](ORIENTATION_REQUEST.md#65-canonical-suite-vocabulary).
+Read next:
+[`RUNTIME_ERROR.md`](RUNTIME_ERROR.md).
+
 ## 2. Scope
 
 This specification defines:
@@ -30,7 +39,7 @@ This specification defines:
 - continuation identity and source report binding;
 - action types;
 - preserved context;
-- request deltas;
+- Request Deltas;
 - availability and blockers;
 - required Human actions;
 - compatibility behavior.
@@ -51,6 +60,8 @@ normative. Examples use illustrative field notation only.
   invent, rank or execute options independently.
 - LYRA MAY explain an option faithfully but MUST NOT select it.
 - A handoff option does not authorize the receiving boundary to act.
+- Providers, prompts, orchestration, transport, internal plans and reasoning
+  strategies MUST NOT appear in a Continuation Option.
 
 ## 5. Common envelope
 
@@ -100,13 +111,18 @@ changes its semantics.
 | `orientation_object_refs` | yes | exact IDs and versions preserved |
 | `intention_ref` | yes | prior intention reference; may require revision by delta |
 | `scope_ref` | yes | prior scope reference; may require revision by delta |
+| `human_authority_ref` | yes | exact Human authority reference from the source report's request |
 | `report_refs` | yes | MUST include the source report |
 | `representation_refs` | yes | ordered, possibly empty approved Representations |
 | `evidence_refs` | yes | ordered, possibly empty Evidence References |
+| `provenance_refs` | yes | ordered, possibly empty provenance records not already carried by Evidence References |
 | `human_annotation_refs` | yes | ordered, possibly empty Human-owned annotation refs |
 
-Preservation means the referenced context remains available for validation. It
-does not mean that every value remains applicable after the request delta.
+Preservation means the referenced context remains available for Validation. It
+does not mean that every value remains applicable after the Request Delta. A
+Request Delta MUST declare any change to preserved Scope, Intention,
+Orientation Object or Human authority. It MUST NOT remove an Evidence Reference
+or provenance reference silently.
 
 ## 8. Request delta
 
@@ -195,10 +211,13 @@ A major change alters action meaning, preservation semantics, request-delta
 operations, availability or Human authority. A minor change may add optional
 metadata or an action type guarded by explicit capability compatibility.
 
+`schema_version` versions this contract language. `option_version` versions an
+immutable Continuation Option. They are never interchangeable.
+
 ## 13. Canonical invariants
 
-1. Every option is derived from one exact report version.
-2. Every option has evidence in `reason_refs`.
+1. Every Continuation Option is derived from one exact source report version.
+2. Every Continuation Option has report-grounded justification in `reason_refs`.
 3. Context is preserved by identity and version.
 4. Scope and mode changes require explicit Human confirmation.
 5. A Request Delta never executes and never bypasses request validation.
@@ -209,6 +228,9 @@ metadata or an action type guarded by explicit capability compatibility.
 10. Effects remain `none`.
 11. An orientation-producing option names `target_mode`; a handoff names
     `target_boundary`; neither field substitutes for the other.
+12. Source report identity, Scope, Orientation Object references, Evidence
+    References, provenance and Human authority remain traceable through every
+    accepted Request Delta.
 
 ## 14. Examples
 
@@ -225,11 +247,13 @@ reason_refs: ["mode_payload.open_questions[0]", "evidence[2]"]
 target_mode: understand
 preserved_context:
   orientation_object_refs: [object-observation-01@1]
-  intention_ref: request-understand-001.intention
-  scope_ref: request-understand-001.scope
+  intention_ref: request-understand-001@1.intention
+  scope_ref: request-understand-001@1.scope
+  human_authority_ref: request-understand-001@1.human_authority
   report_refs: [report-understand-01@1]
   representation_refs: [representation-observation-01@1]
   evidence_refs: [evidence-route-02@1]
+  provenance_refs: []
   human_annotation_refs: []
 request_delta:
   - field_path: intention.focus
@@ -256,11 +280,13 @@ reason_refs: ["mode_payload.suggested_continuations[1]"]
 target_mode: compare
 preserved_context:
   orientation_object_refs: [object-theory-a@2]
-  intention_ref: request-understand-theory-001.intention
-  scope_ref: request-understand-theory-001.scope
+  intention_ref: request-understand-theory-001@1.intention
+  scope_ref: request-understand-theory-001@1.scope
+  human_authority_ref: request-understand-theory-001@1.human_authority
   report_refs: [report-understand-theory-01@1]
   representation_refs: []
   evidence_refs: []
+  provenance_refs: []
   human_annotation_refs: []
 request_delta:
   - field_path: orientation_objects[1]
@@ -289,4 +315,7 @@ effects: none
 - Adapters MUST preserve report binding and delta semantics exactly.
 - A new delta operation requires a major version unless existing consumers can
   safely reject it before Human selection.
-- Continuation remains explicit Human choice across every future ORION runtime.
+- Continuation Option selection remains an explicit Human choice across every
+  future ORION runtime.
+- Compatibility is suite-wide; adaptation MUST preserve every referenced
+  contract identity, version and invariant.

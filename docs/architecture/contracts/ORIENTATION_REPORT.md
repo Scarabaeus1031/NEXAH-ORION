@@ -11,7 +11,7 @@
 An Orientation Report is ORION's immutable public account of one orientation.
 It states what was oriented, what process stages completed, which
 Representations and evidence were used, what became visible, what remains
-uncertain or blocked, and which continuations are valid.
+uncertain or blocked, and which Continuation Options are valid.
 
 The report is authoritative for ORION's navigation, validation and reporting
 result. It is not canonical NEXAH truth, Human meaning or a consequential
@@ -22,6 +22,15 @@ Policy is governed by
 Mode payload meaning is governed by
 [`ORION_ORIENTATION_OPERATORS.md`](../operators/ORION_ORIENTATION_OPERATORS.md).
 
+### Suite position
+
+This is chapter 4 of the public contract suite. It defines the only successful
+or Processing-blocked terminal result. It consumes the Evidence References in
+chapter 3 and supplies the source for every Continuation Option in chapter 5.
+It inherits the canonical vocabulary in
+[`ORIENTATION_REQUEST.md`](ORIENTATION_REQUEST.md#65-canonical-suite-vocabulary).
+Read next: [`CONTINUATION_OPTION.md`](CONTINUATION_OPTION.md).
+
 ## 2. Scope
 
 This specification defines:
@@ -30,7 +39,7 @@ This specification defines:
 - common public envelope;
 - required report sections;
 - mode payload binding;
-- evidence and continuation references;
+- Evidence Reference and Continuation Option references;
 - validation and issue behavior;
 - invariants and compatibility.
 
@@ -43,8 +52,8 @@ normative. Examples use illustrative field notation only.
 
 ## 4. Authority boundaries
 
-- ORION owns report identity, process status, validation, issues, confidence
-  profile and continuations.
+- ORION owns report identity, process status, Validation, issues, confidence
+  profile and Continuation Options.
 - NEXAH and source owners retain authority over referenced objects,
   Representations and invariants.
 - Evidence and editorial authority remain with their declared owners.
@@ -52,7 +61,9 @@ normative. Examples use illustrative field notation only.
   fields.
 - A consumer MAY project and present report fields but MUST NOT repair,
   reinterpret or promote them.
-- The Human owns meaning, continuation selection and decisions.
+- The Human owns meaning, Continuation Option selection and decisions.
+- Providers, prompts, orchestration, transport, internal plans and reasoning
+  strategies MUST NOT appear in an Orientation Report.
 
 ## 5. Report identity
 
@@ -62,10 +73,10 @@ normative. Examples use illustrative field notation only.
 | `report_id` | yes | stable report identity |
 | `report_version` | yes | immutable version of this report identity |
 | `request_id` | yes | exact originating Orientation Request |
+| `request_version` | yes | exact originating Orientation Request version |
 | `request_schema_version` | yes | exact request contract version |
 | `operator_id` | yes | exact Orientation Operator |
 | `operator_version` | yes | exact operator behavior version |
-| `run_ref` | yes | opaque ORION-owned run reference; MUST expose no implementation detail |
 | `supersedes` | no | prior report identity and version corrected or replaced prospectively |
 
 The tuple `report_id + report_version` identifies one immutable report. A
@@ -107,7 +118,7 @@ Every report contains these sections in canonical order:
 | `superseded` | a newer report explicitly supersedes this version |
 | `withdrawn` | ORION has invalidated this report for a declared reason; history remains |
 
-A report is issued only after public contract validation succeeds. Lifecycle is
+A report is issued only after Report Contract Validation succeeds. Lifecycle is
 not processing progress and MUST NOT expose internal execution states.
 
 `superseded` requires a replacement reference. `withdrawn` requires a reason and
@@ -122,11 +133,16 @@ MUST NOT cause deletion or silent replacement.
 | `blocked` | processing began and stopped at a declared blocker; absent outputs remain explicit |
 
 `complete` does not mean final truth or completed Human understanding. `blocked`
-is a valid report status and MUST NOT be converted into a generic error when a
+is a valid report status and MUST NOT be converted into a Runtime Error when a
 faithful report exists.
 
-Clarification-required, unsupported and invalid requests do not produce an
+Clarification Required, Unsupported and Invalid outcomes do not produce an
 Orientation Report.
+
+The three report statuses are mutually exclusive. A Blocked Orientation Report
+means Processing began and a contract-valid report exists. It MUST NOT be
+accompanied by Runtime Error `blocked`, `validation_failed` or
+`internal_failure` for the same attempt.
 
 ## 8. Orientation section
 
@@ -135,11 +151,12 @@ Orientation Report.
 - exact `mode`;
 - exact Human `intention` received;
 - exact confirmed `scope`;
+- exact `human_authority_ref` from the originating Orientation Request;
 - ordered Orientation Object identities and versions;
-- prior report or continuation references, when applicable;
+- prior Orientation Report or Continuation Option references, when applicable;
 - declared constraints and evidence policy references.
 
-The report MUST NOT substitute a rewritten objective for the Human intention.
+The report MUST NOT substitute a rewritten Intention for the Human Intention.
 
 ## 9. Representations section
 
@@ -169,7 +186,8 @@ contains:
 - declared reason when skipped or blocked.
 
 The process section exposes behavioral conformance. It MUST NOT expose internal
-components, provider details, timing traces or private diagnostics.
+components, provider details, prompts, orchestration, internal plans, reasoning
+strategies, timing traces or private diagnostics.
 
 ## 11. Mode payload
 
@@ -222,7 +240,7 @@ Each uncertainty contains:
 - possible resolution condition, if known;
 - status: `open`, `bounded` or `irreducible`.
 
-Uncertainty MUST remain visible in summaries and continuations when material.
+Uncertainty MUST remain visible in summaries and Continuation Options when material.
 
 ## 13. Issues
 
@@ -252,7 +270,7 @@ boundary.
 |---|---|
 | `source_coverage` | `complete`, `partial`, `unknown` |
 | `evidence_coverage` | `complete`, `partial`, `unknown` |
-| `validation_status` | `valid`, `invalid` |
+| `orientation_validation_status` | `valid`, `invalid` |
 | `inference_status` | `none`, `proposed_present` |
 | `uncertainty_refs` | ordered, possibly empty list |
 | `missing_evidence_refs` | ordered, possibly empty list |
@@ -264,9 +282,10 @@ validated public method is approved.
 
 Validation contains two distinct results.
 
-### 15.1 Contract validation
+### 15.1 Report Contract Validation
 
-`contract_validation` MUST be `valid` for an issued report. It confirms:
+`contract_validation` MUST be `valid` for an issued Orientation Report. It
+confirms:
 
 - required envelope and sections;
 - identity and version integrity;
@@ -293,12 +312,13 @@ A contract-valid report MAY have invalid orientation validation and status
 
 ## 16. Continuations
 
-Every continuation conforms to
+Every Continuation Option conforms to
 [`CONTINUATION_OPTION.md`](CONTINUATION_OPTION.md).
 
-Continuations MUST be derived from report fields, ordered by declared policy and
-selected only by the Human. A complete report MAY have no continuation. A
-blocked report SHOULD offer only options that remain behaviorally valid.
+Continuation Options MUST be derived from report fields, ordered by declared policy and
+selected only by the Human. A Complete Orientation Report MAY have no
+Continuation Option. A Blocked Orientation Report SHOULD offer only options
+that remain behaviorally valid.
 
 ## 17. Versioning
 
@@ -316,6 +336,9 @@ Report schema version, report version, operator version, request version,
 Evidence Reference version and Representation versions remain independent and
 explicit.
 
+`schema_version` versions this contract language. `report_version` versions an
+immutable Orientation Report. They are never interchangeable.
+
 ## 18. Canonical invariants
 
 1. A report binds one request and one Orientation Operator version.
@@ -330,6 +353,9 @@ explicit.
 10. Missing outputs are explicit; substitutes are forbidden.
 11. Continuations are report-derived and Human-selected.
 12. No canonical, Library, Atlas or Human decision effect occurs.
+13. A terminal attempt yields either one Orientation Report or one Runtime Error
+    outcome, never both.
+14. The originating Human authority remains explicit and unchanged.
 
 ## 19. Examples
 
@@ -341,16 +367,17 @@ identity:
   report_id: report-understand-blocked-01
   report_version: "1"
   request_id: request-understand-001
+  request_version: "1"
   request_schema_version: orion.orientation-request/1.0
   operator_id: orion.orientation-operator/understand
   operator_version: 0.1-draft
-  run_ref: orion-run-opaque-01
 lifecycle:
   state: current
 status: blocked
 orientation:
   mode: understand
   intention: Understand how this observation reaches the calendar projection.
+  human_authority_ref: request-understand-001@1.human_authority
   scope:
     include: [registered representation routes, evidence, blockers]
     exclude: [canonical mutation, unsupported inference]
@@ -430,7 +457,7 @@ issues:
 confidence:
   source_coverage: complete
   evidence_coverage: partial
-  validation_status: invalid
+  orientation_validation_status: invalid
   inference_status: none
   uncertainty_refs: [uncertainty-evidence-gap-01]
   missing_evidence_refs: [evidence-required-for-proposed-route]
@@ -463,3 +490,5 @@ effects: none
   are introduced.
 - Every future ORION runtime must produce observably equivalent public report
   behavior for the same contract and operator versions.
+- Compatibility is suite-wide; adaptation MUST preserve every referenced
+  contract identity, version and invariant.

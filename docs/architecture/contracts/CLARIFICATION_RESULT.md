@@ -8,17 +8,26 @@
 
 ## 1. Purpose
 
-A Clarification Result tells a consumer exactly why a structurally valid
+A Clarification Result tells a consumer exactly why a contract-valid
 Orientation Request is not ready and what Human input is required before it may
 proceed.
 
-Clarification is a public structured result. It is not dialogue behavior and it
+A Clarification Result is a public structured result. It is not dialogue behavior and it
 does not authorize ORION to guess, infer or choose missing Human values.
 
 Policy is defined in
 [`ORION_ORIENTATION_POLICIES.md`](../operators/ORION_ORIENTATION_POLICIES.md).
 Mode-specific readiness is defined in
 [`ORION_ORIENTATION_OPERATORS.md`](../operators/ORION_ORIENTATION_OPERATORS.md).
+
+### Suite position
+
+This is chapter 2 of the public contract suite. It is the structured payload of
+the Clarification Required outcome defined by
+[`ORIENTATION_REQUEST.md`](ORIENTATION_REQUEST.md#64-public-lifecycle-and-outcomes).
+It inherits the canonical vocabulary in
+[`ORIENTATION_REQUEST.md`](ORIENTATION_REQUEST.md#65-canonical-suite-vocabulary).
+Read next: [`EVIDENCE_REFERENCE.md`](EVIDENCE_REFERENCE.md).
 
 ## 2. Scope
 
@@ -47,18 +56,22 @@ normative. Examples use illustrative field notation only.
   resolve an issue.
 - A consumer MAY collect the Human response but MUST NOT preselect a
   consequential answer.
-- Clarification produces no Orientation Report and no effects.
+- A Clarification Result produces no Orientation Report and no effects.
+- Providers, prompts, orchestration, transport, internal plans and reasoning
+  strategies MUST NOT appear in a Clarification Result.
 
 ## 5. Readiness states
 
-Readiness is evaluated after structural request validation.
+Readiness Validation is evaluated after Contract Validation.
 
 | State | Meaning | Public outcome |
 |---|---|---|
 | `ready` | every required mode input is usable | Orientation Operator may begin; no Clarification Result |
 | `clarification_required` | one or more Human-controlled values are missing, ambiguous or require confirmation | Clarification Result |
-| `unsupported` | a declared mode, kind, version or capability is unsupported | Runtime Error `unsupported` |
-| `invalid` | the request violates contract structure or invariants | Runtime Error `invalid` |
+
+Invalid, Unsupported and Blocked are mutually exclusive non-readiness outcomes,
+not additional readiness states. Their position is defined only by the canonical
+lifecycle in `ORIENTATION_REQUEST.md` and their behavior by `RUNTIME_ERROR.md`.
 
 A Clarification Result MUST have state `clarification_required` and at least one
 blocking issue.
@@ -69,8 +82,10 @@ blocking issue.
 |---|---:|---|
 | `schema_version` | yes | supported `orion.clarification-result/<major>.<minor>` |
 | `result_id` | yes | stable identity for this immutable result |
+| `result_version` | yes | immutable version of this `result_id` |
 | `request_id` | yes | exact originating request ID |
-| `request_schema_version` | yes | exact request version evaluated |
+| `request_version` | yes | exact originating Orientation Request version |
+| `request_schema_version` | yes | exact Orientation Request schema version evaluated |
 | `mode` | yes | exact requested Orientation Mode |
 | `readiness` | yes | MUST be `clarification_required` |
 | `issues` | yes | non-empty ordered Clarification Issue list |
@@ -155,7 +170,7 @@ and remain unchanged. It MUST NOT copy source content unnecessarily.
 A clarified request:
 
 - MUST use a new `request_id` or an explicitly versioned request revision;
-- MUST reference the Clarification Result it answers;
+- MUST reference the exact Clarification Result ID and version it answers;
 - MUST preserve retained values unless the Human explicitly changes them;
 - MUST declare every changed field;
 - MUST be validated from the beginning;
@@ -173,18 +188,22 @@ A major change alters issue meaning, priority, required actions or retained
 context semantics. A minor change may add optional issue metadata or a new issue
 code that existing consumers can safely present as unknown without guessing.
 
+`schema_version` versions this contract language. `result_version` versions an
+immutable Clarification Result. They are never interchangeable.
+
 ## 12. Canonical invariants
 
-1. Clarification follows structural validation and precedes operator execution.
-2. At least one blocking issue is required.
-3. Every issue identifies one field and one required Human action.
-4. Issues are ordered deterministically.
-5. Valid request context is preserved by reference.
-6. ORION, LYRA and the consumer never answer clarification for the Human.
-7. No Orientation Report, evidence finding or continuation is produced.
-8. No effect occurs.
-9. Resubmission is fully revalidated.
-10. Declining clarification is a valid Human choice.
+1. Clarification Required follows Contract Validation and precedes Processing.
+2. `result_id + result_version` identifies one immutable Clarification Result.
+3. At least one blocking issue is required.
+4. Every issue identifies one field and one required Human action.
+5. Issues are ordered deterministically.
+6. Valid Orientation Request context is preserved by reference.
+7. ORION, LYRA and the consumer never answer clarification for the Human.
+8. No Orientation Report, Evidence Reference or Continuation Option is produced.
+9. No effect occurs.
+10. Resubmission is fully revalidated.
+11. Declining clarification is a valid Human choice.
 
 ## 13. Examples
 
@@ -193,7 +212,9 @@ code that existing consumers can safely present as unknown without guessing.
 ```yaml
 schema_version: orion.clarification-result/1.0
 result_id: clarification-understand-001
+result_version: "1"
 request_id: request-understand-002
+request_version: "1"
 request_schema_version: orion.orientation-request/1.0
 mode: understand
 readiness: clarification_required
@@ -219,7 +240,9 @@ effects: none
 ```yaml
 schema_version: orion.clarification-result/1.0
 result_id: clarification-compare-001
+result_version: "1"
 request_id: request-compare-001
+request_version: "1"
 request_schema_version: orion.orientation-request/1.0
 mode: compare
 readiness: clarification_required
@@ -260,4 +283,6 @@ The identity issue appears before the scope issue by canonical ordering.
 - New action types require a compatibility declaration proving that existing
   consumers can preserve Human authority.
 - Adapters MUST preserve issue IDs, order, field paths and action semantics.
-- Clarification MUST never degrade into an unstructured generic error.
+- Clarification Required MUST never degrade into an unstructured failure.
+- Compatibility is suite-wide; adaptation MUST preserve every referenced
+  contract identity, version and invariant.
