@@ -56,19 +56,23 @@ done <<EOF
 $generated
 EOF
 
+manifest="docs/architecture/plates/SHA256SUMS"
+[ -f "$manifest" ] || fail "Missing reviewed Architecture Plate checksum manifest: $manifest"
+if [ -f "$manifest" ] && ! shasum -a 256 -c "$manifest"; then
+  fail "Architecture Plate source/artifact checksums differ from the reviewed pair"
+fi
+
 if command -v rsvg-convert >/dev/null 2>&1; then
   plate_check_tmp=$(mktemp -d)
   trap 'rm -rf "$plate_check_tmp"' EXIT
   while IFS= read -r name; do
     rsvg-convert --width 1536 --height 1024 \
       "docs/architecture/plates/src/$name.svg" > "$plate_check_tmp/$name.png"
-    cmp -s "$plate_check_tmp/$name.png" "docs/architecture/plates/$name.png" || \
-      fail "Generated PNG differs from canonical SVG source: $name"
   done <<EOF
 $generated
 EOF
 else
-  fail "rsvg-convert is required to verify generated Plate PNGs"
+  fail "rsvg-convert is required to verify that Plate SVG sources remain renderable"
 fi
 
 if grep -Fq '/Users/' scripts/generate-architecture-plates; then

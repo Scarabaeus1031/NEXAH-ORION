@@ -29,6 +29,7 @@ docs/architecture/REPRESENTATION_ARCHITECTURE.md
 docs/architecture/operators/OPERATOR_ARCHITECTURE.md
 docs/architecture/lyra/LYRA_ARCHITECTURE.md
 docs/architecture/plates/README.md
+docs/architecture/plates/SHA256SUMS
 docs/architecture/plates/01_system_perspective.png
 docs/architecture/plates/02_orientation_workflow.png
 docs/architecture/plates/03_representation_architecture.png

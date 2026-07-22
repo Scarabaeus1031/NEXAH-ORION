@@ -11,6 +11,7 @@ command -v rsvg-convert >/dev/null 2>&1 || {
 
 source_dir=docs/architecture/plates/src
 output_dir=docs/architecture/plates
+manifest="$output_dir/SHA256SUMS"
 
 count=0
 for source in "$source_dir"/*.svg; do
@@ -23,9 +24,13 @@ for source in "$source_dir"/*.svg; do
   count=$((count + 1))
 done
 
+shasum -a 256 \
+  "$source_dir"/*.svg \
+  "$output_dir"/*.png > "$manifest"
+
 [ "$count" -eq 10 ] || {
   echo "Expected 10 SVG sources, generated $count PNGs." >&2
   exit 1
 }
 
-echo "Generated 10 Architecture Plate PNGs from canonical SVG sources."
+echo "Generated 10 Architecture Plate PNGs and refreshed reviewed checksums."

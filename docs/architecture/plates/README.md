@@ -66,7 +66,11 @@ Regenerate every PNG with:
 
 `rsvg-convert` is a documentation build tool, not an ORION runtime dependency.
 The generator reads SVG files and writes PNG files only; it never rewrites a
-canonical SVG source.
+canonical SVG source. It also refreshes `SHA256SUMS`, which binds every reviewed
+SVG source to its generated PNG artifact. CI verifies those reviewed checksums
+and smoke-renders every SVG. Raw PNG bytes are not compared across operating
+systems because `librsvg`, Cairo and font-library versions may encode equivalent
+renders differently.
 
 Historical candidates are intentionally not stored in this directory. They are
 evidence of visual evolution, not competing specifications.
