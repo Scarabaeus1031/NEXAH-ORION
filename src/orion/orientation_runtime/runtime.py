@@ -179,7 +179,12 @@ class OrientationRuntime:
         continuation: ContinuationOption,
     ) -> OrientationReport:
         evidence_refs = tuple(f"{item.evidence_id}@{item.evidence_version}" for item in evidence)
-        content = self._content(request, "complete", evidence_refs, (continuation.option_id,))
+        content = self._content(
+            request,
+            "complete",
+            evidence,
+            (f"{continuation.option_id}@{continuation.option_version}",),
+        )
         return self._report(
             request,
             report_id,
@@ -255,14 +260,54 @@ class OrientationRuntime:
             effects=NO_EFFECTS,
         )
 
-    def _content(self, request: OrientationRequest, coverage: str, evidence_refs: tuple[str, ...], continuations: tuple[str, ...]) -> dict[str, object]:
+    def _content(
+        self,
+        request: OrientationRequest,
+        coverage: str,
+        evidence: tuple[EvidenceReference, ...],
+        continuations: tuple[str, ...],
+    ) -> dict[str, object]:
         obj = request.orientation_objects[0]
+        evidence_refs = tuple(
+            f"{item.evidence_id}@{item.evidence_version}" for item in evidence
+        )
+        evidence_map = tuple(
+            {
+                "evidence_ref": evidence_ref,
+                "source_ref": item.source.source_ref,
+                "source_version": item.source.source_version,
+                "fragment_ref": item.source.fragment_ref,
+                "authority_owner": item.authority.authority_owner,
+                "authority_domain": item.authority.authority_domain,
+                "evidence_class": item.evidence_class,
+                "relationship": item.relationship,
+            }
+            for item, evidence_ref in zip(evidence, evidence_refs)
+        )
+        focus = request.intention.focus or request.intention.direction
+        if evidence:
+            summary = (
+                f"{obj.object_kind} {obj.object_id}@{obj.object_version} is oriented "
+                f"around {focus}. {len(evidence)} version-bound source fragment(s) "
+                "support this Understanding Frame."
+            )
+        else:
+            summary = (
+                f"{obj.object_kind} {obj.object_id}@{obj.object_version} is scoped "
+                f"around {focus}, but no contract-valid evidence is bound."
+            )
         return {
-            "orientation_summary": f"{obj.object_kind} {obj.object_id}@{obj.object_version} oriented within the confirmed Scope.",
+            "orientation_summary": summary,
             "key_concepts": request.scope.include,
-            "conceptual_structure": f"Orientation Object {obj.object_id}@{obj.object_version} bounded by the submitted Scope.",
-            "claims_and_support": evidence_refs,
-            "evidence_map": evidence_refs,
+            "conceptual_structure": {
+                "orientation_object": f"{obj.object_id}@{obj.object_version}",
+                "focus": focus,
+                "included": request.scope.include,
+                "excluded": request.scope.exclude,
+                "evidence_bindings": evidence_refs,
+            },
+            "claims_and_support": evidence_map,
+            "evidence_map": evidence_map,
             "assumptions": (),
             "dependencies": obj.representation_refs,
             "uncertainties": request.scope.unresolved,

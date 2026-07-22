@@ -216,6 +216,18 @@ class OrientationGatewayTests(unittest.TestCase):
         )
         self.assertEqual(presentation.orientation, report.orientation.mode)
         self.assertEqual(presentation.evidence, report.evidence)
+        self.assertEqual(
+            tuple(item.evidence_ref for item in presentation.evidence_details),
+            report.evidence,
+        )
+        self.assertEqual(
+            presentation.evidence_details[0].source_ref,
+            gateway_evidence().source.source_ref,
+        )
+        self.assertEqual(
+            presentation.evidence_details[0].fragment_ref,
+            gateway_evidence().source.fragment_ref,
+        )
         self.assertEqual(presentation.continuation_suggestions, report.continuations)
 
     def test_invalid_external_request_never_reaches_runtime(self) -> None:

@@ -31,6 +31,7 @@ The official architecture baseline is
 | 6A | canonical LYRA language architecture | [`PHASE_6A_LYRA_LANGUAGE.md`](PHASE_6A_LYRA_LANGUAGE.md) |
 | 6B | deterministic LYRA integration | [`PHASE_6B_LYRA_INTEGRATION.md`](PHASE_6B_LYRA_INTEGRATION.md) |
 | 6C | documentation-backed Orientation Sessions | [`PHASE_6C_ORIENTATION_SESSIONS.md`](PHASE_6C_ORIENTATION_SESSIONS.md) |
+| VI | first live public-contract Understand journey | [`PHASE_VI_FIRST_LIVE_ORIENTATION.md`](PHASE_VI_FIRST_LIVE_ORIENTATION.md) |
 | F1 | ORION v1 Architecture Freeze | [`ORION_V1_ARCHITECTURE_FREEZE.md`](../architecture/ORION_V1_ARCHITECTURE_FREEZE.md) |
 
 Phase records preserve the status and limitations at the time they were written.

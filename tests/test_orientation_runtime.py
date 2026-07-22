@@ -177,8 +177,15 @@ class OrientationRuntimeTests(unittest.TestCase):
         self.assertTrue(all(stage.state == "completed" for stage in report.process))
         self.assertEqual(report.process[5].evidence_refs, report.evidence)
         self.assertEqual(
-            report.mode_payload.content["claims_and_support"],
+            tuple(
+                item["evidence_ref"]
+                for item in report.mode_payload.content["claims_and_support"]
+            ),
             report.evidence,
+        )
+        self.assertEqual(
+            report.mode_payload.content["suggested_continuations"],
+            report.continuations,
         )
 
     def test_continuation_preserves_complete_report_lineage(self) -> None:

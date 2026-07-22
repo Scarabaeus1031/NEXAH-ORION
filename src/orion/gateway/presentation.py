@@ -7,10 +7,26 @@ from dataclasses import dataclass
 from orion.public_contracts import (
     ClarificationResult,
     ContinuationOption,
+    EvidenceReference,
     OrientationReport,
     PublicContract,
     RuntimeError,
 )
+
+
+@dataclass(frozen=True, slots=True)
+class EvidencePresentation:
+    """Inspectable evidence metadata derived from an Evidence Reference."""
+
+    evidence_ref: str
+    source_ref: str
+    source_version: str
+    fragment_ref: str | None
+    authority_owner: str
+    authority_domain: str
+    editorial_status: str
+    evidence_class: str
+    relationship: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -26,11 +42,15 @@ class PresentationModel:
     status: str
     orientation: str | None = None
     evidence: tuple[str, ...] = ()
+    evidence_details: tuple[EvidencePresentation, ...] = ()
     continuation_suggestions: tuple[str, ...] = ()
     messages: tuple[str, ...] = ()
 
 
-def map_presentation(contract: PublicContract) -> PresentationModel:
+def map_presentation(
+    contract: PublicContract,
+    evidence: tuple[EvidenceReference, ...] = (),
+) -> PresentationModel:
     """Map one validated runtime outcome without changing the source contract."""
 
     if isinstance(contract, OrientationReport):
@@ -48,6 +68,7 @@ def map_presentation(contract: PublicContract) -> PresentationModel:
             status=contract.status,
             orientation=contract.orientation.mode,
             evidence=contract.evidence,
+            evidence_details=_evidence_details(contract.evidence, evidence),
             continuation_suggestions=contract.continuations,
             messages=tuple(issue.reason for issue in contract.issues),
         )
@@ -74,6 +95,10 @@ def map_presentation(contract: PublicContract) -> PresentationModel:
             status=contract.availability,
             orientation=contract.target_mode,
             evidence=contract.preserved_context.evidence_refs,
+            evidence_details=_evidence_details(
+                contract.preserved_context.evidence_refs,
+                evidence,
+            ),
             continuation_suggestions=(
                 f"{contract.option_id}@{contract.option_version}",
             ),
@@ -102,4 +127,29 @@ def _humanize(value: str) -> str:
     return value.replace("_", " ").strip().capitalize()
 
 
-__all__ = ["PresentationModel", "map_presentation"]
+def _evidence_details(
+    references: tuple[str, ...],
+    evidence: tuple[EvidenceReference, ...],
+) -> tuple[EvidencePresentation, ...]:
+    index = {
+        f"{item.evidence_id}@{item.evidence_version}": item
+        for item in evidence
+    }
+    return tuple(
+        EvidencePresentation(
+            evidence_ref=reference,
+            source_ref=index[reference].source.source_ref,
+            source_version=index[reference].source.source_version,
+            fragment_ref=index[reference].source.fragment_ref,
+            authority_owner=index[reference].authority.authority_owner,
+            authority_domain=index[reference].authority.authority_domain,
+            editorial_status=index[reference].authority.editorial_status,
+            evidence_class=index[reference].evidence_class,
+            relationship=index[reference].relationship,
+        )
+        for reference in references
+        if reference in index
+    )
+
+
+__all__ = ["EvidencePresentation", "PresentationModel", "map_presentation"]

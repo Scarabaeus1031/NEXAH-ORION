@@ -107,7 +107,7 @@ class OrientationGateway:
                     "manual_review",
                 ),
             )
-        return self._response(request, outcomes)
+        return self._response(request, outcomes, evidence)
 
     @staticmethod
     def _evidence_errors(evidence: tuple[EvidenceReference, ...]) -> tuple[str, ...]:
@@ -144,6 +144,7 @@ class OrientationGateway:
         self,
         request: OrientationRequest | None,
         contracts: tuple[PublicContract, ...],
+        evidence: tuple[EvidenceReference, ...] = (),
     ) -> GatewayResponse:
         valid = tuple(item for item in contracts if validate_public_contract(item).valid)
         if len(valid) != len(contracts):
@@ -159,7 +160,7 @@ class OrientationGateway:
         return GatewayResponse(
             request=request,
             contracts=valid,
-            presentation=tuple(map_presentation(item) for item in valid),
+            presentation=tuple(map_presentation(item, evidence) for item in valid),
         )
 
     @staticmethod
