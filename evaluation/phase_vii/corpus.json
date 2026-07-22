@@ -1,0 +1,238 @@
+{
+  "corpus_id": "orion-real-world-understand-corpus",
+  "corpus_version": "1.0.0",
+  "created": "2026-07-22",
+  "operator": "understand",
+  "authority_owner": "NEXAH Project",
+  "documents": [
+    {
+      "document_id": "architecture-baseline",
+      "document_type": "Architecture specification",
+      "path": "docs/architecture/ORION_ARCHITECTURE.md",
+      "sha256": "7482e2f644d80f2b1b154b85027db21c5ea75a4e720b356f7bf7a2e9ffe45171",
+      "editorial_status": "published",
+      "human_intention": "What is the central architectural decision, and who retains canonical authority?",
+      "focus": "central decision and canonical authority",
+      "success_boundary": "I can state ORION's role and identify who may change canonical NEXAH state.",
+      "scope": {
+        "include": ["ORION role", "canonical authority"],
+        "exclude": ["implementation adapters", "deployment"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "ORION ist die modellunabhängige Reasoning-Architektur oberhalb des deterministischen NEXAH Kernel.",
+        "Nur der Kernel darf kanonischen NEXAH-Zustand akzeptieren oder verändern."
+      ]
+    },
+    {
+      "document_id": "repository-readme",
+      "document_type": "README",
+      "path": "README.md",
+      "sha256": "9f2b3c4d01c9c5966d1af0181bd8fcb976799f6b76ee4183eaaa3b675c3f8bd1",
+      "editorial_status": "published",
+      "human_intention": "What is this repository for, and what governing rule should I remember?",
+      "focus": "repository purpose and governing rule",
+      "success_boundary": "I can explain the repository's role and its model–orchestrator–kernel boundary.",
+      "scope": {
+        "include": ["repository purpose", "governing rule"],
+        "exclude": ["installation commands", "release history"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "ORION is the model-independent reasoning and orchestration repository above the frozen NEXAH Kernel.",
+        "The model proposes. The Orchestrator validates. The Kernel decides."
+      ]
+    },
+    {
+      "document_id": "reasoning-review",
+      "document_type": "Research analysis",
+      "path": "docs/architecture/evidence/NEXAH_REASONING_ARCHITECTURE_REVIEW.md",
+      "sha256": "b03ebec8a436711baffd71660d2016da2b01dce79b9fd72ed4661308044c7744",
+      "editorial_status": "reviewed",
+      "human_intention": "What evidence and limitations support this architecture conclusion?",
+      "focus": "supporting evidence and stated limitations",
+      "success_boundary": "I can identify both the source material considered and what could not be verified.",
+      "scope": {
+        "include": ["sources considered", "verification limits"],
+        "exclude": ["provider adapter design", "future implementation"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "Ausgewertet wurden 22 PNG-Visualisierungen aus dem Builder-Hub-ZIP.",
+        "Aussagen zum heutigen Core werden daher als vom Auftraggeber gesetzte Baseline, nicht als geprüfter Repository-Befund behandelt."
+      ]
+    },
+    {
+      "document_id": "backend-adr",
+      "document_type": "Technical proposal",
+      "path": "docs/adr/0005-capability-based-reasoning-backends.md",
+      "sha256": "0edd17c096b1f3972427ed9d633cd10fb99c7eac0e69d73551d983ac8940a4d1",
+      "editorial_status": "reviewed",
+      "human_intention": "What decision does this proposal make, and what alternative does it reject?",
+      "focus": "accepted decision and rejected alternative",
+      "success_boundary": "I can distinguish the capability-based decision from endpoint-shape compatibility.",
+      "scope": {
+        "include": ["backend selection decision", "rejected alternative"],
+        "exclude": ["adapter implementation", "provider benchmarks"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "ORION selects Reasoning Backends through declared capabilities and policy.",
+        "Treating all OpenAI-compatible endpoints as equivalent was rejected because compatibility is partial and behavior remains model-dependent."
+      ]
+    },
+    {
+      "document_id": "documentation-license",
+      "document_type": "Legal document",
+      "path": "LICENSE-DOCS.md",
+      "sha256": "3c1da66125b11aa563af730863d4e6215edf9020adfbdb548563ffe72addcd6f",
+      "editorial_status": "published",
+      "human_intention": "What may I do with the documentation, and what material is outside this license?",
+      "focus": "permissions and exclusions",
+      "success_boundary": "I can identify the granted reuse rights and the third-party-material boundary.",
+      "scope": {
+        "include": ["reuse permission", "excluded material"],
+        "exclude": ["software licensing", "legal advice"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "Under CC BY 4.0, you may share and adapt the licensed material for any purpose, provided that you give appropriate credit, link to the license, and indicate whether changes were made.",
+        "This license does **not** relicense third-party material, quoted source material, source-derived artifacts, datasets, trademarks, or other components that carry their own license or provenance statement."
+      ]
+    },
+    {
+      "document_id": "first-user-journey",
+      "document_type": "Design document",
+      "path": "docs/experience/FIRST_USER_JOURNEY.md",
+      "sha256": "6a651e7b6d560cb99408985adb80cca856371f22e9d5b957abf0f039acdbd9ee",
+      "editorial_status": "reviewed",
+      "human_intention": "What experience is this journey trying to create, and what is it explicitly not?",
+      "focus": "experience promise and product boundary",
+      "success_boundary": "I can describe the promised experience without calling it a chatbot or answer machine.",
+      "scope": {
+        "include": ["experience promise", "non-chat boundary"],
+        "exclude": ["screen implementation", "visual styling"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "NEXAH hilft einem Menschen, in einer komplexen Frage Orientierung zu gewinnen, bevor es mehr Information anbietet.",
+        "NEXAH ist ein Orientierungsraum, kein Chatbot und keine Antwortmaschine."
+      ]
+    },
+    {
+      "document_id": "lucy-research-notes",
+      "document_type": "Research notes",
+      "path": "docs/architecture/lucy/FUTURE_RESEARCH.md",
+      "sha256": "47d406f33631988624fe340e4986ce23e3e35f4db2d5c2f1e2f401db95638103",
+      "editorial_status": "draft",
+      "human_intention": "What assumptions should future Reflection research avoid making?",
+      "focus": "research cautions and non-assumptions",
+      "success_boundary": "I can name what must remain undecided before a Reflection architecture is proposed.",
+      "scope": {
+        "include": ["reflection boundary", "premature system assumptions"],
+        "exclude": ["LUCY implementation", "runtime design"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "Keine dieser Möglichkeiten darf vorschnell als Memory-Architektur angenommen werden.",
+        "Ein wichtiges Forschungsergebnis kann sein, dass bestimmte Teile bewusst außerhalb eines Systems bleiben müssen."
+      ]
+    },
+    {
+      "document_id": "representation-map",
+      "document_type": "Orientation map",
+      "path": "docs/architecture/transformations/REPRESENTATION_GRAPH.md",
+      "sha256": "580d9e76895e1fdacaab4fa4e1c84ab1e3f14a8d97351870f5e1239c11ff9fed",
+      "editorial_status": "published",
+      "human_intention": "What does this map represent, and which invariant prevents false equivalence?",
+      "focus": "map purpose and route validity",
+      "success_boundary": "I can explain what graph edges mean and why visual similarity is insufficient.",
+      "scope": {
+        "include": ["graph semantics", "route validity"],
+        "exclude": ["renderer implementation", "new transitions"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "Eine Kante beschreibt einen Koordinatenwechsel, keine Entstehung neuer Quellidentität.",
+        "Graphgültigkeit verlangt eine nachvollziehbare Kette von Kantenreferenzen."
+      ]
+    },
+    {
+      "document_id": "cross-repository-governance",
+      "document_type": "Governance document",
+      "path": "docs/governance/CROSS_REPOSITORY_GOVERNANCE.md",
+      "sha256": "d1f473b05c69b458a35ab419bb983993cdb55c1595e95ad9dad07abed13c61cb",
+      "editorial_status": "published",
+      "human_intention": "Who owns a public contract, and what happens when ORION finds a missing Core capability?",
+      "focus": "contract ownership and frozen Core response",
+      "success_boundary": "I can identify the owning authority and the required response to a missing Core capability.",
+      "scope": {
+        "include": ["contract ownership", "frozen Core rule"],
+        "exclude": ["specific migration schedule", "release automation"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "The producer of a public contract normally owns its schema and version.",
+        "If ORION discovers a missing Core capability, the first output is a proposal to the Core owner."
+      ]
+    },
+    {
+      "document_id": "release-strategy",
+      "document_type": "Release proposal",
+      "path": "docs/releases/RELEASE_STRATEGY.md",
+      "sha256": "aaa228306a44f98b9c1cec728ff4d03a4dc87e25928aa4548bb9847cb6ac447f",
+      "editorial_status": "reviewed",
+      "human_intention": "What is outside the current release claim, and what must happen before release?",
+      "focus": "release boundary and prerequisites",
+      "success_boundary": "I can identify prohibited claims and the required release inputs.",
+      "scope": {
+        "include": ["current release boundary", "release inputs"],
+        "exclude": ["tag execution", "artifact publishing"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "It does not create a release or tag.",
+        "A later release must not claim:",
+        "human approval by the ORION release owner."
+      ]
+    },
+    {
+      "document_id": "security-policy",
+      "document_type": "Security policy",
+      "path": "SECURITY.md",
+      "sha256": "3771edbf7bd75ebbae2580eca351fc35cb023b0827c506476791de673d8a9c8f",
+      "editorial_status": "published",
+      "human_intention": "How should a vulnerability be reported, and what support is not promised?",
+      "focus": "private reporting and support limits",
+      "success_boundary": "I can report an issue through the correct channel without assuming production support.",
+      "scope": {
+        "include": ["reporting channel", "support boundary"],
+        "exclude": ["exploit details", "incident response design"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "Report suspected security issues privately to",
+        "No bounty, response-time guarantee or stable production support commitment is implied by this development policy."
+      ]
+    },
+    {
+      "document_id": "contribution-guide",
+      "document_type": "Repository documentation",
+      "path": "CONTRIBUTING.md",
+      "sha256": "d2ab6f994b949738317b09da6f7de82e299cce2979cc951c85acfa54202abc88",
+      "editorial_status": "published",
+      "human_intention": "What should I do before contributing, and when is a change done?",
+      "focus": "entry requirements and definition of done",
+      "success_boundary": "I can begin in the correct ownership boundary and recognize completion.",
+      "scope": {
+        "include": ["before changing anything", "definition of done"],
+        "exclude": ["branch naming details", "license interpretation"],
+        "depth": "focused"
+      },
+      "evidence_fragments": [
+        "Every contribution begins with ownership.",
+        "A change is done when ownership is clear, documentation and compatibility records agree, checks pass, and no stronger claim is made than the evidence supports."
+      ]
+    }
+  ]
+}
