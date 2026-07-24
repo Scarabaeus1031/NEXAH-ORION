@@ -3,8 +3,9 @@
 Approved values for the public repository settings:
 
 - **Name:** `NEXAH-ORION`
-- **Description:** Provider-independent deterministic navigation across
-  registered representations, contracts, evidence, and provenance.
+- **Description:** The certified deterministic Core within NEXAH — The
+  Orientation Ecosystem: structural representation, relations, navigation,
+  orientation maps, Expression, and provenance.
 - **Homepage:** `https://nexah.de` — apply after canonical host and TLS verification
 - **Topics:** `orientation`, `deterministic-systems`, `knowledge-representation`,
   `provenance`, `python`
