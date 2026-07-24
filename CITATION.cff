@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use ORION in research, cite the exact certified release revision."
+title: "NEXAH-ORION: Certified Deterministic Core"
+type: software
+authors:
+  - family-names: "Hofmann"
+    given-names: "Thomas"
+version: "1.0.0"
+license: "Apache-2.0"
+repository-code: "https://github.com/Scarabaeus1031/NEXAH-ORION"
+url: "https://github.com/Scarabaeus1031/NEXAH-ORION"
+keywords:
+  - orientation
+  - deterministic systems
+  - provenance
+  - certification

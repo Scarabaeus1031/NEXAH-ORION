@@ -35,7 +35,7 @@ class RealWorldOrientationCorpusTests(unittest.TestCase):
 
     def test_corpus_is_versioned_diverse_and_reproducible(self) -> None:
         documents = self.corpus["documents"]
-        self.assertEqual(self.corpus["corpus_version"], "1.0.0")
+        self.assertEqual(self.corpus["corpus_version"], "1.0.1")
         self.assertGreaterEqual(len(documents), 10)
         self.assertLessEqual(len(documents), 20)
         self.assertGreaterEqual(len({item["document_type"] for item in documents}), 10)

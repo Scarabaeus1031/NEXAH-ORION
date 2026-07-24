@@ -7,16 +7,16 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from orion import (
+from orion.context_builder import RepositoryContextProvider
+from orion.contracts import OrientationRequest
+from orion.document_selector import (
     DocumentSelectionRule,
     DocumentSelector,
     EmptyDocumentSelectionError,
-    FakeBackend,
-    OrientationRequest,
-    RepositoryContextProvider,
-    SelectingOrientationExecutor,
     UnknownDocumentScopeError,
 )
+from orion.fake_backend import FakeBackend
+from orion.selection_execution import SelectingOrientationExecutor
 
 
 def request(

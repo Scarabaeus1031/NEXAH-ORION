@@ -5,7 +5,8 @@ from __future__ import annotations
 import os
 import unittest
 
-from orion import ContextEntry, OrientationExecutor, OrientationRequest
+from orion.contracts import ContextEntry, OrientationRequest
+from orion.executor import OrientationExecutor
 from orion.ollama_backend import OllamaBackend
 
 

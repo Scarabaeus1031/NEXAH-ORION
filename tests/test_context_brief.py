@@ -7,19 +7,23 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from orion import (
+from orion.brief_backend import ContextBriefReasoningBackend
+from orion.brief_execution import ContextBriefOrientationExecutor
+from orion.context_brief import (
     ContextBrief,
     ContextBriefBuilder,
-    ContextBriefOrientationExecutor,
-    ContextBriefReasoningBackend,
+)
+from orion.context_builder import RepositoryContextProvider
+from orion.contracts import (
     ContextEntry,
     ContextManifest,
-    DocumentSelectionRule,
-    DocumentSelector,
     OrientationRequest,
     ReasoningClaim,
     ReasoningResult,
-    RepositoryContextProvider,
+)
+from orion.document_selector import (
+    DocumentSelectionRule,
+    DocumentSelector,
 )
 from orion.contracts import result_id_for
 

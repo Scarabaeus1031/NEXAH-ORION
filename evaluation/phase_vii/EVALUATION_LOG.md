@@ -1,6 +1,6 @@
 # Phase VII Evaluation Log
 
-- Corpus version: `1.0.0`
+- Corpus version: `1.0.1`
 - Execution date: 2026-07-22
 - Sessions: 12 independent UNDERSTAND journeys
 - Public contract version: 1.0

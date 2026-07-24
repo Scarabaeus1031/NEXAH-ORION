@@ -6,8 +6,32 @@ The format follows Keep a Changelog principles. Versions follow the policy in [`
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-07-24
+
 ### Added
 
+- UNDERSTAND Declared Source Element Declaration Check Alpha, a metadata-only
+  deterministic proof that recognizes the exact accepted Representation
+  profile, records `not_declared` without creating an empty element inventory,
+  and stops inside `understand/2` before structural discovery or source-element
+  inventory.
+- UNDERSTAND Declared Source Boundary Inventory Alpha, a metadata-only
+  deterministic proof that preserves the exact already-declared `whole`
+  fragment boundary and its immutable source and integrity lineage, then stops
+  inside `understand/2` before declared source-element inventory without
+  reopening the Representation or source content.
+- UNDERSTAND Declared Representation Inventory Alpha, a metadata-only
+  deterministic proof that inventories the exact declared Representation in
+  original order and stops inside `understand/2` before source-structure
+  inspection without reading the Representation payload.
+- UNDERSTAND Stage 1 Binding Alpha, a semantically free deterministic proof
+  that binds the exact ready Orientation Object, Representation, source and
+  integrity lineage to `orion.orientation-operator/understand@1.0` and stops
+  before `understand/2` without creating a public outcome.
+- Runtime Readiness Validation Alpha, an internal deterministic proof that
+  exercises the existing Runtime-owned readiness branches for one exact
+  Representation-referenced `OrientationRequest 1.0` and stops before
+  processing without changing Runtime behavior or public contracts.
 - NEXAH Alpha First User Journey specifying the complete five-minute experience
   from a blank browser through question, orientation, evidence, human Reflection
   and a pressure-free departure without extending the frozen architecture.
@@ -94,6 +118,8 @@ The format follows Keep a Changelog principles. Versions follow the policy in [`
 
 ### Changed
 
+- Made the architecture consistency boundary check honor `ORION_PYTHON`,
+  matching the repository's other Python verification entry points.
 - Consolidated obsolete proposed, pre-implementation roadmap and Phase 1B
   current-state wording without changing runtime behavior, contracts or APIs.
 - Declared core architecture in maintenance mode: future redefinition requires

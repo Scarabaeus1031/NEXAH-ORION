@@ -48,7 +48,7 @@ class OrientationRuntime:
     """Execute one deterministic, evidence-bound Understand orientation."""
 
     operator_id = "orion.orientation-operator/understand"
-    operator_version = "0.1-draft"
+    operator_version = "1.0"
 
     def orient(
         self,

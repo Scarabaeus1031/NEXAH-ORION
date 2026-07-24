@@ -11,29 +11,27 @@ Core, ORION, Library, and Builder Hub release independently. An ORION tag never 
 | development | repository workshop and unstable contracts | no required tag; `VERSION` may contain prerelease |
 | preview | bounded contributor testing | `v0.2.0-alpha.1` |
 | candidate | release verification | `v0.2.0-rc.1` |
-| stable repository release | supported ORION contract/runtime scope | `v0.2.0` |
+| stable repository release | supported certified ORION repository scope | `v1.0.0` |
 | ecosystem compatibility bundle | known compatible independent releases | dated manifest, not a shared code version |
 
-## Current development release boundary
+## Current stable release boundary
 
-The F1 Architecture Freeze may be reviewed and committed as development
-documentation together with the completed Phase 0–6C code and verification. It
-does not create a release or tag. A later release must not claim:
+Version `1.0.0` publishes exactly the certified baseline recorded in
+[`ORION_V1_CERTIFIED_BASELINE.md`](ORION_V1_CERTIFIED_BASELINE.md). It contains
+the deterministic Structural Representation, UNDERSTAND, Relations,
+Navigation, Orientation Map and Expression certification chain through
+`at_slice_iv_certified`.
 
-- a stable or production ORION runtime;
-- model independence demonstrated across multiple real providers;
-- a public cross-repository contract;
-- Core, Library, or Builder compatibility beyond pinned documentation;
-- production readiness.
+It does not claim Runtime, Gateway, LYRA execution, SIRIUS, applications,
+Human Reports, presentation, semantic interpretation, decision making or
+production service operation. Earlier release-candidate, Runtime, Gateway,
+provider and presentation records remain historical evidence and do not
+broaden the stable release.
 
-The frozen architecture baseline is stable as an architectural reference while
-the repository remains `0.3.0-dev.0`. Architecture stability and public API or
-runtime stability are separate claims.
-
-The prepared development publication scope is recorded in
-[`RELEASE_CANDIDATE.md`](RELEASE_CANDIDATE.md). The exact unchanged Core-pin
-decision is recorded separately in
-[`CORE_COMPATIBILITY_REPORT.md`](CORE_COMPATIBILITY_REPORT.md).
+The exact unchanged NEXAH Core pin is recorded separately in
+[`CORE_COMPATIBILITY_REPORT.md`](CORE_COMPATIBILITY_REPORT.md). Downstream
+compatibility depends on the immutable ORION release revision and its canonical
+fingerprint.
 
 ## Release inputs
 

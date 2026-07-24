@@ -1,6 +1,6 @@
 # Orientation Request
 
-- Status: Canonical public specification; runtime implementation pending
+- Status: Frozen Version 1.0 public specification; executable model and validation implemented
 - Contract ID: `orion.orientation-request`
 - Contract version: `1.0`
 - Scope: public request from an authorized consumer to ORION

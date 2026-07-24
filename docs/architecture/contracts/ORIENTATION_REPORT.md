@@ -1,6 +1,6 @@
 # Orientation Report
 
-- Status: Canonical public specification; runtime implementation pending
+- Status: Frozen Version 1.0 public specification; executable model and validation implemented
 - Contract ID: `orion.orientation-report`
 - Contract version: `1.0`
 - Scope: public authoritative ORION result for one processed Orientation Request
@@ -370,7 +370,7 @@ identity:
   request_version: "1"
   request_schema_version: orion.orientation-request/1.0
   operator_id: orion.orientation-operator/understand
-  operator_version: 0.1-draft
+  operator_version: 1.0
 lifecycle:
   state: current
 status: blocked
@@ -421,7 +421,7 @@ process:
     state: completed
 mode_payload:
   mode: understand
-  payload_version: 0.1-draft
+  payload_version: 1.0
   content:
     orientation_summary: The source structure is visible; material evidence remains unavailable.
     key_concepts: [Observation, Calendar Projection]

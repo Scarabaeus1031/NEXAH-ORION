@@ -1,26 +1,30 @@
-# ORION Runtime Source
+# ORION Source Map
 
-`orion/` contains the Phase 1A executable architecture slice, the Phase 1B local
-Ollama adapter, the Phase 2A deterministic repository context builder, the Phase
-2B document selector, the Phase 2C content-free Context Brief, the Phase 4A
-Transformation Engine, the Phase 5A declarative Operator Registry, and the Phase
-6B deterministic LYRA language boundary. Its
-internal contracts, explicit representation graph, selection and context
-components, backend ports, adapters, validators, plans, reports, language
-projections, and executors are ORION-owned.
+The certified Version 1 implementation is the bounded deterministic chain
+recorded in `docs/releases/ORION_V1_CERTIFIED_BASELINE.md`:
 
-Only versioned scope-to-path rules, explicit read-only document loading, and
-deterministic content-free brief projection are authorized for context in this
-phase. The Engine may plan registered representation transitions, copy operator
-metadata and report blockers, but may not select or execute operators or
-renderers. No prompt renderer, additional provider, semantic retrieval pipeline,
-persistence layer, or Kernel command is authorized.
+| Source family | Certified responsibility |
+|---|---|
+| Representation and Markdown Structural modules | immutable structural projection and conformance |
+| `understand_*_alpha.py` modules | inventory, summary, and statistics over declared structure |
+| Relation modules | immutable structural and declared Relations plus conformance and certification |
+| Navigation modules | immutable Navigation construction, conformance, and certification |
+| Orientation Map modules | deterministic map construction and conformance |
+| Expression modules | Contract, Construction, External Conformance, and Certification |
+| Slice certification modules | immutable Slice II–IV certification boundaries |
 
-`orion/lyra/` owns translation and explanation only. The ORION-owned
-`lyra_execution.py` composition delegates planning to the unchanged
-Transformation Engine and returns the exact report alongside its explanation.
+Certified modules are consumed at their explicit paths and remain governed by
+their frozen profiles, proofs, and STOP boundaries. The root `orion` package
+retains the earlier aggregate imports only for repository compatibility; those
+imports do not enlarge the certified baseline.
 
-This responsibility layout is frozen by the
-[`ORION v1 Architecture Baseline`](../docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md).
-Operator, Renderer and Reflection extensions may not change it without explicit
-Architecture Review and an accepted ADR.
+Earlier Public Contract, Runtime, Gateway, context, backend, Transformation
+Engine, Operator Registry, and LYRA development slices remain at explicit module
+paths so their historical evidence and separate integrations remain
+reproducible. They are not part of the certified Version 1 Core and are not
+made certified merely by their retained aggregate imports.
+
+This responsibility layout is governed by the
+[`Version 1 Reading Order`](../docs/releases/ORION_V1_READING_ORDER.md) and
+[`Ownership Map`](../docs/governance/OWNERSHIP.md). Changes to authority or
+frozen contracts require Architecture Review and an accepted ADR.

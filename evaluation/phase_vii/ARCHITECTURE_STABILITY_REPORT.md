@@ -1,6 +1,6 @@
 # Phase VII Architecture Stability Report
 
-- Corpus: `orion-real-world-understand-corpus@1.0.0`
+- Corpus: `orion-real-world-understand-corpus@1.0.1`
 - Sessions: 12
 - Operator: UNDERSTAND only
 - Completion: 100%

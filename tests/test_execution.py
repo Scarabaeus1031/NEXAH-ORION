@@ -5,15 +5,15 @@ from __future__ import annotations
 from dataclasses import FrozenInstanceError
 import unittest
 
-from orion import (
+from orion.backend import ReasoningBackend
+from orion.contracts import (
     ContextEntry,
-    FakeBackend,
-    OrientationExecutor,
     OrientationRequest,
-    ReasoningBackend,
     ReasoningClaim,
     ReasoningResult,
 )
+from orion.executor import OrientationExecutor
+from orion.fake_backend import FakeBackend
 
 
 def request() -> OrientationRequest:

@@ -1,6 +1,6 @@
 # Clarification Result
 
-- Status: Canonical public specification; runtime implementation pending
+- Status: Frozen Version 1.0 public specification; executable model and validation implemented
 - Contract ID: `orion.clarification-result`
 - Contract version: `1.0`
 - Scope: public readiness result for a valid but incomplete Orientation Request

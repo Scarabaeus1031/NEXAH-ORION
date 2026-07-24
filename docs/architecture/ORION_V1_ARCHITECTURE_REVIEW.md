@@ -1,5 +1,8 @@
 # ORION v1 Architecture Review Summary
 
+> Historical F1 review record. Current contributor navigation begins with the
+> [Version 1 Reading Order](../releases/ORION_V1_READING_ORDER.md).
+
 - Review phase: F1
 - Review date: 2026-07-19
 - Repository version: `0.3.0-dev.0`

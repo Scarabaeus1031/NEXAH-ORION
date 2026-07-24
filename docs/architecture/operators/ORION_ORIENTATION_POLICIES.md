@@ -1,7 +1,7 @@
 # ORION Orientation Policies
 
-- Status: Canonical behavioral policy
-- Runtime implementation: pending
+- Status: Canonical Version 1 behavioral policy
+- Runtime conformance: verified for the implemented Understand operator
 - Scope: cross-mode orientation principles
 - Applies to: every present and future Orientation Operator
 - Architecture baseline: frozen ORION v1 (`orion-architecture-v1`)

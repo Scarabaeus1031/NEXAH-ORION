@@ -8,14 +8,14 @@ import unittest
 from unittest.mock import patch
 from urllib.error import URLError
 
-from orion import (
+from orion.backend import ReasoningBackend
+from orion.contracts import (
     ContextEntry,
     ContextManifest,
-    OrientationExecutor,
     OrientationRequest,
-    ReasoningBackend,
+    ReasoningResult,
 )
-from orion.contracts import ReasoningResult
+from orion.executor import OrientationExecutor
 from orion.ollama_backend import (
     OllamaBackend,
     ReasoningBackendError,

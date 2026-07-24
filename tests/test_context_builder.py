@@ -8,15 +8,15 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from orion import (
+from orion.context_builder import (
     ContextBuilder,
     ContextDocumentNotFoundError,
-    ContextualOrientationExecutor,
-    FakeBackend,
     InvalidContextDocumentPathError,
-    OrientationRequest,
     RepositoryContextProvider,
 )
+from orion.context_execution import ContextualOrientationExecutor
+from orion.contracts import OrientationRequest
+from orion.fake_backend import FakeBackend
 
 
 def request() -> OrientationRequest:

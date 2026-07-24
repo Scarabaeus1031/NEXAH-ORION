@@ -1,6 +1,6 @@
 # Runtime Error
 
-- Status: Canonical public specification; runtime implementation pending
+- Status: Frozen Version 1.0 public specification; executable model and validation implemented
 - Contract ID: `orion.runtime-error`
 - Contract version: `1.0`
 - Scope: public behavioral failure and non-report outcome contract

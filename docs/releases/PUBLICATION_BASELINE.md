@@ -1,5 +1,8 @@
 # ORION Publication Baseline
 
+> Historical F1 publication record. Current readiness is governed by the
+> [ORION Version 1 RC1 Recommendation](ORION_V1_RC1_RECOMMENDATION.md).
+
 ## Status
 
 **Development publication candidate — locally publication-ready.**

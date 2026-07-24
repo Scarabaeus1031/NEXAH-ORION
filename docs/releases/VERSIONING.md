@@ -30,13 +30,14 @@ Repository version and schema versions are separate:
 
 ## Current version
 
-`0.3.0-dev.0` contains the frozen ORION v1 Architecture Baseline and the
-completed Phase 0–6C development work, including the local Ollama reference
-adapter and deterministic Human → ORION → Human interaction. The Architecture
-Freeze stabilizes responsibility and authority; it does not declare the Python
-contracts a public stable API, create a stable ORION runtime release, or prove
-production readiness. Python package metadata represents the same version as
-`0.3.0.dev0`, the PEP 440 spelling of the repository prerelease.
+`1.0.0` is the immutable release of the certified baseline recorded in
+`ORION_V1_CERTIFIED_BASELINE.md`. Its scope ends at
+`at_slice_iv_certified`. Runtime, Gateway, LYRA execution, SIRIUS,
+applications, Human Reports, presentation, reasoning, semantic interpretation,
+and decision making remain outside the certified release.
+
+Historical development versions and phase documents retain their recorded
+version identifiers. They do not redefine the current repository release.
 
 ## Version source
 

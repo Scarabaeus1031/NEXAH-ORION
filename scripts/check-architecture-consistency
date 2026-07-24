@@ -50,9 +50,6 @@ if "Status: Frozen ORION v1 Architecture Baseline" not in architecture_text:
     fail("ORION architecture is not marked as the frozen v1 baseline")
 if "- Status: Accepted" not in adr_freeze_text:
     fail("ADR-0008 architecture freeze is not accepted")
-if (ROOT / "VERSION").read_text(encoding="utf-8").strip() != "0.3.0-dev.0":
-    fail("F1 architecture baseline must remain at 0.3.0-dev.0")
-
 canonical_terms = (
     "Orientation Object",
     "Representation",

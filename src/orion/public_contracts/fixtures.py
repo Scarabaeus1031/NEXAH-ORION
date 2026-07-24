@@ -217,13 +217,13 @@ def _report(
         uncertainties = (ReportUncertainty("uncertainty-depth-01", "bounded_scope", ("mode_payload.content.scope_coverage",), (), "bounded", "expand Scope"),)
     return OrientationReport(
         schema_version=ORIENTATION_REPORT_SCHEMA,
-        identity=ReportIdentity(report_id, "1", request.request_id, request.request_version, request.schema_version, "orion.orientation-operator/understand", "0.1-draft"),
+        identity=ReportIdentity(report_id, "1", request.request_id, request.request_version, request.schema_version, "orion.orientation-operator/understand", "1.0"),
         lifecycle=ReportLifecycle("current"),
         status=status,
         orientation=_orientation(request),
         representations=_representations(blocked),
         process=_stages(status),
-        mode_payload=ModePayload("understand", "0.1-draft", _understand_content(f"{status} understanding", coverage="complete" if complete else "partial", evidence=evidence)),
+        mode_payload=ModePayload("understand", "1.0", _understand_content(f"{status} understanding", coverage="complete" if complete else "partial", evidence=evidence)),
         evidence=evidence,
         assumptions=(),
         uncertainties=uncertainties,

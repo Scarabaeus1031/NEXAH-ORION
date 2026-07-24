@@ -111,7 +111,8 @@ for path in (
 grep -Fq 'context: ContextManifest' src/orion/validation.py || \
   fail "Validation no longer validates against ContextManifest"
 
-./scripts/check-architecture-consistency || failures=$((failures + 1))
+PYTHONDONTWRITEBYTECODE=1 "$python_command" \
+  ./scripts/check-architecture-consistency || failures=$((failures + 1))
 
 if [ "$failures" -ne 0 ]; then
   echo "$failures boundary check(s) failed." >&2

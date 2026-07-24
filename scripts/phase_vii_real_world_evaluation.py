@@ -48,7 +48,7 @@ class EvaluationSession:
 
 def load_corpus() -> dict[str, Any]:
     corpus = json.loads(CORPUS_PATH.read_text(encoding="utf-8"))
-    if corpus.get("corpus_version") != "1.0.0":
+    if corpus.get("corpus_version") != "1.0.1":
         raise AssertionError("unsupported Phase VII corpus version")
     documents = corpus.get("documents")
     if not isinstance(documents, list) or not 10 <= len(documents) <= 20:

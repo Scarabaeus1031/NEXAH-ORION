@@ -1,5 +1,8 @@
 # ORION Publication Candidate
 
+> Historical F1 publication record. Superseded for current navigation by the
+> [ORION Version 1 RC1 Checklist](ORION_V1_RC1_CHECKLIST.md).
+
 ## Status
 
 ORION remains `0.3.0-dev.0`. This is a prepared development publication

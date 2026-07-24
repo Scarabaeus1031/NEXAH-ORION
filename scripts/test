@@ -16,6 +16,5 @@ if ! "$python_command" -c 'import sys; raise SystemExit(sys.version_info < (3, 1
 fi
 
 PYTHONPATH="$repo_root/src" "$python_command" -m unittest discover -s tests -p 'test_*.py'
-PYTHONPATH="$repo_root/src" "$python_command" -m orion >/dev/null
 
-echo "Phase 1A tests and offline demo passed."
+echo "ORION isolated test suite passed."

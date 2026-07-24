@@ -4,13 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nexah-orion"
-version = "0.3.0.dev0"
-description = "Model-independent reasoning orchestration above the NEXAH Kernel"
+version = "1.0.0"
+description = "Certified deterministic Orientation Core for the NEXAH ecosystem"
 requires-python = ">=3.10"
 dependencies = []
-
-[project.scripts]
-orion-demo = "orion.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

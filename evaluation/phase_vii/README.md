@@ -1,7 +1,7 @@
 # Phase VII Real-World Orientation Evaluation
 
 - Corpus: `orion-real-world-understand-corpus`
-- Version: `1.0.0`
+- Version: `1.0.1` (document revisions refreshed during the Phase VIII documentation audit)
 - Operator: UNDERSTAND only
 - Documents: 12
 - Runtime and Gateway: unchanged from Phase VI

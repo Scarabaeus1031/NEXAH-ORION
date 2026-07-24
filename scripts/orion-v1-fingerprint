@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""Print the canonical ORION Version 1 downstream-compatibility fingerprint."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def fingerprint_paths() -> tuple[Path, ...]:
+    fixed = (
+        ROOT / "VERSION",
+        ROOT / "workspace.yaml",
+        ROOT / "evaluation/phase_vii/corpus.json",
+        ROOT / "docs/architecture/operators/ORION_ORIENTATION_POLICIES.md",
+        ROOT / "docs/architecture/operators/ORION_ORIENTATION_OPERATORS.md",
+    )
+    discovered = tuple(
+        path
+        for pattern in (
+            "docs/architecture/contracts/*.md",
+            "src/orion/public_contracts/**/*.py",
+            "src/orion/orientation_runtime/**/*.py",
+            "src/orion/gateway/**/*.py",
+        )
+        for path in ROOT.glob(pattern)
+        if path.is_file()
+    )
+    return tuple(sorted((*fixed, *discovered), key=lambda path: path.relative_to(ROOT).as_posix()))
+
+
+def canonical_manifest() -> str:
+    lines = []
+    for path in fingerprint_paths():
+        relative = path.relative_to(ROOT).as_posix()
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        lines.append(f"{digest}  {relative}")
+    return "\n".join(lines) + "\n"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--manifest",
+        action="store_true",
+        help="print the sorted per-file SHA-256 manifest before the fingerprint",
+    )
+    args = parser.parse_args()
+
+    manifest = canonical_manifest()
+    if args.manifest:
+        print(manifest, end="")
+    print(hashlib.sha256(manifest.encode("utf-8")).hexdigest())
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,6 +1,6 @@
 # Evidence Reference
 
-- Status: Canonical public specification; runtime implementation pending
+- Status: Frozen Version 1.0 public specification; executable model and validation implemented
 - Contract ID: `orion.evidence-reference`
 - Contract version: `1.0`
 - Scope: public identity, provenance and traceability of evidence used by ORION

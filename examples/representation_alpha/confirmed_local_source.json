@@ -1,0 +1,20 @@
+{
+  "schema_version": "orion.confirmed-local-source/0.1-alpha",
+  "orientation_object_id": "orientation-object-alpha-local-text-001",
+  "orientation_object_version": "1",
+  "source": {
+    "entry_id": "confirmed-local-text-001",
+    "source_owner": "human-alpha-reviewer",
+    "source_ref": "nexahedron://confirmed-source/alpha-local-text-001",
+    "source_version": "sha256:1869afe0bab70f4a91c17a7888ccff836199ba7a76afd7868d4c4a29e44336f0",
+    "fragment_ref": "whole",
+    "media_type": "text/plain;charset=utf-8",
+    "content": "Information already exists. Orientation is what is missing.\n",
+    "integrity_sha256": "1869afe0bab70f4a91c17a7888ccff836199ba7a76afd7868d4c4a29e44336f0"
+  },
+  "confirmation": {
+    "confirmed_by": "human-alpha-reviewer",
+    "confirmed_revision": 1,
+    "confirmation_id": "confirmation-213b4b3c43dbc417"
+  }
+}

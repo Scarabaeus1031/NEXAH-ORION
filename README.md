@@ -1,13 +1,12 @@
-# NEXAH-ORION
+# NEXAH-ORION — Certified Deterministic Core
 
-ORION is the model-independent reasoning and orchestration repository above the frozen NEXAH Kernel.
+ORION owns the certified deterministic Core within the NEXAH Orientation Ecosystem. Its Version 1 baseline covers immutable Structural Representation, UNDERSTAND inventory, Structural Summary and Statistics, Relations, Navigation, Orientation Map and the certified Expression boundary.
 
-This repository contains the frozen ORION v1 Architecture Baseline established
-after Phases 0–6C. It includes the deterministic reasoning boundary, context
-pipeline, Representation Architecture, Transformation Engine, declarative
-Operator Registry, LYRA language boundary and canonical Orientation Sessions.
-`FakeBackend` remains the offline reasoning baseline; `OllamaBackend` is the
-first real implementation of the frozen provider-neutral port.
+**Public path:** [NEXAH Visitor Guide](https://nexah.de/visitor-guide/) · [Human-facing Workspace](https://nexahedron.com) · [Research & Framework](https://github.com/Scarabaeus1031/NEXAH)
+
+ORION does not own the public website, the Human Workspace, Human meaning, Human decisions, Runtime, Gateway, LYRA execution, SIRIUS, applications or presentation.
+
+The canonical baseline is [`docs/releases/ORION_V1_CERTIFIED_BASELINE.md`](docs/releases/ORION_V1_CERTIFIED_BASELINE.md). Earlier Runtime, Gateway, report and LYRA documents remain historical or separate architectural records; they do not redefine the certified Version 1 baseline.
 
 The governing rule is:
 
@@ -17,6 +16,11 @@ The governing rule is:
 
 | I want to… | Read |
 |---|---|
+| understand Version 1 without reading phase history | [`docs/releases/ORION_V1_READING_ORDER.md`](docs/releases/ORION_V1_READING_ORDER.md) |
+| see what Version 1 includes and excludes | [`docs/releases/ORION_V1_RELEASE_NOTES.md`](docs/releases/ORION_V1_RELEASE_NOTES.md) |
+| inspect the canonical Version 1 baseline | [`docs/releases/ORION_V1_CERTIFIED_BASELINE.md`](docs/releases/ORION_V1_CERTIFIED_BASELINE.md) |
+| inspect the public contract language | [`docs/architecture/contracts/ORIENTATION_REQUEST.md`](docs/architecture/contracts/ORIENTATION_REQUEST.md) |
+| inspect historical Runtime/Gateway work outside the certified Core | [`src/README.md`](src/README.md) |
 | understand the ecosystem's highest governance baseline | [NEXAH Ecosystem Constitution v1.0](https://github.com/Scarabaeus1031/NEXAH/blob/main/GOVERNANCE/ECOSYSTEM_CONSTITUTION.md) |
 | understand the architecture | [`docs/architecture/ORION_ARCHITECTURE.md`](docs/architecture/ORION_ARCHITECTURE.md) |
 | inspect the official ORION v1 freeze | [`docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md`](docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md) |
@@ -25,7 +29,7 @@ The governing rule is:
 | navigate the Orientation Transform Stack | [`docs/architecture/transformations/ORIENTATION_TRANSFORM_STACK.md`](docs/architecture/transformations/ORIENTATION_TRANSFORM_STACK.md) |
 | inspect the versioned transformation contracts | [`docs/architecture/transformations/contracts/TRANSITION_CONTRACT_SPECIFICATION.md`](docs/architecture/transformations/contracts/TRANSITION_CONTRACT_SPECIFICATION.md) |
 | understand the operator capability inventory | [`docs/architecture/operators/OPERATOR_ARCHITECTURE.md`](docs/architecture/operators/OPERATOR_ARCHITECTURE.md) |
-| understand LYRA's human-language boundary | [`docs/architecture/lyra/LYRA_ARCHITECTURE.md`](docs/architecture/lyra/LYRA_ARCHITECTURE.md) |
+| inspect the historical LYRA boundary record outside the certified baseline | [`docs/architecture/lyra/LYRA_ARCHITECTURE.md`](docs/architecture/lyra/LYRA_ARCHITECTURE.md) |
 | explore why LUCY may exist | [`docs/architecture/lucy/LUCY_CONCEPT.md`](docs/architecture/lucy/LUCY_CONCEPT.md) |
 | inspect the LUCY Concept Freeze | [`docs/architecture/lucy/LUCY_CONCEPT_REVIEW.md`](docs/architecture/lucy/LUCY_CONCEPT_REVIEW.md) |
 | walk through the first NEXAH Alpha experience | [`docs/experience/FIRST_USER_JOURNEY.md`](docs/experience/FIRST_USER_JOURNEY.md) |
@@ -56,7 +60,7 @@ The governing rule is:
 
 ```text
 NEXAH Framework / OLS / Kernel   definitions, semantics and deterministic contracts
-NEXAH-ORION                      deterministic navigation, reports, validation and LYRA
+NEXAH-ORION                      certified structural orientation and Expression boundaries
 Library House                    Works, Editions and editorial identity
 Builder Hub                      independent operator-facing application
 ```
@@ -100,8 +104,10 @@ entries do not establish new constitutional authority.
 | proposed architecture decision | `docs/adr/` |
 | cross-repository rules | `docs/governance/` |
 | release and compatibility policy | `docs/releases/` |
-| Phase 1A internal contracts and runtime | `src/orion/` |
-| public cross-repository contracts | `schemas/` only after separate approval |
+| frozen public contract specifications | `docs/architecture/contracts/` |
+| executable public contract binding | `src/orion/public_contracts/` |
+| historical Runtime, Gateway and presentation work outside the certified Core | `src/orion/orientation_runtime/`, `src/orion/gateway/` |
+| optional future transport encodings | `schemas/` only after separate approval |
 | ORION-owned verification | `tests/` beside the owned behavior |
 | local research | `.workspace/research/` |
 | local experiments | `.workspace/experiments/` |
@@ -114,51 +120,52 @@ entries do not establish new constitutional authority.
 ## Repository status
 
 Under the adopted Ecosystem Constitution, ORION is the House that navigates.
-This repository therefore owns deterministic navigation, reports, validation
-and the LYRA language boundary; it does not own Experience presentation,
-Library identity or Human interpretation, Reflection and decision.
+The certified Version 1 baseline owns only the structural Representation,
+UNDERSTAND inventory, Summary, Statistics, Relations, Navigation, Orientation
+Map and Expression boundaries named in the certified baseline. It does not own
+Experience presentation, Library identity, Runtime, Gateway, LYRA execution or
+Human interpretation, Reflection and decision.
 
 The Phase 7A LUCY Concept Freeze remains a non-normative boundary record. LUCY
 is not an ORION component or constitutional House. The Human remains the one
 who reflects and decides.
 
-The F1 ORION Architecture Baseline remains frozen, architecture-complete and
-interaction-complete for its scope. Core architecture stays in maintenance mode:
+The Phase VIII audit recommends the ORION Version 1 baseline for stable freeze.
+Core architecture stays in maintenance mode:
 a change to frozen terminology, responsibilities, authority, contracts,
 dependency direction or structure requires explicit Architecture Review and an
 accepted ADR.
 
-The Phase 6C Orientation Sessions remain the executable Human → LYRA → ORION
-→ LYRA → Human conformance baseline. LYRA does not reason, plan, route,
-validate, render, execute, call a provider, or upgrade evidence. LUCY remains
-outside the execution path. Phase 7 asks what human Reflection means before any
-future architecture is considered.
+Earlier public-contract, Runtime, Gateway, provider and LYRA modules remain
+explicit-path historical or experimental artifacts. Their presence in the
+working repository does not make them part of the certified Version 1 Core or
+its public release claim. LUCY remains research outside execution.
 
 Architecture Plates follow a source/artifact rule: SVG files under
 `docs/architecture/plates/src/` are canonical and editable; PNG files are
 generated documentation artifacts and are never edited directly.
 
-The Operator Registry remains the current transformation capability
-baseline: all T01–T15 entries are non-executable and deterministic routing is
-unchanged. Ollama remains an externally managed runtime; ORION never starts or
-stops it. Run all isolated tests with `make test`; the `llama3.1:8b` integration
-remains opt-in through `make integration`.
+The earlier Operator Registry and T01–T15 transition prototypes remain
+non-executable historical architecture slices. Ollama remains an opt-in
+experiment and is not part of the Version 1 public Runtime. Run all isolated
+tests with `make test`; the Ollama integration remains opt-in through
+`make integration`.
 
 No registered transition is currently executable. ORION can navigate documented
 representation routes, attach declarative operator metadata and produce
 Transformation Plans and blocker reports, but it never generates a
 Representation Target; `produced_representation` remains `None`.
 
-The repository remains `0.3.0-dev.0`. The F1 freeze is an architecture baseline,
-not a public release, stable semantic-version tag or production-readiness claim.
-Its current publication blockers and exact Core-pin mismatch are recorded in
-[`docs/releases/PUBLICATION_BASELINE.md`](docs/releases/PUBLICATION_BASELINE.md).
+The repository version is `1.0.0`. Its supported scope is exactly the certified
+baseline through WP30. Earlier Public Contract, Runtime, Gateway, provider and
+LYRA work remains available as historical or separately governed material and
+does not broaden the Version 1 release.
 
 The public repository identity is
 [`Scarabaeus1031/NEXAH-ORION`](https://github.com/Scarabaeus1031/NEXAH-ORION).
-It publishes the independent ORION development baseline; public release tags
-and stable API claims remain governed separately. The verified Core pin is
-unchanged.
+It publishes the independent ORION Version 1 certified baseline. Publication
+and downstream compatibility remain bound to the exact immutable release
+revision and canonical fingerprint. The verified NEXAH Core pin is unchanged.
 
 Original software is licensed under the [Apache License 2.0](LICENSE).
 Original documentation, specifications, research, books and visual material

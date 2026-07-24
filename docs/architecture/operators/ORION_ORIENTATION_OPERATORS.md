@@ -1,7 +1,7 @@
 # ORION Orientation Operators
 
-- Status: Canonical behavioral specification; runtime implementation pending
-- Contract family: `orion.orientation-operators/0.1-draft`
+- Status: Canonical Version 1 behavioral specification; Understand implemented, other modes future-version
+- Contract family: `orion.orientation-operators/1.0`
 - Scope: mode-level Orientation Request to Orientation Report behavior
 - Consumers: NEXAHEDRON and future ORION clients
 - Provider policy: model-independent and provider-neutral

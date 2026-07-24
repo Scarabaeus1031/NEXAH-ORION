@@ -1,5 +1,9 @@
 # Canonical Orientation Sessions
 
+> Historical Phase 6C conformance collection. Current executable acceptance
+> evidence is Phase VI and the Phase VII evaluation linked from the
+> [Version 1 Reading Order](../releases/ORION_V1_READING_ORDER.md).
+
 These versioned sessions are executable documentation for the Phase 6C
 Human → LYRA → ORION → LYRA → Human boundary. They introduce no
 architecture, contract, route or runtime authority. Each session uses the

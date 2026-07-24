@@ -1,6 +1,8 @@
 # Local Workspace
 
-The repository is both the future ORION source repository and the entry point for a local multi-repository workshop. Independent repositories are never copied into ORION; local working copies live under `.workspace/`, which is ignored by Git.
+The repository is the ORION source repository and the entry point for a local
+multi-repository workshop. Independent repositories are never copied into
+ORION; local working copies live under `.workspace/`, which is ignored by Git.
 
 ## Bootstrap
 
@@ -29,8 +31,8 @@ The Core checkout is verified against the revision in `workspace.yaml`. The scri
 ```text
 nexah-orion/
 ├── docs/                         tracked ORION records
-├── schemas/                      future public cross-repository contracts
-├── src/orion/                    internal execution and Ollama adapter
+├── schemas/                      reserved transport encodings
+├── src/orion/                    Version 1 binding and retained internal slices
 ├── tests/                        ORION-owned verification
 ├── tools/                        future maintained repository tools
 ├── scripts/                      workshop automation
@@ -54,8 +56,8 @@ nexah-orion/
 | Zone | Purpose | May become authoritative by placement? | Commit to ORION? |
 |---|---|---:|---:|
 | `docs/` | reviewed ORION records | yes, according to document status | yes |
-| `schemas/` | approved public ORION-owned contracts | yes, after ADR approval | later |
-| `src/orion/` | internal ORION execution contracts and runtime | yes | yes |
+| `schemas/` | optional future transport encodings | only after separate approval | later |
+| `src/orion/` | executable public binding, Runtime, Gateway and retained internal slices | according to the public boundary | yes |
 | `tests/` | ORION-owned execution verification | yes | yes |
 | `.workspace/research/` | sources, notes, hypotheses | no | no |
 | `.workspace/experiments/` | disposable trials and benchmarks | no | no |

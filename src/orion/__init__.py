@@ -1,4 +1,9 @@
-"""Provider-independent ORION execution and transformation boundaries."""
+"""Provider-independent ORION execution and transformation boundaries.
+
+The aggregate imports are retained for compatibility with the earlier
+repository surface. The certified Version 1 baseline is narrower and is
+defined only by ``docs/releases/ORION_V1_CERTIFIED_BASELINE.md``.
+"""
 
 from .backend import ReasoningBackend
 from .brief_backend import ContextBriefReasoningBackend
@@ -180,4 +185,4 @@ __all__ = [
     "DEFAULT_TRANSITION_CONTRACTS",
 ]
 
-__version__ = "0.3.0.dev0"
+__version__ = "1.0.0"

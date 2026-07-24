@@ -1,0 +1,188 @@
+{
+  "boundary_ref": "whole",
+  "declared_lossiness": [
+    "raw_source_not_embedded",
+    "parent_element_hierarchy_not_declared",
+    "inline_elements_not_declared",
+    "blank_lines_not_declared",
+    "link_reference_definitions_not_declared",
+    "source_spelling_details_not_declared",
+    "list_details_not_declared",
+    "code_fence_details_not_declared",
+    "parser_metadata_not_declared",
+    "rendering_and_editor_state_not_declared",
+    "semantic_and_evidence_information_not_declared"
+  ],
+  "elements": [
+    {
+      "boundary_ref": "whole",
+      "element_id": "element-7fc58ef6c4d0dce49638a642",
+      "element_kind": "document",
+      "level": null,
+      "locator": {
+        "end_byte": 116,
+        "end_line": 8,
+        "start_byte": 0,
+        "start_line": 1
+      },
+      "ordinal": 0
+    },
+    {
+      "boundary_ref": "whole",
+      "element_id": "element-430556706e37ea26ea746f40",
+      "element_kind": "atx_heading",
+      "level": 1,
+      "locator": {
+        "end_byte": 14,
+        "end_line": 1,
+        "start_byte": 0,
+        "start_line": 1
+      },
+      "ordinal": 1
+    },
+    {
+      "boundary_ref": "whole",
+      "element_id": "element-8fad73d957fd0d4e5423ecd2",
+      "element_kind": "paragraph",
+      "level": null,
+      "locator": {
+        "end_byte": 75,
+        "end_line": 4,
+        "start_byte": 15,
+        "start_line": 3
+      },
+      "ordinal": 2
+    },
+    {
+      "boundary_ref": "whole",
+      "element_id": "element-657bfb8e7607a211dce059de",
+      "element_kind": "atx_heading",
+      "level": 3,
+      "locator": {
+        "end_byte": 89,
+        "end_line": 6,
+        "start_byte": 76,
+        "start_line": 6
+      },
+      "ordinal": 3
+    },
+    {
+      "boundary_ref": "whole",
+      "element_id": "element-feb3190cea005113506aa2f3",
+      "element_kind": "paragraph",
+      "level": null,
+      "locator": {
+        "end_byte": 116,
+        "end_line": 8,
+        "start_byte": 90,
+        "start_line": 8
+      },
+      "ordinal": 4
+    }
+  ],
+  "orientation_object_id": "orientation-object-alpha",
+  "orientation_object_version": "1",
+  "profile_id": "orion.representation/markdown-structure",
+  "profile_version": "1.0.0",
+  "projection": {
+    "declared_lossiness": [
+      "raw_source_not_embedded",
+      "parent_element_hierarchy_not_declared",
+      "inline_elements_not_declared",
+      "blank_lines_not_declared",
+      "link_reference_definitions_not_declared",
+      "source_spelling_details_not_declared",
+      "list_details_not_declared",
+      "code_fence_details_not_declared",
+      "parser_metadata_not_declared",
+      "rendering_and_editor_state_not_declared",
+      "semantic_and_evidence_information_not_declared"
+    ],
+    "profile_id": "orion.representation/markdown-structure",
+    "profile_version": "1.0.0",
+    "projection_id": "orion.projection/markdown-structure",
+    "projection_version": "1.0.0",
+    "source_boundary": "whole",
+    "source_grammar": "CommonMark",
+    "source_grammar_version": "0.31.2",
+    "source_media_type": "text/markdown;charset=utf-8",
+    "target_domain": "orion.representation.markdown-block-structure"
+  },
+  "provenance": [
+    {
+      "declared_lossiness": [
+        "none"
+      ],
+      "input_refs": [
+        "markdown-source-alpha@sha256:19dea63f252392fcfaa1ff4bfeef9ed3fbef774cd7116d6effc153a143964f22",
+        "orientation-object-alpha@1"
+      ],
+      "output_ref": "confirmed:markdown-source-alpha@sha256:19dea63f252392fcfaa1ff4bfeef9ed3fbef774cd7116d6effc153a143964f22",
+      "owner": "human-alpha-reviewer",
+      "sequence": 1,
+      "step_id": "confirmation-e8a98418009cd7b5",
+      "step_kind": "human_confirmation"
+    },
+    {
+      "declared_lossiness": [
+        "raw_source_not_embedded",
+        "parent_element_hierarchy_not_declared",
+        "inline_elements_not_declared",
+        "blank_lines_not_declared",
+        "link_reference_definitions_not_declared",
+        "source_spelling_details_not_declared",
+        "list_details_not_declared",
+        "code_fence_details_not_declared",
+        "parser_metadata_not_declared",
+        "rendering_and_editor_state_not_declared",
+        "semantic_and_evidence_information_not_declared"
+      ],
+      "input_refs": [
+        "confirmed:markdown-source-alpha@sha256:19dea63f252392fcfaa1ff4bfeef9ed3fbef774cd7116d6effc153a143964f22",
+        "orion.representation/markdown-structure@1.0.0"
+      ],
+      "output_ref": "mapping:representation-7bdb85d76e6b9a8d",
+      "owner": "ORION Representation Boundary",
+      "sequence": 2,
+      "step_id": "orion.projection/markdown-structure@1.0.0",
+      "step_kind": "deterministic_projection"
+    },
+    {
+      "declared_lossiness": [
+        "raw_source_not_embedded",
+        "parent_element_hierarchy_not_declared",
+        "inline_elements_not_declared",
+        "blank_lines_not_declared",
+        "link_reference_definitions_not_declared",
+        "source_spelling_details_not_declared",
+        "list_details_not_declared",
+        "code_fence_details_not_declared",
+        "parser_metadata_not_declared",
+        "rendering_and_editor_state_not_declared",
+        "semantic_and_evidence_information_not_declared"
+      ],
+      "input_refs": [
+        "mapping:representation-7bdb85d76e6b9a8d"
+      ],
+      "output_ref": "representation-7bdb85d76e6b9a8d",
+      "owner": "ORION Representation Boundary",
+      "sequence": 3,
+      "step_id": "orion.renderer/markdown-structure@0.3-alpha",
+      "step_kind": "deterministic_rendering"
+    }
+  ],
+  "renderer_id": "orion.renderer/markdown-structure",
+  "renderer_version": "0.3-alpha",
+  "representation_id": "representation-7bdb85d76e6b9a8d",
+  "representation_sha256": "0cfe0b88b38415de949efd720bb6cbc48a919230dbed51260ef0015592586723",
+  "representation_version": "sha256:0cfe0b88b38415de949efd720bb6cbc48a919230dbed51260ef0015592586723",
+  "schema_version": "orion.representation/markdown-structure/1.0.0",
+  "source": {
+    "content_sha256": "19dea63f252392fcfaa1ff4bfeef9ed3fbef774cd7116d6effc153a143964f22",
+    "entry_id": "markdown-source-alpha",
+    "owner": "human-alpha-reviewer",
+    "revision": "sha256:19dea63f252392fcfaa1ff4bfeef9ed3fbef774cd7116d6effc153a143964f22",
+    "source_ref": "local:orientation.md"
+  },
+  "target_domain": "orion.representation.markdown-block-structure"
+}

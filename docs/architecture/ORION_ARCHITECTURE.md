@@ -408,7 +408,7 @@ nexah-orion/
 │   └── orion/                 # internal runtime and LYRA package
 ├── tests/                     # unit, conformance and opt-in integration
 ├── scripts/                   # repository governance and verification
-├── schemas/                   # reserved; no public contracts approved
+├── schemas/                   # reserved for optional transport encodings
 ├── tools/                     # reserved maintained tools
 └── .workspace/                # ignored local-only material
 ```

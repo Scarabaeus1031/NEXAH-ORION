@@ -1,5 +1,9 @@
 # ORION v1 Architecture Freeze
 
+> Historical F1 freeze record. Its accepted boundary remains decision evidence;
+> current Version 1 status and inventory are defined by the
+> [Phase VIII Architecture Audit](../releases/ORION_V1_ARCHITECTURE_AUDIT.md).
+
 - Baseline ID: `orion-architecture-v1`
 - Status: Frozen
 - Freeze phase: F1

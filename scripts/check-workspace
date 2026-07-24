@@ -16,6 +16,7 @@ CONTRIBUTING.md
 GOVERNANCE.md
 SECURITY.md
 CODE_OF_CONDUCT.md
+CITATION.cff
 LICENSE
 LICENSE-DOCS.md
 LICENSES.md
@@ -23,6 +24,8 @@ CHANGELOG.md
 VERSION
 workspace.yaml
 docs/architecture/ORION_ARCHITECTURE.md
+docs/architecture/ORION_CORE_PLATE.md
+docs/architecture/ORION_SYSTEM_PLATE.md
 docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md
 docs/architecture/ORION_V1_ARCHITECTURE_REVIEW.md
 docs/architecture/REPRESENTATION_ARCHITECTURE.md
@@ -65,6 +68,10 @@ docs/governance/CROSS_REPOSITORY_GOVERNANCE.md
 docs/governance/COMPATIBILITY_POLICY.md
 docs/releases/RELEASE_STRATEGY.md
 docs/releases/VERSIONING.md
+docs/releases/ORION_V1_CERTIFIED_BASELINE.md
+docs/releases/ORION_V1_RELEASE_NOTES.md
+docs/releases/ORION_V1_READING_ORDER.md
+docs/releases/ORION_V1_VERSION_CLASSIFICATION.md
 docs/releases/PUBLICATION_BASELINE.md
 docs/releases/RELEASE_CANDIDATE.md
 docs/releases/CORE_COMPATIBILITY_REPORT.md
@@ -138,6 +145,7 @@ scripts/test-ollama-integration
 scripts/check-architecture-consistency
 scripts/check-boundaries
 scripts/check-architecture-plates
+scripts/orion-v1-fingerprint
 scripts/generate-architecture-plates'
 
 while IFS= read -r path; do
@@ -152,6 +160,18 @@ EOF
 version=$(tr -d '\r\n' < VERSION)
 echo "$version" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$' || \
   fail "VERSION is not valid Semantic Versioning: $version"
+
+package_version=$(awk -F'"' '/^version = "/ { print $2; exit }' pyproject.toml)
+citation_version=$(awk -F'"' '/^version: "/ { print $2; exit }' CITATION.cff)
+module_version=$(awk -F'"' '/^__version__ = "/ { print $2; exit }' src/orion/__init__.py)
+normalized_version=$(printf '%s' "$version" | sed 's/-dev\./.dev/')
+
+[ "$package_version" = "$normalized_version" ] || \
+  fail "pyproject.toml version $package_version does not match VERSION $version."
+[ "$citation_version" = "$version" ] || \
+  fail "CITATION.cff version $citation_version does not match VERSION $version."
+[ "$module_version" = "$version" ] || \
+  fail "src/orion/__init__.py version $module_version does not match VERSION $version."
 
 adr_numbers=
 for adr in docs/adr/[0-9][0-9][0-9][0-9]-*.md; do

@@ -26,6 +26,16 @@ grep -Fq "## [$version]" CHANGELOG.md || {
   exit 1
 }
 
+fingerprint=$(./scripts/orion-v1-fingerprint)
+[ "$fingerprint" = "$(./scripts/orion-v1-fingerprint)" ] || {
+  echo "Canonical fingerprint replay is not deterministic." >&2
+  exit 1
+}
+grep -Fq "$fingerprint" docs/releases/ORION_V1_RELEASE_NOTES.md || {
+  echo "Release notes do not publish the canonical fingerprint $fingerprint." >&2
+  exit 1
+}
+
 if [ ! -d docs/releases/compatibility ] || \
    ! find docs/releases/compatibility -type f -name '*.yaml' -print | grep -q .; then
   echo "No release compatibility record found." >&2
@@ -33,10 +43,13 @@ if [ ! -d docs/releases/compatibility ] || \
 fi
 
 if [ "$mode" = release ]; then
-  if grep -El '^- Status: (Draft|Proposed)$' docs/adr/[0-9][0-9][0-9][0-9]-*.md >/dev/null 2>&1; then
-    echo "A release cannot include Draft or Proposed ADRs." >&2
-    exit 1
-  fi
+  for adr in docs/adr/[0-9][0-9][0-9][0-9]-*.md; do
+    [ "$(basename "$adr")" = "0000-template.md" ] && continue
+    if grep -Eq '^- Status: (Draft|Proposed)$' "$adr"; then
+      echo "A release cannot include Draft or Proposed ADRs: $adr" >&2
+      exit 1
+    fi
+  done
   if [ -n "$(git status --porcelain)" ]; then
     echo "Release check requires a clean working tree." >&2
     exit 1

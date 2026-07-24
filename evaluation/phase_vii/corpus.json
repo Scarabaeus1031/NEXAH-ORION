@@ -1,6 +1,6 @@
 {
   "corpus_id": "orion-real-world-understand-corpus",
-  "corpus_version": "1.0.0",
+  "corpus_version": "1.0.1",
   "created": "2026-07-22",
   "operator": "understand",
   "authority_owner": "NEXAH Project",
@@ -9,7 +9,7 @@
       "document_id": "architecture-baseline",
       "document_type": "Architecture specification",
       "path": "docs/architecture/ORION_ARCHITECTURE.md",
-      "sha256": "7482e2f644d80f2b1b154b85027db21c5ea75a4e720b356f7bf7a2e9ffe45171",
+      "sha256": "a985f2c2ba5fb622c85177d3cd367085497fd1c0b22c89b60607480abf57d905",
       "editorial_status": "published",
       "human_intention": "What is the central architectural decision, and who retains canonical authority?",
       "focus": "central decision and canonical authority",
@@ -28,7 +28,7 @@
       "document_id": "repository-readme",
       "document_type": "README",
       "path": "README.md",
-      "sha256": "9f2b3c4d01c9c5966d1af0181bd8fcb976799f6b76ee4183eaaa3b675c3f8bd1",
+      "sha256": "10cb10a979bede22f50c902a85b5d9aec8e2589852d2add6f747bd7654c82317",
       "editorial_status": "published",
       "human_intention": "What is this repository for, and what governing rule should I remember?",
       "focus": "repository purpose and governing rule",
@@ -39,7 +39,7 @@
         "depth": "focused"
       },
       "evidence_fragments": [
-        "ORION is the model-independent reasoning and orchestration repository above the frozen NEXAH Kernel.",
+        "ORION owns the certified deterministic Core within the NEXAH Orientation Ecosystem.",
         "The model proposes. The Orchestrator validates. The Kernel decides."
       ]
     },
@@ -180,7 +180,7 @@
       "document_id": "release-strategy",
       "document_type": "Release proposal",
       "path": "docs/releases/RELEASE_STRATEGY.md",
-      "sha256": "aaa228306a44f98b9c1cec728ff4d03a4dc87e25928aa4548bb9847cb6ac447f",
+      "sha256": "46736afbf03d45c68d34a4421d53fee358fa60d273023085be5082957b72cbaf",
       "editorial_status": "reviewed",
       "human_intention": "What is outside the current release claim, and what must happen before release?",
       "focus": "release boundary and prerequisites",
@@ -191,8 +191,8 @@
         "depth": "focused"
       },
       "evidence_fragments": [
-        "It does not create a release or tag.",
-        "A later release must not claim:",
+        "Version `1.0.0` publishes exactly the certified baseline recorded in",
+        "It does not claim Runtime, Gateway, LYRA execution, SIRIUS, applications,",
         "human approval by the ORION release owner."
       ]
     },
@@ -200,7 +200,7 @@
       "document_id": "security-policy",
       "document_type": "Security policy",
       "path": "SECURITY.md",
-      "sha256": "3771edbf7bd75ebbae2580eca351fc35cb023b0827c506476791de673d8a9c8f",
+      "sha256": "7d9bd9e32bb2dd703c8ba8a5a397682dc92628d3d9fe2502515d0a7531a2bbb6",
       "editorial_status": "published",
       "human_intention": "How should a vulnerability be reported, and what support is not promised?",
       "focus": "private reporting and support limits",
