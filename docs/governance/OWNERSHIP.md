@@ -83,6 +83,33 @@ reproducibility. They do not enlarge the certified Version 1 baseline.
 These explicit module paths remain internal and do not enlarge the supported
 Version 1 public interface.
 
+## Adopted Master Architecture partition
+
+ADR-0009 adopts one cross-status organizing partition without adopting any new
+capability:
+
+| Region | Owner and authority | Current status |
+|---|---|---|
+| Certified Core | ORION product authority within the existing Version 1 contract | Certified through `at_slice_iv_certified`; unchanged |
+| Separately Adopted Extension Profiles | Each future profile requires its own explicit Owner decision and applicable semantic, validation, certification, release and governance process | **Adopted Extension Profiles: NONE** |
+| External Research | Science Lab owns Research evidence; ORION product adoption requires the Research-to-Architecture Adoption Gate and an explicit Owner decision | Separate authority; no automatic promotion |
+
+Human intention, interpretation, meaning, decision, consent and STOP remain
+Human-owned. NEXAH Framework and OLS retain their ecosystem and normative
+semantic authority; the Kernel retains deterministic released-contract
+execution authority.
+
+At the ORION↔NEXAH Interface V1 boundary, ORION owns the meaning of exported
+ORION objects, Interface V1 owns transport and NEXAH owns registered
+consumption. This local ownership rule does not supersede OLS normative
+authority or Human meaning and decision authority. Interface V1 remains
+`MEMBRANE_V1_APPROVED_NOT_IMPLEMENTED`.
+
+The Legacy Public Contract/Gateway and Interface V1 are distinct boundaries.
+Existing untracked Runtime and deployment work is
+`NONCANONICAL / PENDING SEPARATE REVIEW`; file presence grants no product,
+release or certification authority.
+
 ## Architecture maintenance mode
 
 The frozen scope is defined in
