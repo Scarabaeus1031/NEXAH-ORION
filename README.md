@@ -23,6 +23,8 @@ The governing rule is:
 | inspect historical Runtime/Gateway work outside the certified Core | [`src/README.md`](src/README.md) |
 | understand the ecosystem's highest governance baseline | [NEXAH Ecosystem Constitution v1.0](https://github.com/Scarabaeus1031/NEXAH/blob/main/GOVERNANCE/ECOSYSTEM_CONSTITUTION.md) |
 | understand the architecture | [`docs/architecture/ORION_ARCHITECTURE.md`](docs/architecture/ORION_ARCHITECTURE.md) |
+| map OLS 1.0 across ORION and the NEXAH ecosystem | [`docs/architecture/OLS_1_0_REPOSITORY_ARCHITECTURE_EXTRACTION.md`](docs/architecture/OLS_1_0_REPOSITORY_ARCHITECTURE_EXTRACTION.md) |
+| examine the proposed machine-readable OLS bridge | [`docs/architecture/MACHINE_READABLE_ORIENTATION_ARCHITECTURE.md`](docs/architecture/MACHINE_READABLE_ORIENTATION_ARCHITECTURE.md) |
 | inspect the official ORION v1 freeze | [`docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md`](docs/architecture/ORION_V1_ARCHITECTURE_FREEZE.md) |
 | read the F1 architecture review | [`docs/architecture/ORION_V1_ARCHITECTURE_REVIEW.md`](docs/architecture/ORION_V1_ARCHITECTURE_REVIEW.md) |
 | understand representation and rendering | [`docs/architecture/REPRESENTATION_ARCHITECTURE.md`](docs/architecture/REPRESENTATION_ARCHITECTURE.md) |

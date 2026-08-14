@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">NEXAH Orientation Infrastructure</title>
+  <desc id="desc">An informative architecture overview connecting Research, Architecture, OLS, Kernel, ORION, Validation, Applications, Library, public interfaces, and the Human while preserving separate authority.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#092f68"/>
+    </marker>
+    <marker id="feedback-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6d3d91"/>
+    </marker>
+    <style>
+      text { font-family: Inter, Avenir, Helvetica, Arial, sans-serif; }
+      .label { font-size: 16px; font-weight: 700; letter-spacing: 1.2px; }
+      .title { font-size: 40px; font-weight: 700; fill: #152238; }
+      .subtitle { font-size: 21px; font-weight: 400; fill: #1457a6; }
+      .box-title { font-size: 23px; font-weight: 700; }
+      .box-copy { font-size: 17px; font-weight: 400; fill: #536174; }
+      .rail-title { font-size: 15px; font-weight: 700; fill: #092f68; letter-spacing: 0.8px; }
+      .rail-copy { font-size: 14px; font-weight: 400; fill: #536174; }
+      .footer { font-size: 15px; font-weight: 700; fill: #536174; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#ffffff"/>
+  <rect x="18" y="18" width="1564" height="1064" fill="none" stroke="#aab8c8" stroke-width="2"/>
+
+  <text x="58" y="68" class="label" fill="#1457a6">INFORMATIVE ECOSYSTEM VISUAL</text>
+  <text x="58" y="120" class="title">NEXAH ORIENTATION INFRASTRUCTURE</text>
+  <text x="58" y="158" class="subtitle">Von Forschung zu menschlichem Verstehen — ohne kollabierende Autorität.</text>
+  <line x1="58" y1="187" x2="1542" y2="187" stroke="#aab8c8" stroke-width="2"/>
+
+  <!-- Orientation rail -->
+  <rect x="58" y="220" width="230" height="776" rx="18" fill="#f7f9fc" stroke="#aab8c8" stroke-width="2"/>
+  <text x="83" y="258" class="rail-title">ORIENTIERUNGSPRINZIP</text>
+
+  <line x1="104" y1="300" x2="104" y2="888" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <circle cx="104" cy="322" r="15" fill="#ffffff" stroke="#6d3d91" stroke-width="3"/>
+  <text x="134" y="318" class="rail-title">ORIENTATION</text>
+  <text x="134" y="338" class="rail-copy">Frage und Position</text>
+
+  <circle cx="104" cy="432" r="15" fill="#ffffff" stroke="#1457a6" stroke-width="3"/>
+  <text x="134" y="428" class="rail-title">REFERENCES</text>
+  <text x="134" y="448" class="rail-copy">Quellen und Grenzen</text>
+
+  <circle cx="104" cy="542" r="15" fill="#ffffff" stroke="#b98320" stroke-width="3"/>
+  <text x="134" y="538" class="rail-title">EVIDENCE</text>
+  <text x="134" y="558" class="rail-copy">Belege · Unsicherheit</text>
+
+  <circle cx="104" cy="652" r="15" fill="#ffffff" stroke="#20a6b7" stroke-width="3"/>
+  <text x="134" y="648" class="rail-title">NAVIGATION</text>
+  <text x="134" y="668" class="rail-copy">Wege und Blocker</text>
+
+  <circle cx="104" cy="762" r="15" fill="#ffffff" stroke="#3e7c50" stroke-width="3"/>
+  <text x="134" y="758" class="rail-title">UNDERSTANDING</text>
+  <text x="134" y="778" class="rail-copy">Menschliche Einordnung</text>
+
+  <rect x="82" y="910" width="182" height="58" rx="12" fill="#ffffff" stroke="#092f68" stroke-width="2"/>
+  <text x="173" y="934" font-size="15" fill="#092f68" font-weight="700" text-anchor="middle">STOP BLEIBT</text>
+  <text x="173" y="954" font-size="14" fill="#536174" text-anchor="middle">immer möglich</text>
+
+  <!-- Research -->
+  <rect x="332" y="220" width="1210" height="92" rx="16" fill="#ffffff" stroke="#6d3d91" stroke-width="3"/>
+  <text x="360" y="258" class="box-title" fill="#6d3d91">RESEARCH</text>
+  <text x="360" y="286" class="box-copy">fragt · beobachtet · prüft · bewahrt Evidenz und Unsicherheit</text>
+  <rect x="1276" y="240" width="238" height="50" rx="11" fill="#f7f0fb" stroke="#6d3d91" stroke-width="1.5"/>
+  <text x="1395" y="270" font-size="16" fill="#6d3d91" font-weight="700" text-anchor="middle">PROPOSES</text>
+
+  <!-- Architecture and OLS -->
+  <line x1="937" y1="312" x2="937" y2="337" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="332" y="342" width="575" height="102" rx="16" fill="#ffffff" stroke="#1457a6" stroke-width="3"/>
+  <text x="360" y="382" class="box-title" fill="#1457a6">ARCHITECTURE</text>
+  <text x="360" y="412" class="box-copy">ordnet Verantwortung, Grenzen und Referenzen</text>
+  <rect x="967" y="342" width="575" height="102" rx="16" fill="#ffffff" stroke="#092f68" stroke-width="3"/>
+  <text x="995" y="382" class="box-title" fill="#092f68">ORIENTATION LANGUAGE · OLS</text>
+  <text x="995" y="412" class="box-copy">definiert freigegebene Semantik</text>
+  <line x1="907" y1="393" x2="957" y2="393" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Kernel and ORION -->
+  <line x1="1255" y1="444" x2="1255" y2="469" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="332" y="474" width="575" height="102" rx="16" fill="#ffffff" stroke="#3e7c50" stroke-width="3"/>
+  <text x="360" y="514" class="box-title" fill="#3e7c50">ORIENTATION KERNEL</text>
+  <text x="360" y="544" class="box-copy">führt freigegebene Verträge begrenzt aus</text>
+  <rect x="967" y="474" width="575" height="102" rx="16" fill="#ffffff" stroke="#20a6b7" stroke-width="3"/>
+  <text x="995" y="514" class="box-title" fill="#168a99">ORION</text>
+  <text x="995" y="544" class="box-copy">navigiert deterministisch und meldet Blocker</text>
+  <path d="M1255 444 L1255 458 L620 458 L620 469" fill="none" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Validation, applications, library -->
+  <line x1="620" y1="576" x2="620" y2="601" stroke="#092f68" stroke-width="3"/>
+  <line x1="1255" y1="576" x2="1255" y2="601" stroke="#092f68" stroke-width="3"/>
+  <line x1="514" y1="601" x2="1360" y2="601" stroke="#092f68" stroke-width="3"/>
+  <line x1="514" y1="601" x2="514" y2="616" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="937" y1="601" x2="937" y2="616" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1360" y1="601" x2="1360" y2="616" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="332" y="621" width="365" height="112" rx="16" fill="#ffffff" stroke="#b98320" stroke-width="3"/>
+  <text x="360" y="661" class="box-title" fill="#b98320">VALIDATION · POA</text>
+  <text x="360" y="690" class="box-copy">prüft begrenzte Claims</text>
+  <text x="360" y="714" font-size="15" fill="#536174">POA-001 · POA-002</text>
+
+  <rect x="755" y="621" width="365" height="112" rx="16" fill="#ffffff" stroke="#c2672d" stroke-width="3"/>
+  <text x="783" y="661" class="box-title" fill="#c2672d">APPLICATIONS</text>
+  <text x="783" y="690" class="box-copy">wenden im erklärten Kontext an</text>
+  <text x="783" y="714" font-size="15" fill="#536174">domänenspezifische Evidenz</text>
+
+  <rect x="1178" y="621" width="364" height="112" rx="16" fill="#ffffff" stroke="#6d3d91" stroke-width="3"/>
+  <text x="1206" y="661" class="box-title" fill="#6d3d91">LIBRARY</text>
+  <text x="1206" y="690" class="box-copy">bewahrt Werke und Identität</text>
+  <text x="1206" y="714" font-size="15" fill="#536174">Registry · Atlas · Provenienz</text>
+
+  <!-- Public interfaces -->
+  <line x1="514" y1="733" x2="514" y2="748" stroke="#092f68" stroke-width="3"/>
+  <line x1="937" y1="733" x2="937" y2="748" stroke="#092f68" stroke-width="3"/>
+  <line x1="1360" y1="733" x2="1360" y2="748" stroke="#092f68" stroke-width="3"/>
+  <line x1="514" y1="748" x2="1360" y2="748" stroke="#092f68" stroke-width="3"/>
+  <line x1="937" y1="748" x2="937" y2="758" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="332" y="763" width="1210" height="120" rx="18" fill="#f7f9fc" stroke="#536174" stroke-width="2"/>
+  <text x="360" y="793" class="label" fill="#536174">PUBLIC INTERFACES · PRÄSENTIEREN, BEWAHREN, PUBLIZIEREN</text>
+
+  <rect x="360" y="813" width="260" height="50" rx="11" fill="#ffffff" stroke="#1457a6" stroke-width="2"/>
+  <text x="490" y="843" font-size="18" fill="#1457a6" font-weight="700" text-anchor="middle">EXPERIENCE · nexah.de</text>
+
+  <rect x="654" y="813" width="260" height="50" rx="11" fill="#ffffff" stroke="#20a6b7" stroke-width="2"/>
+  <text x="784" y="843" font-size="18" fill="#168a99" font-weight="700" text-anchor="middle">NEXAHEDRON</text>
+
+  <rect x="948" y="813" width="260" height="50" rx="11" fill="#ffffff" stroke="#3e7c50" stroke-width="2"/>
+  <text x="1078" y="843" font-size="18" fill="#3e7c50" font-weight="700" text-anchor="middle">GITHUB · REVISIONEN</text>
+
+  <rect x="1242" y="813" width="272" height="50" rx="11" fill="#ffffff" stroke="#6d3d91" stroke-width="2"/>
+  <text x="1378" y="843" font-size="17" fill="#6d3d91" font-weight="700" text-anchor="middle">ARE.NA · VISUELLES MATERIAL</text>
+
+  <!-- Human -->
+  <line x1="937" y1="883" x2="937" y2="908" stroke="#092f68" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="332" y="913" width="1210" height="83" rx="16" fill="#092f68" stroke="#092f68" stroke-width="3"/>
+  <text x="360" y="950" font-size="25" fill="#ffffff" font-weight="700">HUMAN</text>
+  <text x="360" y="978" font-size="18" fill="#dce7f5">interpretiert · reflektiert · entscheidet · fährt fort oder stoppt</text>
+
+  <!-- Feedback -->
+  <path d="M1514 954 L1560 954 L1560 266 L1519 266" fill="none" stroke="#6d3d91" stroke-width="2.5" stroke-dasharray="9 7" marker-end="url(#feedback-arrow)"/>
+  <text x="1548" y="604" font-size="15" fill="#6d3d91" font-weight="700" text-anchor="middle" transform="rotate(-90 1548 604)">FEEDBACK ERÖFFNET NEUE FRAGEN</text>
+
+  <!-- Authority rule -->
+  <line x1="58" y1="1024" x2="1542" y2="1024" stroke="#aab8c8" stroke-width="2"/>
+  <text x="58" y="1058" class="footer">INFORMATIVE BEGLEITUNG ZU ORIENTATION_INFRASTRUCTURE.md</text>
+  <text x="1542" y="1058" class="footer" text-anchor="end">KEINE LINIE ÜBERTRÄGT AUTORITÄT · MARKDOWN BLEIBT MASSGEBLICH</text>
+</svg>
