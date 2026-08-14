@@ -1,4 +1,4 @@
-.PHONY: bootstrap check test integration readiness-alpha understand-stage1-alpha understand-representation-inventory-alpha understand-source-boundary-inventory-alpha understand-source-element-declaration-check-alpha slice-ii-structural-expansion-i slice-ii-structural-expansion-ii slice-ii-complete-vocabulary slice-ii-structural-summary slice-ii-structural-statistics slice-ii-certification slice-iii-relation-object slice-iii-sequential-relations slice-iii-structural-equality slice-iii-declared-cross-references slice-iii-relation-conformance slice-iii-relations-certification slice-iii-navigation-object slice-iii-navigation-construction slice-iii-navigation-conformance slice-iii-navigation-certification slice-iii-orientation-map-object slice-iii-orientation-map-construction slice-iii-orientation-map-conformance slice-iii-certification slice-iv-expression-contract slice-iv-expression-construction slice-iv-expression-conformance slice-iv-expression-certification slice-iv-certification adr release-check
+.PHONY: bootstrap check test integration readiness-alpha understand-stage1-alpha understand-representation-inventory-alpha understand-source-boundary-inventory-alpha understand-source-element-declaration-check-alpha slice-ii-structural-expansion-i slice-ii-structural-expansion-ii slice-ii-complete-vocabulary slice-ii-structural-summary slice-ii-structural-statistics slice-ii-certification slice-iii-relation-object slice-iii-sequential-relations slice-iii-structural-equality slice-iii-declared-cross-references slice-iii-relation-conformance slice-iii-relations-certification slice-iii-navigation-object slice-iii-navigation-construction slice-iii-navigation-conformance slice-iii-navigation-certification slice-iii-orientation-map-object slice-iii-orientation-map-construction slice-iii-orientation-map-conformance slice-iii-certification slice-iv-expression-contract slice-iv-expression-construction slice-iv-expression-conformance slice-iv-expression-certification slice-iv-certification runtime-v1-1-test runtime-v1-1-proof runtime-v1-1-linux-verification runtime-v1-1-run adr release-check
 
 bootstrap:
 	./scripts/bootstrap-workspace
@@ -101,6 +101,18 @@ slice-iv-expression-certification:
 
 slice-iv-certification:
 	PYTHONPATH=src python3 scripts/slice_iv_certification_proof.py
+
+runtime-v1-1-test:
+	PYTHONPATH=src python3 -m unittest -v tests.test_runtime_v1_1
+
+runtime-v1-1-proof:
+	PYTHONPATH=src python3 scripts/orion_runtime_stage1_proof.py
+
+runtime-v1-1-linux-verification:
+	./scripts/verify_orion_runtime_linux.sh
+
+runtime-v1-1-run:
+	PYTHONPATH=src python3 -m orion_runtime
 
 adr:
 	@test -n "$(TITLE)" || (echo "Usage: make adr TITLE='short decision title'"; exit 2)

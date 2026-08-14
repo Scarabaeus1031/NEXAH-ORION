@@ -1,0 +1,38 @@
+[Unit]
+Description=ORION Version 1.1 Runtime
+After=network.target
+
+[Service]
+Type=simple
+User=orion
+Group=orion
+WorkingDirectory=/opt/orion/current
+Environment=PYTHONPATH=/opt/orion/current/src
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONUNBUFFERED=1
+Environment=ORION_BIND_HOST=127.0.0.1
+Environment=ORION_PORT=8080
+EnvironmentFile=/etc/orion/runtime.env
+ExecStart=/usr/bin/python3 -m orion_runtime
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+KillMode=control-group
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=localhost
+LockPersonality=true
+MemoryMax=1536M
+TasksMax=32
+LimitNOFILE=64
+
+[Install]
+WantedBy=multi-user.target

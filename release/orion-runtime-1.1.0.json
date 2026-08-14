@@ -1,0 +1,526 @@
+{
+  "api_version": "1.0",
+  "core_commit": "d34fbb2f99334534f4db89465a29f8bdb16d14d3",
+  "core_fingerprint": "6201362c094530a0a31fa3d80b46c9131011bb8c8d400183271b0da0eb423f8d",
+  "files": [
+    {
+      "bytes": 269,
+      "path": ".dockerignore",
+      "sha256": "12ba8ec4dde9d05bb762b717cd9e38d3e1aa7dff697dd5f570b7ebb8c1753045"
+    },
+    {
+      "bytes": 1503,
+      "path": "Dockerfile",
+      "sha256": "83af6d8e2682ab8cea83c47f2351ba0711431e327cfda51ed1fb5a92f6fb426a"
+    },
+    {
+      "bytes": 6,
+      "path": "VERSION",
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03"
+    },
+    {
+      "bytes": 1879,
+      "path": "deploy/nginx-orion-runtime.conf",
+      "sha256": "127cd3c8ed2811c3c5777ff38da9f4ae529565417e0cb88c9b08768c4db55e25"
+    },
+    {
+      "bytes": 855,
+      "path": "deploy/orion-runtime.service",
+      "sha256": "54d604a2825917cf32ee0b626dc6285bb9397ff5cf14ee8a575920f6dc59c9d1"
+    },
+    {
+      "bytes": 206,
+      "path": "deploy/runtime.env.example",
+      "sha256": "571f47ce9ec2cf30ba097554295a44d22b703da798afafcae8a600a50e52710b"
+    },
+    {
+      "bytes": 11801,
+      "path": "docs/architecture/contracts/CLARIFICATION_RESULT.md",
+      "sha256": "93a8d0b488d5a3db9ba56f35e97f00566a2660a438736cc4e44ce00adf5a7684"
+    },
+    {
+      "bytes": 13450,
+      "path": "docs/architecture/contracts/CONTINUATION_OPTION.md",
+      "sha256": "773bf123493658a5896fcaceffac310d5c23b06a8a99b5b8093ebb38e9c78f00"
+    },
+    {
+      "bytes": 12158,
+      "path": "docs/architecture/contracts/EVIDENCE_REFERENCE.md",
+      "sha256": "331439e46469425c55cf0e0767e33d738a433ea0d306ad7627b815d9b8e34685"
+    },
+    {
+      "bytes": 18327,
+      "path": "docs/architecture/contracts/ORIENTATION_REPORT.md",
+      "sha256": "c07d89d104be5f214e803f994f9ed11599fafd6da92fecbf6a6c50f18d436e37"
+    },
+    {
+      "bytes": 19272,
+      "path": "docs/architecture/contracts/ORIENTATION_REQUEST.md",
+      "sha256": "269a28bd9001fe07e062a1a49af1cde187121319bd14dd93628dcc665c74941d"
+    },
+    {
+      "bytes": 14736,
+      "path": "docs/architecture/contracts/RUNTIME_ERROR.md",
+      "sha256": "7ccd374871eeb1fe838f0098d71afb78cb487cb73caf43b7f1ceb038f0d2bd63"
+    },
+    {
+      "bytes": 5126,
+      "path": "docs/architecture/operators/OPERATOR_ARCHITECTURE.md",
+      "sha256": "7a2e810bc8addd430b23998790208b455040213a5565c126f77173a998192fd4"
+    },
+    {
+      "bytes": 42544,
+      "path": "docs/architecture/operators/ORION_ORIENTATION_OPERATORS.md",
+      "sha256": "5eaac53cf16b67a227cb8ce8e4a1daddebfca44b0e1335f60ad4f3161f2db178"
+    },
+    {
+      "bytes": 21681,
+      "path": "docs/architecture/operators/ORION_ORIENTATION_POLICIES.md",
+      "sha256": "7d507b8c48a777186db44c74b7a786418fc92281bc56ebd77da859cf3c214de0"
+    },
+    {
+      "bytes": 6375,
+      "path": "docs/architecture/runtime/ORION_ARTIFACT_MANIFEST_CONTRACT.md",
+      "sha256": "2490db494a6ae7fe2479081c5214d7d40cbc1f0bad7b66a750aa6a28cd229df3"
+    },
+    {
+      "bytes": 5894,
+      "path": "docs/architecture/runtime/ORION_AUTHORITY_MATRIX.md",
+      "sha256": "d2cd2869c6c939a19fb29659e78a033e14fa386eca87deb64501ff3474bc2dff"
+    },
+    {
+      "bytes": 6000,
+      "path": "docs/architecture/runtime/ORION_CLARIFICATION_CONTRACT.md",
+      "sha256": "94127784f46e276dfaa229d08578c0181d7a2f39daf12ff62fa648deda3a551f"
+    },
+    {
+      "bytes": 6660,
+      "path": "docs/architecture/runtime/ORION_CONFIRMED_MATERIAL_CONTRACT.md",
+      "sha256": "168536ddbbe09f75b2880c0b58c71f2de82fa2de502ec573d6917db280c4dbc9"
+    },
+    {
+      "bytes": 5883,
+      "path": "docs/architecture/runtime/ORION_IDENTITY_CONTRACT.md",
+      "sha256": "f3ad3829cce6895e1a77ba18806da0011cbf1f5bf315dd61dbaeaf4ead813a40"
+    },
+    {
+      "bytes": 8186,
+      "path": "docs/architecture/runtime/ORION_OPERATIONAL_BOUNDARY.md",
+      "sha256": "f1e358c5ca4f441351af27cacd092785ed500bf95d3cd3f9e4a883bdbd6e5a4b"
+    },
+    {
+      "bytes": 10236,
+      "path": "docs/architecture/runtime/ORION_SLICE_EXECUTION_CONTRACT.md",
+      "sha256": "52e7a5181e8cbcb048e499b84808033c5b1cdaf37bd53342df19305f909c5345"
+    },
+    {
+      "bytes": 12071,
+      "path": "evaluation/phase_vii/corpus.json",
+      "sha256": "59d5ee9d372237a67a57d95eb4edd7a0e0f0f09694858450a6951ce39633bae9"
+    },
+    {
+      "bytes": 310,
+      "path": "pyproject.toml",
+      "sha256": "de841d05937367ad4e5f2b1bb0f54f43c0d5392c08565d610f96114dbd8edf84"
+    },
+    {
+      "bytes": 5111,
+      "path": "src/orion/__init__.py",
+      "sha256": "e7ec8f0c312f2a69a4374afaa840735116001d1c85ca805c634ec312cd701e14"
+    },
+    {
+      "bytes": 631,
+      "path": "src/orion/backend.py",
+      "sha256": "6e8057112a116172136b02311a314dff76bd90818f1c9992d481ee68977ed6f1"
+    },
+    {
+      "bytes": 729,
+      "path": "src/orion/brief_backend.py",
+      "sha256": "3bdf74fd1f56ff36edf681387d2f6b9f55342d3382016c3c21775bba8514cc2d"
+    },
+    {
+      "bytes": 2091,
+      "path": "src/orion/brief_execution.py",
+      "sha256": "45910ca8f35c0956708477c7cff6438e0563c00805fbbf39fd23a9029196fd20"
+    },
+    {
+      "bytes": 7542,
+      "path": "src/orion/context_brief.py",
+      "sha256": "955378ee8daee5cd91d9781afde2c854b21418967e1803789777ccadb90c06ff"
+    },
+    {
+      "bytes": 4351,
+      "path": "src/orion/context_builder.py",
+      "sha256": "700d5746b771ad8da721687cc7663ff19af3ec2c8924a6e4ee7033374b7fee82"
+    },
+    {
+      "bytes": 1461,
+      "path": "src/orion/context_execution.py",
+      "sha256": "b1d215f69d47eec8181d2276f637b6252102caf9bb2f8f13024b5a712b19fcdf"
+    },
+    {
+      "bytes": 9916,
+      "path": "src/orion/contracts.py",
+      "sha256": "82e4dbc3c915cf6545bc410ce7aa00749ef86a52241e92ecf8f24de900c9ab13"
+    },
+    {
+      "bytes": 26753,
+      "path": "src/orion/declared_cross_references_alpha.py",
+      "sha256": "48573342d6d907802f8867415efe1e1dc103f052a4265a9ce1c0bf2ce7300445"
+    },
+    {
+      "bytes": 7364,
+      "path": "src/orion/document_selector.py",
+      "sha256": "e6e6546632d074ef6f4891f3d865661fd1ad74002066d445b112f6684ed6b772"
+    },
+    {
+      "bytes": 1527,
+      "path": "src/orion/executor.py",
+      "sha256": "12ed38214c12ba637d63f1f6fb81619f43e886ac5c6ff91cdfc8a1f2e4fb9fd4"
+    },
+    {
+      "bytes": 8672,
+      "path": "src/orion/expression_certification_alpha.py",
+      "sha256": "4f877dbc87592f32259f5537da04bedec2c4387813e6fa8df491d12f98873c7f"
+    },
+    {
+      "bytes": 19636,
+      "path": "src/orion/expression_conformance_alpha.py",
+      "sha256": "b452af1386362fdeaaac63a6b4dd1eaf3fc12f02247573a7d801afbe1cc8d805"
+    },
+    {
+      "bytes": 14334,
+      "path": "src/orion/expression_construction_alpha.py",
+      "sha256": "50fccddf748ef8910bedb3b82c7a3ced8af263873b0aaf0e33409fa168d1f42f"
+    },
+    {
+      "bytes": 20375,
+      "path": "src/orion/expression_contract_alpha.py",
+      "sha256": "dff4030db357125e2dd3217157905c81b3ebfecb02d0915b849105b21e289c00"
+    },
+    {
+      "bytes": 1435,
+      "path": "src/orion/fake_backend.py",
+      "sha256": "114fff63a1a8345c73028503b8086f149e8f2494c18aae604448e610fc46f736"
+    },
+    {
+      "bytes": 342,
+      "path": "src/orion/gateway/__init__.py",
+      "sha256": "e6e46bb1c0402f68d03c100ba710a8bc9d9959991368beeddd3ac4f88521d858"
+    },
+    {
+      "bytes": 7347,
+      "path": "src/orion/gateway/gateway.py",
+      "sha256": "b84babbec5a79e376989da72adf1a55ec5c6de40e1a823c8c49eeb6f85945bac"
+    },
+    {
+      "bytes": 5643,
+      "path": "src/orion/gateway/presentation.py",
+      "sha256": "66a3ecbba348c05a1b0240e76fef11aba1e86f6fcb27ef9659e7ebc592ad4970"
+    },
+    {
+      "bytes": 9043,
+      "path": "src/orion/gateway/translation.py",
+      "sha256": "8cce30ac731548cda7ae3f549090bf55bbd006398fd6f29bceca370479ef6e3e"
+    },
+    {
+      "bytes": 952,
+      "path": "src/orion/lyra/__init__.py",
+      "sha256": "26bb9360b09525d27de5704d7e6f288104c1b48e0cd55e09828aaa7cecda75f3"
+    },
+    {
+      "bytes": 674,
+      "path": "src/orion/lyra/exceptions.py",
+      "sha256": "3ac95ad1520ecc10316e53e994e76dddeef2e3b987620e92515f3c60da68324d"
+    },
+    {
+      "bytes": 3998,
+      "path": "src/orion/lyra/explanation.py",
+      "sha256": "406f61a8c7a11e5ce002f6a44ad65db868a1af62ece6e39e493005934a58a875"
+    },
+    {
+      "bytes": 4182,
+      "path": "src/orion/lyra/models.py",
+      "sha256": "b1e8b030dae69444656f5ea6711f3468d80944cdf67078dc851a698288b1fe25"
+    },
+    {
+      "bytes": 5295,
+      "path": "src/orion/lyra/translator.py",
+      "sha256": "784a20f6a542984c363c8fce746339506ee4603ac081cd3981ef4bd2510886d8"
+    },
+    {
+      "bytes": 2864,
+      "path": "src/orion/lyra/vocabulary.py",
+      "sha256": "f0ccb4ca3e1dd360ac04f6b8653ea8e93df1066bf89cce97b9bab94afb828ae8"
+    },
+    {
+      "bytes": 1700,
+      "path": "src/orion/lyra_execution.py",
+      "sha256": "3fc5653e7d1b375762144858c07064f3a8338871caf946dbdc06e5d1e57dd8af"
+    },
+    {
+      "bytes": 50517,
+      "path": "src/orion/markdown_structural_renderer_alpha.py",
+      "sha256": "22c110fa3aaab2bdbca5c39a75874c71ef836469157cb254e8c092d25e570e99"
+    },
+    {
+      "bytes": 28960,
+      "path": "src/orion/navigation_certification_alpha.py",
+      "sha256": "444aa58f06c4e6d8c11384a06b8dae0b1e9fbb666719f90c535b9780bff02e33"
+    },
+    {
+      "bytes": 28495,
+      "path": "src/orion/navigation_conformance_alpha.py",
+      "sha256": "30636b5776fd9eb259e4d1bce8d8afb11d93ff47ce0dd72af8ebae962e82ab83"
+    },
+    {
+      "bytes": 19408,
+      "path": "src/orion/navigation_construction_alpha.py",
+      "sha256": "32f48449fe48f00b6b72d76142dee892a079962bcb47e1ed910d7950509b0336"
+    },
+    {
+      "bytes": 11835,
+      "path": "src/orion/navigation_object_alpha.py",
+      "sha256": "d9c99cc09f041fc166739d3954818c1096d6028926d99125e5d17f9eb18b2036"
+    },
+    {
+      "bytes": 13585,
+      "path": "src/orion/ollama_backend.py",
+      "sha256": "6a242195e5ea50ffdb3149277aae939fd15560591b6c397ffd7aecb88e1b474d"
+    },
+    {
+      "bytes": 8489,
+      "path": "src/orion/operator_registry.py",
+      "sha256": "f5dcb403aaeb2ec6e3b766349cd2985f8932fb77a19f003b3d1d039811ff123c"
+    },
+    {
+      "bytes": 33533,
+      "path": "src/orion/orientation_map_conformance_alpha.py",
+      "sha256": "82609be6e9d32a67e1cc13de94d7fd851737a56d270a123269632d0de98700d6"
+    },
+    {
+      "bytes": 22895,
+      "path": "src/orion/orientation_map_construction_alpha.py",
+      "sha256": "0c6ea6001183d4feb8eee84779b1d07771a0d85d15c00d77e1b5f580de43d1eb"
+    },
+    {
+      "bytes": 17462,
+      "path": "src/orion/orientation_map_object_alpha.py",
+      "sha256": "6d743c773c813d3d56719f30fea66e78aa354f7665f2d4befdcc341aaa844fcb"
+    },
+    {
+      "bytes": 151,
+      "path": "src/orion/orientation_runtime/__init__.py",
+      "sha256": "6fe0495172ad067017a22b4a8bd32b92f035a00b3334d2ae2d2db00d918495ca"
+    },
+    {
+      "bytes": 21290,
+      "path": "src/orion/orientation_runtime/runtime.py",
+      "sha256": "573c16d8a681f0c110be3522ccdb986e0029adf2de1ad27c2d519e7a4ebd6dbb"
+    },
+    {
+      "bytes": 1011,
+      "path": "src/orion/public_contracts/__init__.py",
+      "sha256": "ede27deaccb82bc29dd85bf20cc6cf404449e8ecac9bed606c8b0fe3b9d5eddc"
+    },
+    {
+      "bytes": 13417,
+      "path": "src/orion/public_contracts/fixtures.py",
+      "sha256": "f647f9c0e7751d40589bbf8b3820cea63e6bda5b6728b3808aed976a44e236e5"
+    },
+    {
+      "bytes": 17102,
+      "path": "src/orion/public_contracts/models.py",
+      "sha256": "8057790773ae7bb5f112eceb092917697f32f765b00e5e0e87535a00f8501d71"
+    },
+    {
+      "bytes": 39228,
+      "path": "src/orion/public_contracts/validation.py",
+      "sha256": "c9b556ba60375edda409b9cb6165c54d41b765f891a0174101663047a16154d4"
+    },
+    {
+      "bytes": 2459,
+      "path": "src/orion/readiness_alpha.py",
+      "sha256": "e6c7ae7d1b5335a8901f550db312b2087acac7f5b6f494130ea9b6375399dd93"
+    },
+    {
+      "bytes": 23465,
+      "path": "src/orion/relation_conformance_alpha.py",
+      "sha256": "c1108687b020d33f08cc59209315db1f1b6f67fd3b268d1b7f51a88b154d0a50"
+    },
+    {
+      "bytes": 26571,
+      "path": "src/orion/relations_certification_alpha.py",
+      "sha256": "8329de7c8c60fd58aae42045ede2239eee98df0ebba70edaceb7feffe7a97a18"
+    },
+    {
+      "bytes": 23111,
+      "path": "src/orion/representation_alpha.py",
+      "sha256": "220e8f5f89d39bf7fc5fb9629cc0a2d11246ed93fb1be1e814bbc34f706c5f48"
+    },
+    {
+      "bytes": 1246,
+      "path": "src/orion/selection_execution.py",
+      "sha256": "7fd79671375557babfe005f3c1ea151b4ccfcf36fee5124fdb80c59a6ae5ffa8"
+    },
+    {
+      "bytes": 18379,
+      "path": "src/orion/sequential_relations_alpha.py",
+      "sha256": "47763598a0f9c06abf34f6018c47f26484d0cf13d0fb292bb9607726ee25aa18"
+    },
+    {
+      "bytes": 38536,
+      "path": "src/orion/slice_iii_certification_alpha.py",
+      "sha256": "59229e6abaa6f996e325a013edccf249711ab40f4cd3bec4b3dc91ea43a20168"
+    },
+    {
+      "bytes": 7207,
+      "path": "src/orion/slice_iv_certification_alpha.py",
+      "sha256": "5b70d3d306c29fcca7b0a2367cd16ef7bd03553930d3b90b9362afaffff31aa0"
+    },
+    {
+      "bytes": 22605,
+      "path": "src/orion/structural_equality_relations_alpha.py",
+      "sha256": "c53e4ba2c683b5913f9616636f9be8c6568f75aad964001a91876bc4186b83e4"
+    },
+    {
+      "bytes": 18061,
+      "path": "src/orion/structural_relation_alpha.py",
+      "sha256": "32e23f75e4f4868f810ba1c9adeb59554980c2992700b0d57b16e91da855a8c1"
+    },
+    {
+      "bytes": 14045,
+      "path": "src/orion/transformation_contracts.py",
+      "sha256": "1a14bf652111f67a18b331e2b52e0e268eb0f85a57b03b9da2f721cae07e267b"
+    },
+    {
+      "bytes": 26352,
+      "path": "src/orion/transformation_engine.py",
+      "sha256": "79f15d83cd4cc07f59b6ae94f5c89429420492efcc0cea3a180cd4f5f9a8f776"
+    },
+    {
+      "bytes": 6712,
+      "path": "src/orion/understand_representation_inventory_alpha.py",
+      "sha256": "0927df401a4235c36bc7fb5e12ad84f9a2edf998fe74be25bd1d99f70735b610"
+    },
+    {
+      "bytes": 7379,
+      "path": "src/orion/understand_source_boundary_inventory_alpha.py",
+      "sha256": "a69e4c5c996134771fd0ee354f056fd822f602b50eb3a82957e2311ba827bc4a"
+    },
+    {
+      "bytes": 8505,
+      "path": "src/orion/understand_source_element_declaration_check_alpha.py",
+      "sha256": "c9850455de27c25557c4df4f370e71d56a7f35c17368a59682dc4bb9236e6ca8"
+    },
+    {
+      "bytes": 10141,
+      "path": "src/orion/understand_source_element_inventory_alpha.py",
+      "sha256": "fc2dcc807a5d487dfcff82721b51c693529e323404f42431cb3e45659e21da42"
+    },
+    {
+      "bytes": 6143,
+      "path": "src/orion/understand_stage1_alpha.py",
+      "sha256": "37e42e207e9214425a030c8db6d3dc0c118a65feb2c860ef9f231993ddd967e8"
+    },
+    {
+      "bytes": 27449,
+      "path": "src/orion/understand_structural_statistics_alpha.py",
+      "sha256": "8b99219a83d4a530664b9115408bd11480843e034ea0e824ab962e14e5f8e279"
+    },
+    {
+      "bytes": 17925,
+      "path": "src/orion/understand_structural_summary_alpha.py",
+      "sha256": "a66cda2aca6ec6e14b16d8a0328579b9dcca5cf975769d9adb52cc9829e00341"
+    },
+    {
+      "bytes": 2073,
+      "path": "src/orion/validation.py",
+      "sha256": "47bfcce22f804c109f8b4a7428aa551c962ea6a2f78bf792daf30ff320860c66"
+    },
+    {
+      "bytes": 153,
+      "path": "src/orion_runtime/__init__.py",
+      "sha256": "9f4cf65c484e1a486cb2980fa0e5523a1272f0c3719456cd83e47184ce1d3cb3"
+    },
+    {
+      "bytes": 129,
+      "path": "src/orion_runtime/__main__.py",
+      "sha256": "2752ba7819c55845a208a2d96643487290f92a3561ace7ee0239e3008ebb3528"
+    },
+    {
+      "bytes": 15978,
+      "path": "src/orion_runtime/adapter.py",
+      "sha256": "360776675a9ad1798e8548a56c8c6b57ff019c25030398b269cc6b1aaaa03ab8"
+    },
+    {
+      "bytes": 2269,
+      "path": "src/orion_runtime/canonical.py",
+      "sha256": "5e4f2078f10ad89109da87c78f1b060eab0082db0beedfce34d7a5dda1142371"
+    },
+    {
+      "bytes": 2208,
+      "path": "src/orion_runtime/constants.py",
+      "sha256": "dda653b39bdbcd42383ae99f22dedef1eb083734fff87659104e86666466f67f"
+    },
+    {
+      "bytes": 21907,
+      "path": "src/orion_runtime/contracts.py",
+      "sha256": "671b259b3fb79c3877d2dae0eb8bee4237e2063efccb250c44de0cebf8999943"
+    },
+    {
+      "bytes": 572,
+      "path": "src/orion_runtime/errors.py",
+      "sha256": "fe6f65ab7778508c4b54d3c935744303b256214940b34191a60182a721e493d5"
+    },
+    {
+      "bytes": 3733,
+      "path": "src/orion_runtime/fixtures.py",
+      "sha256": "b10aac55b91c2dc02c9766a463221c10818cac7f7d2f3e7f02c95b8bc9b26d86"
+    },
+    {
+      "bytes": 3101,
+      "path": "src/orion_runtime/gateway.py",
+      "sha256": "3003c33ada30c3bcd260676575e0dd7727a571b6f822767b4c74a7d23577b1d4"
+    },
+    {
+      "bytes": 5264,
+      "path": "src/orion_runtime/isolation.py",
+      "sha256": "d4409902b400a09cc6aa84843e09c7b1ce80720165069cb2640cc657cf68468f"
+    },
+    {
+      "bytes": 16719,
+      "path": "src/orion_runtime/manifest.py",
+      "sha256": "2a89ae4c26630fafc1b3ae7c4799eb42fccdd404bdfd3840ca767333921e2d76"
+    },
+    {
+      "bytes": 7951,
+      "path": "src/orion_runtime/process.py",
+      "sha256": "352fcb23a86553f065db1ba3c586a3a0822fade3f446441e514ca302f45b53da"
+    },
+    {
+      "bytes": 5376,
+      "path": "src/orion_runtime/release.py",
+      "sha256": "404da40986a237415957e75d5ebf5e024d431bd26e3d672167e676d2fa628ecf"
+    },
+    {
+      "bytes": 19573,
+      "path": "src/orion_runtime/server.py",
+      "sha256": "cc7fd867338e8ab0a3873970b61486fd3bc47d103da76fda78dfa2ace4ff500b"
+    },
+    {
+      "bytes": 1498,
+      "path": "src/orion_runtime/worker.py",
+      "sha256": "a8fc472512cbee401b1ffaac3c1277c2e0500346e8fc982645efe2d11be1562f"
+    },
+    {
+      "bytes": 1631,
+      "path": "workspace.yaml",
+      "sha256": "20307f55be6214913e34c5cc9c31a6e6dde67927978b722e14d346bb4d7851c5"
+    }
+  ],
+  "release_id": "sha256:867c6ed4eced1acdd30d377e1b44fc10583a40a029c2c1fb1dfdd115fe9201b0",
+  "runtime_version": "1.1.0",
+  "schema_version": "orion.runtime-release-manifest/1.0",
+  "supported_gateway_version": "nexahedron-gateway/1.0"
+}
