@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500" role="img" aria-labelledby="title description">
+  <title id="title">POA-001 comparison result</title>
+  <desc id="description">A traceable static representation of result-001.</desc>
+  <metadata id="poa-001-lineage" data-result-id="result-001" data-result-sha256="6d565b327ed812f7b4e3b2239298e07715bdf3ac077d759d48263ce1279bb6b3" />
+  <style>
+    .background { fill: #f7f4ed; }
+    .panel { fill: #ffffff; stroke: #243447; stroke-width: 2; }
+    .heading { fill: #17212b; font: 700 24px sans-serif; }
+    .label { fill: #243447; font: 700 17px sans-serif; }
+    .value { fill: #0b6e4f; font: 700 36px sans-serif; }
+    .detail { fill: #425466; font: 14px sans-serif; }
+    .difference { fill: #8a3ffc; font: 700 20px sans-serif; }
+    .boundary { fill: #7a3e00; font: 14px sans-serif; }
+    .footer { fill: #5b6573; font: 12px monospace; }
+    .arrow { stroke: #8a3ffc; stroke-width: 4; fill: none; }
+  </style>
+  <g id="result-title" data-result-path="/id">
+    <rect class="background" x="0" y="0" width="960" height="500" />
+    <text class="heading" x="40" y="48">Result: result-001</text>
+  </g>
+  <g id="record-a" data-result-path="/comparison/sources/0">
+    <rect class="panel" x="70" y="95" width="300" height="150" rx="8" />
+    <text class="label" x="95" y="130">record-a</text>
+    <text class="value" x="95" y="185">2</text>
+    <text class="detail" x="95" y="218">field: declared_value</text>
+  </g>
+  <g id="record-a-evidence" data-result-path="/evidence/0">
+    <text class="detail" x="95" y="238">evidence: supplied-record-a</text>
+  </g>
+  <g id="record-b" data-result-path="/comparison/sources/1">
+    <rect class="panel" x="590" y="95" width="300" height="150" rx="8" />
+    <text class="label" x="615" y="130">record-b</text>
+    <text class="value" x="615" y="185">5</text>
+    <text class="detail" x="615" y="218">field: declared_value</text>
+  </g>
+  <g id="record-b-evidence" data-result-path="/evidence/1">
+    <text class="detail" x="615" y="238">evidence: supplied-record-b</text>
+  </g>
+  <g id="signed-difference" data-result-path="/comparison/signed_difference">
+    <path class="arrow" d="M 390 165 L 565 165" />
+    <path class="arrow" d="M 550 153 L 565 165 L 550 177" />
+    <text class="difference" x="425" y="145">difference: 3</text>
+  </g>
+  <g id="uncertainty" data-result-path="/uncertainty">
+    <text class="boundary" x="40" y="295">Uncertainty: record-a: none-declared; record-b: none-declared</text>
+    <text class="boundary" x="40" y="325">Limitation: The supplied values are not independently validated.</text>
+  </g>
+  <g id="prohibited-implications" data-result-path="/prohibited_implications">
+    <text class="boundary" x="40" y="365">Does not imply: preference, recommendation, domain-validity</text>
+  </g>
+  <g id="processor-footer" data-result-path="/processor">
+    <text class="footer" x="40" y="420">processor: poa-001-compare</text>
+    <text class="footer" x="40" y="445">result sha256: 6d565b327ed812f7b4e3b2239298e07715bdf3ac077d759d48263ce1279bb6b3</text>
+  </g>
+</svg>

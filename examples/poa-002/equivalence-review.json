@@ -1,0 +1,845 @@
+{
+  "id": "equivalence-review-001",
+  "inputs": {
+    "request": {
+      "id": "request-001",
+      "path": "../poa-001/request.json",
+      "sha256": "d847553992b746790bc7f55dd8b58f06631c5f1e31fd0e8d60b6425f9fd7d52a",
+      "processor_a_binding_sha256": "d847553992b746790bc7f55dd8b58f06631c5f1e31fd0e8d60b6425f9fd7d52a",
+      "processor_b_binding_sha256": "d847553992b746790bc7f55dd8b58f06631c5f1e31fd0e8d60b6425f9fd7d52a"
+    },
+    "observation": {
+      "id": "observation-001",
+      "path": "../poa-001/observation.json",
+      "sha256": "fe3f1c9e4339bd7d646814e1af101876573934539e40e01b4878852d29bd1d73",
+      "processor_a_binding_sha256": "fe3f1c9e4339bd7d646814e1af101876573934539e40e01b4878852d29bd1d73",
+      "processor_b_binding_sha256": "fe3f1c9e4339bd7d646814e1af101876573934539e40e01b4878852d29bd1d73"
+    },
+    "expression": {
+      "id": "expression-001",
+      "path": "../poa-001/expression.json",
+      "sha256": "cc57e561e0e209d4cca504f63d044bb012a740ac6479da71fd4dacc0247a9667",
+      "processor_a_result_sha256": "cc57e561e0e209d4cca504f63d044bb012a740ac6479da71fd4dacc0247a9667",
+      "processor_b_result_sha256": "cc57e561e0e209d4cca504f63d044bb012a740ac6479da71fd4dacc0247a9667"
+    },
+    "frozen_digest_checks": {
+      "request.json": true,
+      "observation.json": true,
+      "expression.json": true,
+      "compare.py": true,
+      "result.json": true
+    }
+  },
+  "processors": {
+    "independent_development_statement": "Processor B was authored anew in a separate implementation task from the frozen POA-002 artifact requirements; it does not copy, import, call, inspect at runtime, generate from, or wrap Processor A.",
+    "processor_a": {
+      "identity": "poa-001-compare",
+      "source_path": "../poa-001/compare.py",
+      "source_sha256": "05e122b25d0cfb5f2ec05ec3d88ed9305013fb30f85ea77210380e885704b262",
+      "method_summary": "Validates the frozen shapes and lineage, then subtracts the first ordered declared value from the second.",
+      "origin": "Frozen committed POA-001 implementation.",
+      "working_directory": "temporary/processor-a",
+      "result_read_from_other_processor": false,
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "math",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "local_imports": []
+    },
+    "processor_b": {
+      "identity": "poa-002-compare-b",
+      "source_path": "processor-b.py",
+      "source_sha256": "0b9d285267ff511f4a6f5bc6e24d0d61684c52e8a24c7439f927e02035d05a06",
+      "method_summary": "Indexes the two validated records by identifier, resolves the declared order, and sums the second value with the negated first.",
+      "origin": "Authored from the frozen POA-002 design in a separate implementation task.",
+      "working_directory": "temporary/processor-b",
+      "result_read_from_other_processor": false,
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "math",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "local_imports": []
+    },
+    "cross_references": {
+      "processor_a_names_processor_b": false,
+      "processor_b_names_processor_a": false
+    },
+    "distinct_source_paths": true,
+    "distinct_source_digests": true,
+    "separate_processes": true,
+    "separate_working_directories": true,
+    "shared_output_path": false,
+    "shared_local_helper": false,
+    "dependency_check_pass": true
+  },
+  "results": {
+    "result_a": {
+      "id": "result-001",
+      "path": "../poa-001/result.json",
+      "sha256": "6d565b327ed812f7b4e3b2239298e07715bdf3ac077d759d48263ce1279bb6b3",
+      "processor": "poa-001-compare"
+    },
+    "result_b": {
+      "id": "result-002-b",
+      "path": "result-b.json",
+      "sha256": "b29336fdc35d0af1b49a232ab97a1e50c3d4c396d7ebf9ed07a9595958c7a990",
+      "processor": "poa-002-compare-b"
+    },
+    "distinct_identities": true,
+    "distinct_digests": true
+  },
+  "byte_equivalence": {
+    "required": false,
+    "equal": false,
+    "result_a_size": 1112,
+    "result_b_size": 1116,
+    "difference_segments": [
+      {
+        "operation": "replace",
+        "result_a_range": [
+          20,
+          21
+        ],
+        "result_b_range": [
+          20,
+          23
+        ],
+        "result_a_segment_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "result_b_segment_sha256": "0421f73b95fd7a9232b4f60f7b85e269c5c2da8c07719d5ae425b76a11e59ef1",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "replace",
+        "result_a_range": [
+          199,
+          200
+        ],
+        "result_b_range": [
+          201,
+          202
+        ],
+        "result_a_segment_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "result_b_segment_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          208,
+          208
+        ],
+        "result_b_range": [
+          210,
+          212
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "4fc0bdb51ffc8cfdcaaee067eb264b8a5c646176cf870be17c2e647fbb2cb7f4",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          235,
+          235
+        ],
+        "result_b_range": [
+          239,
+          244
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "c6aafd3c5e500e101646472947e29a93c80a03306bd58a47cba901671a9ad3ac",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          236,
+          236
+        ],
+        "result_b_range": [
+          245,
+          262
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "04e5a2c1a145ba6a4962b1883a31a1b4213c0b885afdd32b3fa980ccc04c4b66",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          237,
+          237
+        ],
+        "result_b_range": [
+          263,
+          269
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "0242dc67623dce3a6c9223398816b747d8c71ae89255137d07d67678fbe3215b",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          238,
+          238
+        ],
+        "result_b_range": [
+          270,
+          275
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "ed95fd9fcc65ff4c7306b7756aaeae4b5b44e432046be2ac0d70bfbf9fa12eb4",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          239,
+          239
+        ],
+        "result_b_range": [
+          276,
+          279
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "bddd7e364a4b4736b9610bb1a48e6e4c4a6d23086b0f9d1a3f6ec36c2e238758",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "replace",
+        "result_a_range": [
+          240,
+          241
+        ],
+        "result_b_range": [
+          280,
+          288
+        ],
+        "result_a_segment_sha256": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d",
+        "result_b_segment_sha256": "6ebc313ba834cf58562c4045c49cfb6698a7950884a8ffce2c3b6b70185bb995",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          242,
+          242
+        ],
+        "result_b_range": [
+          289,
+          295
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "fbb117a1db636a033a9667a45349359543546cbce5eb1911cef06cfdbbcc8a00",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "delete",
+        "result_a_range": [
+          245,
+          248
+        ],
+        "result_b_range": [
+          298,
+          298
+        ],
+        "result_a_segment_sha256": "ab8a1c796dbbdf684804bb812f58224546831650914d14fd30aaf04b12273916",
+        "result_b_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "replace",
+        "result_a_range": [
+          249,
+          253
+        ],
+        "result_b_range": [
+          299,
+          300
+        ],
+        "result_a_segment_sha256": "0487aac998b0e5ab85a630a98d03af97af7955574607600e2014c47a9658acbc",
+        "result_b_segment_sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "delete",
+        "result_a_range": [
+          254,
+          296
+        ],
+        "result_b_range": [
+          301,
+          301
+        ],
+        "result_a_segment_sha256": "89f3d234e301a13638fdcb6624836ff029eb08d28d523a5bb1e5dd5cfc2fe356",
+        "result_b_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "delete",
+        "result_a_range": [
+          297,
+          298
+        ],
+        "result_b_range": [
+          302,
+          302
+        ],
+        "result_a_segment_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "result_b_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      }
+    ]
+  },
+  "structural_equivalence": {
+    "required": true,
+    "equal": true,
+    "identity_values_treated_as_corresponding": [
+      "/id",
+      "/processor",
+      "/processor_sha256"
+    ],
+    "differences": []
+  },
+  "semantic_equivalence": {
+    "required": true,
+    "equal": true,
+    "comparisons": [
+      {
+        "concern": "Input Request digest",
+        "path": "/inputs/request/sha256",
+        "result_a": "d847553992b746790bc7f55dd8b58f06631c5f1e31fd0e8d60b6425f9fd7d52a",
+        "result_b": "d847553992b746790bc7f55dd8b58f06631c5f1e31fd0e8d60b6425f9fd7d52a",
+        "required_relation": "Equal to POA-001",
+        "pass": true
+      },
+      {
+        "concern": "Input Observation digest",
+        "path": "/inputs/observation/sha256",
+        "result_a": "fe3f1c9e4339bd7d646814e1af101876573934539e40e01b4878852d29bd1d73",
+        "result_b": "fe3f1c9e4339bd7d646814e1af101876573934539e40e01b4878852d29bd1d73",
+        "required_relation": "Equal to POA-001",
+        "pass": true
+      },
+      {
+        "concern": "Input Expression digest",
+        "path": "/inputs/expression/sha256",
+        "result_a": "cc57e561e0e209d4cca504f63d044bb012a740ac6479da71fd4dacc0247a9667",
+        "result_b": "cc57e561e0e209d4cca504f63d044bb012a740ac6479da71fd4dacc0247a9667",
+        "required_relation": "Equal to POA-001",
+        "pass": true
+      },
+      {
+        "concern": "Result status",
+        "path": "/status",
+        "result_a": "complete",
+        "result_b": "complete",
+        "required_relation": "Equal",
+        "pass": true
+      },
+      {
+        "concern": "Comparison field",
+        "path": "/comparison/field",
+        "result_a": "declared_value",
+        "result_b": "declared_value",
+        "required_relation": "Equal",
+        "pass": true
+      },
+      {
+        "concern": "Ordered source IDs",
+        "path": "/comparison/sources",
+        "result_a": [
+          "record-a",
+          "record-b"
+        ],
+        "result_b": [
+          "record-a",
+          "record-b"
+        ],
+        "required_relation": "Equal and same order",
+        "pass": true
+      },
+      {
+        "concern": "Source values",
+        "path": "/comparison/sources",
+        "result_a": [
+          2,
+          5
+        ],
+        "result_b": [
+          2,
+          5
+        ],
+        "required_relation": "Equal",
+        "pass": true
+      },
+      {
+        "concern": "Signed difference",
+        "path": "/comparison/signed_difference",
+        "result_a": 3,
+        "result_b": 3,
+        "required_relation": "Equal",
+        "pass": true
+      },
+      {
+        "concern": "Evidence",
+        "path": "/evidence",
+        "result_a": [
+          {
+            "record_ref": "record-a",
+            "value": "supplied-record-a"
+          },
+          {
+            "record_ref": "record-b",
+            "value": "supplied-record-b"
+          }
+        ],
+        "result_b": [
+          {
+            "record_ref": "record-a",
+            "value": "supplied-record-a"
+          },
+          {
+            "record_ref": "record-b",
+            "value": "supplied-record-b"
+          }
+        ],
+        "required_relation": "Equal to Observation",
+        "pass": true
+      },
+      {
+        "concern": "Uncertainty and limitation",
+        "path": "/uncertainty",
+        "result_a": {
+          "records": [
+            {
+              "record_ref": "record-a",
+              "value": "none-declared"
+            },
+            {
+              "record_ref": "record-b",
+              "value": "none-declared"
+            }
+          ],
+          "limitation": "The supplied values are not independently validated."
+        },
+        "result_b": {
+          "records": [
+            {
+              "record_ref": "record-a",
+              "value": "none-declared"
+            },
+            {
+              "record_ref": "record-b",
+              "value": "none-declared"
+            }
+          ],
+          "limitation": "The supplied values are not independently validated."
+        },
+        "required_relation": "Equal to Observation",
+        "pass": true
+      },
+      {
+        "concern": "Prohibited implications",
+        "path": "/prohibited_implications",
+        "result_a": [
+          "preference",
+          "recommendation",
+          "domain-validity"
+        ],
+        "result_b": [
+          "preference",
+          "recommendation",
+          "domain-validity"
+        ],
+        "required_relation": "Equal to Expression",
+        "pass": true
+      },
+      {
+        "concern": "Invented information",
+        "path": "/boundary_checks/no_invention",
+        "result_a": [],
+        "result_b": [],
+        "required_relation": "None",
+        "pass": true
+      },
+      {
+        "concern": "STOP behavior",
+        "path": "/boundary_checks/stop_cases",
+        "result_a": [
+          {
+            "case": "unsupported_operator",
+            "status": "blocked",
+            "comparison_present": false
+          },
+          {
+            "case": "stale_observation_digest",
+            "status": "blocked",
+            "comparison_present": false
+          },
+          {
+            "case": "invalid_required_input_shape",
+            "status": "blocked",
+            "comparison_present": false
+          }
+        ],
+        "result_b": [
+          {
+            "case": "unsupported_operator",
+            "status": "blocked",
+            "comparison_present": false
+          },
+          {
+            "case": "stale_observation_digest",
+            "status": "blocked",
+            "comparison_present": false
+          },
+          {
+            "case": "invalid_required_input_shape",
+            "status": "blocked",
+            "comparison_present": false
+          }
+        ],
+        "required_relation": "Same boundary",
+        "pass": true
+      }
+    ]
+  },
+  "differences": {
+    "parsed_path_count": 3,
+    "parsed": [
+      {
+        "path": "/id",
+        "result_a": "result-001",
+        "result_b": "result-002-b",
+        "classification": "implementation-specific",
+        "reason": "Independent Results must retain distinct Result or Processor identity."
+      },
+      {
+        "path": "/processor",
+        "result_a": "poa-001-compare",
+        "result_b": "poa-002-compare-b",
+        "classification": "implementation-specific",
+        "reason": "Independent Results must retain distinct Result or Processor identity."
+      },
+      {
+        "path": "/processor_sha256",
+        "result_a": "05e122b25d0cfb5f2ec05ec3d88ed9305013fb30f85ea77210380e885704b262",
+        "result_b": "0b9d285267ff511f4a6f5bc6e24d0d61684c52e8a24c7439f927e02035d05a06",
+        "classification": "implementation-specific",
+        "reason": "Independent Results must retain distinct Result or Processor identity."
+      }
+    ],
+    "raw_segment_count": 14,
+    "raw": [
+      {
+        "operation": "replace",
+        "result_a_range": [
+          20,
+          21
+        ],
+        "result_b_range": [
+          20,
+          23
+        ],
+        "result_a_segment_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "result_b_segment_sha256": "0421f73b95fd7a9232b4f60f7b85e269c5c2da8c07719d5ae425b76a11e59ef1",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "replace",
+        "result_a_range": [
+          199,
+          200
+        ],
+        "result_b_range": [
+          201,
+          202
+        ],
+        "result_a_segment_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "result_b_segment_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          208,
+          208
+        ],
+        "result_b_range": [
+          210,
+          212
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "4fc0bdb51ffc8cfdcaaee067eb264b8a5c646176cf870be17c2e647fbb2cb7f4",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          235,
+          235
+        ],
+        "result_b_range": [
+          239,
+          244
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "c6aafd3c5e500e101646472947e29a93c80a03306bd58a47cba901671a9ad3ac",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          236,
+          236
+        ],
+        "result_b_range": [
+          245,
+          262
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "04e5a2c1a145ba6a4962b1883a31a1b4213c0b885afdd32b3fa980ccc04c4b66",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          237,
+          237
+        ],
+        "result_b_range": [
+          263,
+          269
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "0242dc67623dce3a6c9223398816b747d8c71ae89255137d07d67678fbe3215b",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          238,
+          238
+        ],
+        "result_b_range": [
+          270,
+          275
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "ed95fd9fcc65ff4c7306b7756aaeae4b5b44e432046be2ac0d70bfbf9fa12eb4",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          239,
+          239
+        ],
+        "result_b_range": [
+          276,
+          279
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "bddd7e364a4b4736b9610bb1a48e6e4c4a6d23086b0f9d1a3f6ec36c2e238758",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "replace",
+        "result_a_range": [
+          240,
+          241
+        ],
+        "result_b_range": [
+          280,
+          288
+        ],
+        "result_a_segment_sha256": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d",
+        "result_b_segment_sha256": "6ebc313ba834cf58562c4045c49cfb6698a7950884a8ffce2c3b6b70185bb995",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "insert",
+        "result_a_range": [
+          242,
+          242
+        ],
+        "result_b_range": [
+          289,
+          295
+        ],
+        "result_a_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result_b_segment_sha256": "fbb117a1db636a033a9667a45349359543546cbce5eb1911cef06cfdbbcc8a00",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "delete",
+        "result_a_range": [
+          245,
+          248
+        ],
+        "result_b_range": [
+          298,
+          298
+        ],
+        "result_a_segment_sha256": "ab8a1c796dbbdf684804bb812f58224546831650914d14fd30aaf04b12273916",
+        "result_b_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "replace",
+        "result_a_range": [
+          249,
+          253
+        ],
+        "result_b_range": [
+          299,
+          300
+        ],
+        "result_a_segment_sha256": "0487aac998b0e5ab85a630a98d03af97af7955574607600e2014c47a9658acbc",
+        "result_b_segment_sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "delete",
+        "result_a_range": [
+          254,
+          296
+        ],
+        "result_b_range": [
+          301,
+          301
+        ],
+        "result_a_segment_sha256": "89f3d234e301a13638fdcb6624836ff029eb08d28d523a5bb1e5dd5cfc2fe356",
+        "result_b_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      },
+      {
+        "operation": "delete",
+        "result_a_range": [
+          297,
+          298
+        ],
+        "result_b_range": [
+          302,
+          302
+        ],
+        "result_a_segment_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "result_b_segment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "classification": "implementation-specific",
+        "reason": "Raw bytes differ only where required implementation identities differ."
+      }
+    ],
+    "discarded_before_classification": 0
+  },
+  "boundary_checks": {
+    "same_frozen_inputs": true,
+    "lineage_preserved": true,
+    "evidence_preserved": true,
+    "uncertainty_and_limitation_preserved": true,
+    "prohibited_implications_preserved": true,
+    "invented_information": {
+      "processor_a": [],
+      "processor_b": [],
+      "pass": true
+    },
+    "stop_cases": [
+      {
+        "case": "unsupported_operator",
+        "processor_a": {
+          "status": "blocked",
+          "reason": "unsupported_operator",
+          "comparison_present": false,
+          "preserved_boundary": true
+        },
+        "processor_b": {
+          "status": "blocked",
+          "reason": "operator_not_implemented",
+          "comparison_present": false,
+          "preserved_boundary": true
+        },
+        "same_expression_lineage": true,
+        "boundary_equivalent": true
+      },
+      {
+        "case": "stale_observation_digest",
+        "processor_a": {
+          "status": "blocked",
+          "reason": "observation_digest_mismatch",
+          "comparison_present": false,
+          "preserved_boundary": true
+        },
+        "processor_b": {
+          "status": "blocked",
+          "reason": "input_digest_conflict",
+          "comparison_present": false,
+          "preserved_boundary": true
+        },
+        "same_expression_lineage": true,
+        "boundary_equivalent": true
+      },
+      {
+        "case": "invalid_required_input_shape",
+        "processor_a": {
+          "status": "blocked",
+          "reason": "invalid_required_input_shape",
+          "comparison_present": false,
+          "preserved_boundary": true
+        },
+        "processor_b": {
+          "status": "blocked",
+          "reason": "required_expression_shape_invalid",
+          "comparison_present": false,
+          "preserved_boundary": true
+        },
+        "same_expression_lineage": true,
+        "boundary_equivalent": true
+      }
+    ],
+    "stop_equivalence": true,
+    "silent_repair": false,
+    "processor_communication": false
+  },
+  "verdict": {
+    "status": "pass",
+    "claim": "The two independent implementations are semantically equivalent for this single frozen POA-002 experiment."
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "id": "poa-003-representation-review",
+  "status": "complete",
+  "claim": "representation-independence-for-one-frozen-result",
+  "result": {
+    "id": "result-001",
+    "sha256": "6d565b327ed812f7b4e3b2239298e07715bdf3ac077d759d48263ce1279bb6b3",
+    "unchanged": true
+  },
+  "representation_a": {
+    "id": "poa-001-static-svg",
+    "media": "image/svg+xml",
+    "sha256": "857d4aa28e531445a6e884eff1ab913d3821de88a975135c3d26fbad530effeb",
+    "result_binding": "pass",
+    "required_semantics": "pass",
+    "non_authoritative": "pass",
+    "visible_result_paths": [
+      "/comparison/signed_difference",
+      "/comparison/sources/0",
+      "/comparison/sources/1",
+      "/evidence/0",
+      "/evidence/1",
+      "/id",
+      "/processor",
+      "/prohibited_implications",
+      "/uncertainty"
+    ],
+    "result_paths_reachable_by_digest": [
+      "/expression_ref",
+      "/expression_sha256",
+      "/processor_sha256",
+      "/status"
+    ],
+    "mapping_loss": [
+      "JSON types and full nesting are not directly visible",
+      "four lineage fields require following the bound Result digest",
+      "spatial placement and an arrow are presentational additions"
+    ]
+  },
+  "representation_b": {
+    "id": "poa-003-markdown-table",
+    "media": "text/markdown",
+    "sha256": "b2739204f3d764b9754d305c37ee91cf2583163883b156b586914f6e2da0187e",
+    "result_binding": "pass",
+    "required_semantics": "pass",
+    "non_authoritative": "pass",
+    "visible_result_paths": [
+      "/comparison/field",
+      "/comparison/signed_difference",
+      "/comparison/sources/0/record_ref",
+      "/comparison/sources/0/value",
+      "/comparison/sources/1/record_ref",
+      "/comparison/sources/1/value",
+      "/evidence/0/record_ref",
+      "/evidence/0/value",
+      "/evidence/1/record_ref",
+      "/evidence/1/value",
+      "/expression_ref",
+      "/expression_sha256",
+      "/id",
+      "/processor",
+      "/processor_sha256",
+      "/prohibited_implications/0",
+      "/prohibited_implications/1",
+      "/prohibited_implications/2",
+      "/status",
+      "/uncertainty/limitation",
+      "/uncertainty/records/0/record_ref",
+      "/uncertainty/records/0/value",
+      "/uncertainty/records/1/record_ref",
+      "/uncertainty/records/1/value"
+    ],
+    "result_paths_reachable_by_digest": [],
+    "mapping_loss": [
+      "JSON nesting is flattened into explicit Result paths",
+      "the SVG spatial relation and arrow are not reproduced"
+    ]
+  },
+  "preserved": {
+    "comparison": "pass",
+    "evidence": "pass",
+    "uncertainty": "pass",
+    "limitation": "pass",
+    "prohibited_implications": "pass",
+    "processor_lineage": "pass",
+    "result_identity_and_digest": "pass"
+  },
+  "differences": [
+    {
+      "concern": "media",
+      "a": "image/svg+xml",
+      "b": "text/markdown",
+      "classification": "representation-specific"
+    },
+    {
+      "concern": "structure",
+      "a": "spatial groups and arrow",
+      "b": "ordered path-value rows",
+      "classification": "representation-specific"
+    },
+    {
+      "concern": "lineage visibility",
+      "a": "selected paths plus exact Result binding",
+      "b": "all frozen leaf paths plus exact Result binding",
+      "classification": "disclosed mapping loss"
+    }
+  ],
+  "discarded_differences": 0,
+  "semantic_authority": "immutable-result-only",
+  "human_authority": "review-required",
+  "verdict": "pass",
+  "bounded_conclusion": "The two completed Representations preserve the frozen required meaning and boundaries for result-001; no general conformance is claimed."
+}

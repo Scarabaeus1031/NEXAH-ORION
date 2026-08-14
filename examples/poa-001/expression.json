@@ -1,0 +1,22 @@
+{
+  "id": "expression-001",
+  "request_ref": "request-001",
+  "request_sha256": "d847553992b746790bc7f55dd8b58f06631c5f1e31fd0e8d60b6425f9fd7d52a",
+  "observation_ref": "observation-001",
+  "observation_sha256": "fe3f1c9e4339bd7d646814e1af101876573934539e40e01b4878852d29bd1d73",
+  "operator": "COMPARE",
+  "inputs": [
+    "record-a",
+    "record-b"
+  ],
+  "field": "declared_value",
+  "preserve": [
+    "evidence",
+    "uncertainty"
+  ],
+  "prohibited_implications": [
+    "preference",
+    "recommendation",
+    "domain-validity"
+  ]
+}

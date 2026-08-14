@@ -1,0 +1,20 @@
+{
+  "id": "observation-001",
+  "subject": "Two supplied orientation records",
+  "field": "declared_value",
+  "records": [
+    {
+      "id": "record-a",
+      "declared_value": 2,
+      "evidence": "supplied-record-a",
+      "uncertainty": "none-declared"
+    },
+    {
+      "id": "record-b",
+      "declared_value": 5,
+      "evidence": "supplied-record-b",
+      "uncertainty": "none-declared"
+    }
+  ],
+  "limitation": "The supplied values are not independently validated."
+}

@@ -1,0 +1,50 @@
+{
+  "id": "result-001",
+  "status": "complete",
+  "expression_ref": "expression-001",
+  "expression_sha256": "cc57e561e0e209d4cca504f63d044bb012a740ac6479da71fd4dacc0247a9667",
+  "processor": "poa-001-compare",
+  "processor_sha256": "05e122b25d0cfb5f2ec05ec3d88ed9305013fb30f85ea77210380e885704b262",
+  "evidence": [
+    {
+      "record_ref": "record-a",
+      "value": "supplied-record-a"
+    },
+    {
+      "record_ref": "record-b",
+      "value": "supplied-record-b"
+    }
+  ],
+  "uncertainty": {
+    "records": [
+      {
+        "record_ref": "record-a",
+        "value": "none-declared"
+      },
+      {
+        "record_ref": "record-b",
+        "value": "none-declared"
+      }
+    ],
+    "limitation": "The supplied values are not independently validated."
+  },
+  "prohibited_implications": [
+    "preference",
+    "recommendation",
+    "domain-validity"
+  ],
+  "comparison": {
+    "field": "declared_value",
+    "sources": [
+      {
+        "record_ref": "record-a",
+        "value": 2
+      },
+      {
+        "record_ref": "record-b",
+        "value": 5
+      }
+    ],
+    "signed_difference": 3
+  }
+}
